@@ -128,6 +128,7 @@ class LmsController extends Controller
             } else {
 
                 $data = [
+                    'user_id' => $user->id,
                     'company_name' => $company,
                     'company_slug' => company_slugify($company),
                     'admin_name' => $user->name,
@@ -140,7 +141,7 @@ class LmsController extends Controller
                 $client = new Client(); 
 
                 // Make a POST request to the API
-                $response = $client->post('http://192.168.10.199/pollob/academy-laravel/api/register_company', [
+                $response = $client->post('https://lms.creativeitem.com/api/register_company', [
                     'form_params' => $data
                 ]);
 
@@ -162,12 +163,13 @@ class LmsController extends Controller
                 {
                     // $responseData = $response->json(); // Decode the JSON response
 
-                     $data1 = SaasCompany::create([
-                        'user_id' => $user->id,
-                        'saas_id' => 1,
-                        'company_name' => $company,
-                        'company_slug' => company_slugify($company)
-                    ]);
+                    //  $data1 = SaasCompany::create([
+                    //     'user_id' => $user->id,
+                    //     'saas_id' => 1,
+                    //     'company_name' => $company,
+                    //     'company_slug' => company_slugify($company),
+                    //     'db_name' => $responseData['db_name'],
+                    // ]);
 
                     // Redirect to the specified URL with the company slug
                     // return redirect()->to('https://lms.creativeitem.com/' . $data1->company_slug);

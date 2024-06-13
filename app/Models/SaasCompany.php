@@ -15,6 +15,6 @@ class SaasCompany extends Model
      *
      * @return array
      */
-    protected $fillable = [ 'user_id', 'saas_id', 'company_name', 'company_slug', 'config' ];
+    protected $fillable = [ 'user_id', 'saas_id', 'company_name', 'company_slug', 'db_name', 'config' ];
     
 }
