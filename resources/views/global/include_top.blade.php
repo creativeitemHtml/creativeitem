@@ -81,7 +81,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/chosen/chosen.min.css') }}" />
     <!-- Custom Css -->
     
-    @if(Route::currentRouteName() == 'register' || Route::currentRouteName() == 'lms.home')
+    @if(Route::currentRouteName() == 'login' || Route::currentRouteName() == 'register' || Route::currentRouteName() == 'lms.home')
     <!-- <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet" /> -->
     <link href="{{ asset('assets/css/signup.css') }}" rel="stylesheet" />
     @endif
