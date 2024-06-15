@@ -27,38 +27,31 @@ class LmsController extends Controller
 
     public function features()
     {
-        $element_categories = ElementCategory::where('parent_id', NULL)->orderBy('order', 'asc')->get();
+        $page_data['page_title'] = 'Creative LMS Features';
 
-        return Inertia::render('Frontend/Lms/Features', [
-            'element_categories' => $element_categories,
-        ]);
+        return view('frontend.creative_lms.features', $page_data);
     }
 
     public function pricing()
     {
-        $element_categories = ElementCategory::where('parent_id', NULL)->orderBy('order', 'asc')->get();
+        $page_data['page_title'] = 'Creative LMS Pricing';
 
-        return Inertia::render('Frontend/Lms/Pricing', [
-            'element_categories' => $element_categories,
-        ]);
+        return view('frontend.creative_lms.pricing', $page_data);
     }
 
     public function solution_course_selling()
     {
-        $element_categories = ElementCategory::where('parent_id', NULL)->orderBy('order', 'asc')->get();
+        $page_data['page_title'] = 'Creative LMS Solution For Course Selling';
 
-        return Inertia::render('Frontend/Lms/SolutionCourseSelling', [
-            'element_categories' => $element_categories,
-        ]);
+        return view('frontend.creative_lms.solution_course_selling', $page_data);
     }
 
     public function solution_training()
     {
-        $element_categories = ElementCategory::where('parent_id', NULL)->orderBy('order', 'asc')->get();
+        $page_data['page_title'] = 'Creative LMS Solution For Training';
 
-        return Inertia::render('Frontend/Lms/SolutionTraining', [
-            'element_categories' => $element_categories,
-        ]);
+        return view('frontend.creative_lms.solution_training', $page_data);
+
     }
 
     public function demo() 
