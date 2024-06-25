@@ -97,7 +97,7 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                             <div class="venobox-img-wrap">
 
                                 @if($selected_product->product_to_elementCategory->slug == 'ui-kits' || $selected_product->product_to_elementCategory->slug == 'laravel-themes')
-                                    <a class="my-image-links live-preview-btn" data-gall="gallery01" href="{{ $preview_thumbnails[0]->src }}">Screenshots</a>
+                                    <a class="my-image-links live-preview-btn" data-gall="gallery01" href="{{ $preview_thumbnails[0]->src }}">{{get_phrase('Screenshots')}}</a>
                                     @foreach($preview_thumbnails as $thumbnail)
                                         <a class="my-image-links" data-gall="gallery01" href="{{ $thumbnail->src }}"></a>
                                     @endforeach
@@ -121,6 +121,10 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                     {{ get_phrase('Save') }}
                                 @endif
                             </a>
+                            @if(!empty($selected_product->previewUrl))
+                            <a class="live-preview-btn" target="_blank" href="{{ $selected_product->previewUrl}}">{{get_phrase('Preview')}}</a>
+                            @else
+                            @endif
                         </div>
                         <!-- About -->
                         <div class="elDetails-about">

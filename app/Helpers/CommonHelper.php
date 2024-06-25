@@ -56,12 +56,29 @@ if ( ! function_exists('get_all_language'))
     }
 }
 
+
 if ( ! function_exists('get_phrase'))
 {
     function get_phrase($phrase = '') {
+        
 
-        $active_language = get_settings('language');
-        $phrase = str_replace("'", '_', $phrase);
+        if(isset(auth()->user()->id)) {
+            $active_language = User::where('id', auth()->user()->id)->value('language');
+        }
+        elseif(!empty(session('language')))
+        {
+            $active_language = session('language');
+        }
+        elseif(session('location') == "Bangladesh")
+        {
+            $active_language = 'Bangla';
+        }
+        else
+        {
+            $active_language = get_settings('language');
+        }
+    
+
         $query = DB::table('language')->where('name', $active_language)->where('phrase', $phrase);
         if($query->get()->count() == 0){
             $translated = $phrase;
@@ -78,12 +95,9 @@ if ( ! function_exists('get_phrase'))
             }else{
                 DB::table('language')->insert(array('name' => 'english', 'phrase' => $phrase, 'translated' => $translated));
             }
-            $translated = str_replace('_', "'", $translated);
             return $translated;
         }
-        $translated = $query->value('translated');
-        $translated = str_replace('_', "'", $translated);
-        return $translated;
+        return $query->value('translated');
     }
 }
 
@@ -504,3 +518,5 @@ if(!function_exists('seo'))
         return (object) $seo; // Cast the array to an object
     }
 }
+
+

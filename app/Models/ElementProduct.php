@@ -14,7 +14,7 @@ class ElementProduct extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'id', 'product_id', 'title', 'summary', 'description', 'element_category_id', 'sub_category_id', 'price_type', 'price', 'like', 'comment', 'downalod', 'file_size', 'file_types', 'tag_ids', 'thumbnail', 'preview_thumbnails', 'file_3d', 'preview_video', 'file' ];
+    protected $fillable = [ 'id', 'product_id', 'title', 'summary', 'description', 'element_category_id', 'sub_category_id', 'price_type', 'price', 'like', 'comment', 'downalod', 'file_size', 'file_types', 'tag_ids', 'thumbnail', 'preview_thumbnails', 'file_3d', 'preview_video', 'file', 'previewUrl' ];
 
     public function product_to_elementCategory()
     {

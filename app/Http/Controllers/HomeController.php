@@ -14,13 +14,24 @@ use App\Mail\VerifyEmailWithPassword;
 use App\Mail\ProjectReport;
 use DB;
 use File;
+use Illuminate\Support\Facades\Session;
+use Stevebauman\Location\Facades\Location;
 
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
+        $ip = $request->ip(); // remove the command when it's have in a domain
+        // $ip = '27.147.191.220';
+        $location = Location::get($ip);
+
+        if(!empty($location->countryName)){
+            Session::put('location', $location->countryName);
+        }
+        
+        
         $element_categories = ElementCategory::where('parent_id', NULL)->where('status', 1)->orderBy('order', 'asc')->get();
         
         $page_data['seo'] = seo();
@@ -531,4 +542,10 @@ class HomeController extends Controller
         }
 
     }
+    function session_language(Request $request){
+        $data = $request->language;
+        Session::put('language', $data);
+        return redirect()->back()->with('message', 'You have successfully transleted language.');
+    }
+    
 }

@@ -25,6 +25,7 @@ class User extends Authenticatable
         'wishlists',
         'company_lms',
         'company_school',
+        'language',
     ];
 
     /**

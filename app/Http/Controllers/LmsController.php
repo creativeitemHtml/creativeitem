@@ -27,31 +27,38 @@ class LmsController extends Controller
 
     public function features()
     {
-        $page_data['page_title'] = 'Creative LMS Features';
+        $element_categories = ElementCategory::where('parent_id', NULL)->orderBy('order', 'asc')->get();
 
-        return view('frontend.creative_lms.features', $page_data);
+        return Inertia::render('Frontend/Lms/Features', [
+            'element_categories' => $element_categories,
+        ]);
     }
 
     public function pricing()
     {
-        $page_data['page_title'] = 'Creative LMS Pricing';
+        $element_categories = ElementCategory::where('parent_id', NULL)->orderBy('order', 'asc')->get();
 
-        return view('frontend.creative_lms.pricing', $page_data);
+        return Inertia::render('Frontend/Lms/Pricing', [
+            'element_categories' => $element_categories,
+        ]);
     }
 
     public function solution_course_selling()
     {
-        $page_data['page_title'] = 'Creative LMS Solution For Course Selling';
+        $element_categories = ElementCategory::where('parent_id', NULL)->orderBy('order', 'asc')->get();
 
-        return view('frontend.creative_lms.solution_course_selling', $page_data);
+        return Inertia::render('Frontend/Lms/SolutionCourseSelling', [
+            'element_categories' => $element_categories,
+        ]);
     }
 
     public function solution_training()
     {
-        $page_data['page_title'] = 'Creative LMS Solution For Training';
+        $element_categories = ElementCategory::where('parent_id', NULL)->orderBy('order', 'asc')->get();
 
-        return view('frontend.creative_lms.solution_training', $page_data);
-
+        return Inertia::render('Frontend/Lms/SolutionTraining', [
+            'element_categories' => $element_categories,
+        ]);
     }
 
     public function demo() 
@@ -121,7 +128,6 @@ class LmsController extends Controller
             } else {
 
                 $data = [
-                    'user_id' => $user->id,
                     'company_name' => $company,
                     'company_slug' => company_slugify($company),
                     'admin_name' => $user->name,
@@ -134,7 +140,7 @@ class LmsController extends Controller
                 $client = new Client(); 
 
                 // Make a POST request to the API
-                $response = $client->post('https://lms.creativeitem.com/api/register_company', [
+                $response = $client->post('http://192.168.10.199/pollob/academy-laravel/api/register_company', [
                     'form_params' => $data
                 ]);
 
@@ -156,13 +162,12 @@ class LmsController extends Controller
                 {
                     // $responseData = $response->json(); // Decode the JSON response
 
-                    //  $data1 = SaasCompany::create([
-                    //     'user_id' => $user->id,
-                    //     'saas_id' => 1,
-                    //     'company_name' => $company,
-                    //     'company_slug' => company_slugify($company),
-                    //     'db_name' => $responseData['db_name'],
-                    // ]);
+                     $data1 = SaasCompany::create([
+                        'user_id' => $user->id,
+                        'saas_id' => 1,
+                        'company_name' => $company,
+                        'company_slug' => company_slugify($company)
+                    ]);
 
                     // Redirect to the specified URL with the company slug
                     // return redirect()->to('https://lms.creativeitem.com/' . $data1->company_slug);

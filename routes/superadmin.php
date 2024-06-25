@@ -100,5 +100,13 @@ Route::name('superadmin.')->prefix('superadmin')->middleware('auth', 'superadmin
         Route::get('element/subscription-list', 'subscription_list')->name('subscription_list');
 
         Route::get('element_category/{parent_id}', 'category_wise_sub_category')->name('category_wise_sub_category');
+
+        //Language settings routes
+        Route::get('manage_language/{language?}', 'manageLanguage')->name('language.manage_language');
+        Route::post('language/language_add', 'addLanguage')->name('language.language_add');
+        Route::any('language/{language?}', 'updatedPhrase')->name('language.update_phrase');
+        Route::get('language/delete/{name}', 'deleteLanguage')->name('language.delete');
+        Route::post('change_language', 'user_language')->name('user_language');
+        
     });
 });

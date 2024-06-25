@@ -67,19 +67,29 @@
                 <label for="categories" class="col-sm-2 enForm-label">{{ get_phrase('Categories') }}</label>
                 <div class="col-sm-10 col-md-9 col-lg-10">
                     <select id="element_category_id" name="element_category_id" class="enForm-select enForm-nice-select" data-placeholder="Type to search..." require onchange="categoryWiseSubCategory(this.value)">
-                        <option value="Select">Select</option>
+                        <option value="Select">{{get_phrase('Select')}}</option>
                         @foreach($element_categories as $element_category)
                             <option value="{{ $element_category->id }}">{{ $element_category->name }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
+
+            {{-- Preview Url --}}
+            <div class="row justify-content-between align-items-center d-none" id="previewUrlbody">
+                <label for="previewUrl" class="col-sm-2 enForm-label">{{ get_phrase('Preview Url') }}</label>
+                <div class="col-sm-10 col-md-9 col-lg-10">
+                    <input type="text" class="form-control enForm-control" id="previewUrl" name="previewUrl" placeholder="Preview Url" aria-label="" required />
+                </div>
+            </div>
+
             <!-- Sub Categories -->
             <div class="row justify-content-between align-items-center">
                 <label for="sub_categories" class="col-sm-2 enForm-label">{{ get_phrase('Sub Categories') }}</label>
                 <div class="col-sm-10 col-md-9 col-lg-10">
                     <select id="sub_category_id" name="sub_category_id" class="enForm-select enForm-nice-select" data-placeholder="Type to search...">
                         <option value="">{{ get_phrase('Select sub category') }}</option>
+                        
                     </select>
                 </div>
             </div>
@@ -184,5 +194,16 @@
             }
         });
     }
+
+    $('#element_category_id').on('change', function preview_url() {
+        var test = $('#element_category_id').val()
+        if (test == 9) {
+           $('#previewUrlbody').removeClass('d-none') 
+        }else{
+            $('#previewUrlbody').addClass('d-none')
+        }
+    })
+
+    
 
 </script>

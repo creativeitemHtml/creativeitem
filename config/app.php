@@ -1,22 +1,12 @@
 <?php
+$http_status = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+$http_hostname = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '127.0.0.1';
+$script_name = isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : '/index.php';
 
-$hostname = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : null;
-$script_name = isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : null;
+$app_url = $http_status."://".$http_hostname.$script_name;
+$app_url = str_replace('/index.php', '', $app_url);
 
-if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-    $host_type = "https://";
-} else {
-    $host_type = "http://";
-}
-
-//check is it valet server or laravel inbuilt server
-if ($hostname == '127.0.0.1:8000' || str_contains($script_name, 'valet/')) {
-    $asset_url = null;
-} else {
-    $asset_url = str_replace("index.php", "", $script_name) . 'public';
-}
-
-$app_url = $host_type . $hostname;
+$asset_url = file_exists('public') ? $app_url.'/public' : $app_url;
 
 return [
 

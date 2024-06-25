@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <!-- Section Title -->
                 <div class="blog-section-title">
-                    <h1 class="text-54">Creativeitem Blog</h1>
+                    <h1 class="text-54">{{get_phrase('Creativeitem Blog')}}</h1>
                     <p class="blog-p">Crafting Stories, Igniting Ideas: Your Premier Source for Creativity Where Imagination Meets Innovation. </p>
                 </div>
                 <!-- Blog search -->

@@ -28,6 +28,7 @@ isset($system)              ? "" : $system = "";
 isset($categories)          ? "" : $categories = "";
 isset($service_package)     ? "" : $service_package = "";
 isset($service)             ? "" : $service = "";
+isset($language)            ? "" : $language = "";
 @endphp
 
 <!-- Start Breadcrumb -->
@@ -377,7 +378,7 @@ isset($service)             ? "" : $service = "";
                                     </ul>
                                 </li>
 
-                                <li class="nav-links-li-2 {{ request()->is('superadmin/system-settings') || request()->is('superadmin/sitemap') || request()->is('superadmin/seo_settings') ? 'active-submenu':'' }}">
+                                <li class="nav-links-li-2 {{ request()->is('superadmin/system-settings') || request()->is('superadmin/sitemap') || request()->is('superadmin/seo_settings') || request()->is('superadmin/manage_language') ? 'active-submenu':'' }}">
                                     <a href="javascript:void(0);" class="nav-item nav-item-have-sub d-flex align-items-center">
                                         <div class="sidebar_icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20">
@@ -386,10 +387,11 @@ isset($service)             ? "" : $service = "";
                                         </div>
                                         <span class="link-name">{{ get_phrase('Settings') }}</span>
                                     </a>
-                                    <ul class="sideBar-sub" style="{{ request()->is('superadmin/system-settings') || request()->is('superadmin/sitemap') || request()->is('superadmin/seo_settings') ? 'display: block;':'' }}">
+                                    <ul class="sideBar-sub" style="{{ request()->is('superadmin/system-settings') || request()->is('superadmin/sitemap') || request()->is('superadmin/seo_settings') || request()->is('superadmin/manage_language') ? 'display: block;':'' }}">
                                         <li><a href="{{ route('superadmin.system_settings') }}" class="{{ $system }}">{{ get_phrase('System Settings') }}</a></li>
                                         <li><a href="{{ route('superadmin.sitemap_settings') }}" class="{{ $sitemap_settings }}">{{ get_phrase('Sitemap Settings') }}</a></li>
                                         <li><a href="{{ route('superadmin.seo_settings') }}" class="{{ $seo }}">{{ get_phrase('Seo Settings') }}</a></li>
+                                        <li><a href="{{ route('superadmin.language.manage_language') }}" class="{{ $language }}">{{ get_phrase('Language Settings') }}</a></li>
                                     </ul>
                                 </li>
 

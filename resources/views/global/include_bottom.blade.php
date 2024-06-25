@@ -10,8 +10,6 @@
     <script src="{{ asset('assets/vendors/multi-img-video/multiple-image-video(MIV).js') }}"></script>
     <script src="{{ asset('assets/vendors/venobox/venobox.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/plyr/plyr.js') }}"></script>
-    <script src="{{ asset('assets/vendors/aos/aos.js') }}"></script>
-    <script src="{{ asset('assets/vendors/aos/aos-active') }}"></script>
     <script src="{{ asset('assets/vendors/counterup/jquery.waypoints.js') }}"></script>
     <script src="{{ asset('assets/vendors/counterup/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/counterup/counterup-active.js') }}"></script>

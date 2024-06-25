@@ -62,18 +62,30 @@
                     <input type="text" class="form-control enForm-control" id="file_size" name="file_size" placeholder="Ex: 1.12 GB" aria-label="Type keyword" value="{{ $product_details->file_size }}" />
                 </div>
             </div>
+            
+
             <!-- Categories -->
             <div class="row justify-content-between align-items-center">
                 <label for="categories" class="col-sm-2 enForm-label">{{ get_phrase('Categories') }}</label>
                 <div class="col-sm-10 col-md-9 col-lg-10">
-                    <select id="element_category_id" name="element_category_id" class="form-select enForm-select eChoice-multiple-without-remove" data-placeholder="Type to search..." require onchange="categoryWiseSubCategory(this.value)">
-                        <option value="Select">Select</option>
+                    <select id="element_category_id" name="element_category_id" class="enForm-select enForm-nice-select" data-placeholder="Type to search..." require onchange="categoryWiseSubCategory(this.value)">
+                        <option value="Select">{{get_phrase('Select')}}</option>
                         @foreach($element_categories as $element_category)
-                            <option value="{{ $element_category->id }}" @php if($element_category->id == $product_details->element_category_id) echo 'selected' @endphp>{{ $element_category->name }}</option>
+                        <option value="{{ $element_category->id }}"{{ $element_category->id == $product_details->element_category_id ?  'selected':'' }}>{{ $element_category->name }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
+
+
+            {{-- Preview Url --}}
+            <div class="row justify-content-between align-items-center d-none" id="previewUrlbody">
+                <label for="previewUrl" class="col-sm-2 enForm-label">{{ get_phrase('Preview Url') }}</label>
+                <div class="col-sm-10 col-md-9 col-lg-10">
+                    <input type="text" class="form-control enForm-control" id="previewUrl" name="previewUrl" placeholder="Preview Url" value="{{ $product_details->previewUrl }}" aria-label="Preview Url" required />
+                </div>
+            </div>
+
             <!-- Sub Categories -->
             <div class="row justify-content-between align-items-center">
                 <label for="sub_categories" class="col-sm-2 enForm-label">{{ get_phrase('Sub Categories') }}</label>
@@ -175,4 +187,13 @@
             }
         });
     }
+
+    $('#element_category_id').on('change', function preview_url() {
+        var test = $('#element_category_id').val()
+        if (test == 9) {
+           $('#previewUrlbody').removeClass('d-none') 
+        }else{
+            $('#previewUrlbody').addClass('d-none')
+        }
+    })
 </script>

@@ -1,13 +1,14 @@
 @extends('global.index')
 @section('content')
 
+
 <!-- Start Banner Area -->
 <section class="pt-5">
     <div class="container">
         <div class="row align-items-center mb-100px">
             <div class="col-md-6">
                 <div class="ci-banner-details1">
-                    <p class="mb-12px skin-sm-highlight">Creative Elements</p>
+                    <p class="mb-12px skin-sm-highlight">{{get_phrase('Creative Elements')}}</p>
                     <h1 class="mb-20px es-title-1 ci-top-banner-title1"><span class="ci-text-secondary">Unlock your creativity With</span> <span class="ci-title-gradient">Fre<span class="ci-title-gradient-italic">e</span> Premiu<span class="ci-title-gradient-italic">m</span></span> UI Components</h1>
                     <p class="man-subtitle-1">Lorem Ipsum available, but the majority have  suffered alteration in some form, by injected humor.</p>
                     <div class="d-flex align-items-center g-30px flex-wrap">

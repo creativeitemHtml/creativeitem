@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
-use App\Models\{User, Product, ProductType, Topic, Article, Documentation, Blog, BlogCategory, Ad, AdDimension, Project, OnlineMeeting, PaymentMilestone, RolesAndPermission, SeoField, Package, Tag, Setting, ElementCategory, ElementProduct, Subscription, ElementDownload, ElementFileType, ServicePackage, Service};
+use App\Models\{User, Product, ProductType, Topic, Article, Documentation, Blog, BlogCategory, Ad, AdDimension, Project, OnlineMeeting, PaymentMilestone, RolesAndPermission, SeoField, Package, Tag, Setting, ElementCategory, ElementProduct, Subscription, ElementDownload, ElementFileType, ServicePackage, Service, Language};
 use Illuminate\Support\Facades\Hash;
 use Validator;
 use Response;
@@ -2054,6 +2054,7 @@ class SuperadminController extends Controller
             $send_data['file_types'] = $file_types;
             $send_data['tag_ids'] = $tags;
             $send_data['product_id'] = $request->product_id;
+            $send_data['previewUrl'] = $request->previewUrl;
             
             ElementProduct::create($send_data);
 
@@ -2133,6 +2134,7 @@ class SuperadminController extends Controller
             $send_data['file_size'] = $request->file_size;
             $send_data['file_types'] = $file_types;
             $send_data['tag_ids'] = $tags;
+            $send_data['previewUrl'] = $request->previewUrl;
 
             ElementProduct::where('product_id', $product_id)->update($send_data);
 
@@ -2171,4 +2173,83 @@ class SuperadminController extends Controller
         endforeach;
         echo $options;
     }
+
+     // language
+
+    public function manageLanguage($language = '')
+    {
+        $page_data['page_title'] = 'Manage Language';
+        // $page_data['packages'] = Package::all();
+        $page_data['language']='active';
+        $page_data['sub_folder'] = 'language';
+        $page_data['file_name'] = 'manage_language';
+
+        if(!empty($language)) {
+
+            $edit_profile = $language;
+            $phrases = Language::where('name', $language)->get();
+            $languages = get_all_language();
+            
+            return view('superadmin.navigation', ['languages' => $languages, 'edit_profile' => $edit_profile, 'phrases' => $phrases], $page_data);
+        } else {
+            $languages = get_all_language();
+            return view('superadmin.navigation', ['languages' => $languages], $page_data);
+
+        }
+
+    }
+
+    public function addLanguage(Request $request){
+
+        $language = $request->language;
+        if ($language == 'n-a') {
+            return redirect('language.manage_language')->with('error', "Language name can not be empty or can not have special characters");
+        }
+
+        $phrases = Language::where('name', 'english')->get();
+
+        foreach($phrases as $phrase){
+            Language::create([
+                'name' => $language,
+                'phrase' => $phrase->phrase,
+                'translated' => $phrase->translated,
+            ]);
+        }
+
+        return redirect('language.manage_language')->with('message', "Language added successfully");
+    }
+
+   
+
+    public function updatedPhrase(Request $request)
+    {
+ 
+        $current_editing_language = $request->currentEditingLanguage;
+        $updatedValue = $request->updatedValue;
+        $phrase = $request->phrase;
+
+        $query = Language::where('name', $current_editing_language)
+            ->where('phrase', $phrase)
+            ->first();
+
+        if (!empty($query) && $query->count() > 0) {
+            $query->translated = $updatedValue;
+            $query->save();
+        }
+    }
+
+    public function deleteLanguage($name='')
+    {
+        $language = Language::where('name', $name)->get();
+        $language->map->delete();
+        return redirect()->back()->with('message', 'You have successfully delete a language.');
+    }
+
+    function user_language(Request $request){
+        $data['language'] = $request->language;
+        User::where('id', auth()->user()->id)->update($data);
+
+        return redirect()->back()->with('message', 'You have successfully transleted language.');
+    }
+    
 }

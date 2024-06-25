@@ -41,4 +41,6 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/privacy-policy', 'privacy_policy')->name('privacy_policy');
     Route::get('/refund-policy', 'refund_policy')->name('refund_policy');
     Route::get('/support-policy', 'support_policy')->name('support_policy');
+    Route::post('/session-language', 'session_language')->name('session_language');
+    Route::post('/session-language_show', 'session_language_show')->name('session_language_show');
 });

@@ -385,87 +385,109 @@
                             </a>
                         </div>
                         <!-- Language Select -->
-                        <div class="desktop-language-select">
-                            <form action="" class="language-selector">
+                       
+                        @endif
+                        @if(isset(auth()->user()->id) && auth()->user()->id != "")
+                        @if(auth()->user()->role_id == 1)
+                        @php
+                            $all_languages = get_all_language();
+                            $usersinfo = DB::table('users')->where('id', auth()->user()->id)->first();
+
+                            $userlanguage = $usersinfo->language;
+                            
+                        @endphp
+                        {{-- <div class="desktop-language-select">
+                            
                                 <div class="dropdown-c dropdown-hover">
                                     <div class="selected-show">
-                                        <span class="select-flug">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M24 3.99997H0V20.0001H24V3.99997Z" fill="#F0F0F0"/>
-                                            <path d="M13.5 3.99985H10.5V10.4998H0V13.4998H10.5V19.9998H13.5V13.4998H24V10.4998H13.5V3.99985Z" fill="#D80027"/>
-                                            <path d="M18.459 14.7824L24.0003 17.861V14.7824H18.459Z" fill="#0052B4"/>
-                                            <path d="M14.6094 14.7824L24.0007 19.9998V18.5244L17.2651 14.7824H14.6094Z" fill="#0052B4"/>
-                                            <path d="M21.4992 19.9998L14.6094 16.1718V19.9998H21.4992Z" fill="#0052B4"/>
-                                            <path d="M14.6094 14.7824L24.0007 19.9998V18.5244L17.2651 14.7824H14.6094Z" fill="#F0F0F0"/>
-                                            <path d="M14.6094 14.7824L24.0007 19.9998V18.5244L17.2651 14.7824H14.6094Z" fill="#D80027"/>
-                                            <path d="M4.23473 14.7823L0 17.135V14.7823H4.23473Z" fill="#0052B4"/>
-                                            <path d="M9.39174 15.4458V19.9998H1.19531L9.39174 15.4458Z" fill="#0052B4"/>
-                                            <path d="M6.73561 14.7824L0 18.5244V19.9998L9.39131 14.7824H6.73561Z" fill="#D80027"/>
-                                            <path d="M5.54133 9.21723L0 6.13867V9.21723H5.54133Z" fill="#0052B4"/>
-                                            <path d="M9.39131 9.21722L0 3.99985V5.47519L6.73561 9.21722H9.39131Z" fill="#0052B4"/>
-                                            <path d="M2.50195 3.99985L9.39174 7.82785V3.99985H2.50195Z" fill="#0052B4"/>
-                                            <path d="M9.39131 9.21722L0 3.99985V5.47519L6.73561 9.21722H9.39131Z" fill="#F0F0F0"/>
-                                            <path d="M9.39131 9.21722L0 3.99985V5.47519L6.73561 9.21722H9.39131Z" fill="#D80027"/>
-                                            <path d="M19.7656 9.21731L24.0004 6.86465V9.21731H19.7656Z" fill="#0052B4"/>
-                                            <path d="M14.6094 8.55383V3.99988H22.8058L14.6094 8.55383Z" fill="#0052B4"/>
-                                            <path d="M17.2651 9.21722L24.0007 5.47519V3.99985L14.6094 9.21722H17.2651Z" fill="#D80027"/>
-                                            </svg>                              
-                                        </span>
-                                        <span class="select-lang">ENG</span>
+                                        @if(!empty($userlanguage))
+                                        <span class="select-lang">{{ucwords($userlanguage)}}</span>
+                                        @else
+                                        <span class="select-lang">{{ucwords(get_settings('language'))}}</span>
+                                        @endif
                                     </div>
                                     <div class="drop-content">
                                         <ul class="drop-hover">
-                                            <li class="d-none">
-                                                <span class="select-flug">
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M24 3.99997H0V20.0001H24V3.99997Z" fill="#F0F0F0"/>
-                                                    <path d="M13.5 3.99985H10.5V10.4998H0V13.4998H10.5V19.9998H13.5V13.4998H24V10.4998H13.5V3.99985Z" fill="#D80027"/>
-                                                    <path d="M18.459 14.7824L24.0003 17.861V14.7824H18.459Z" fill="#0052B4"/>
-                                                    <path d="M14.6094 14.7824L24.0007 19.9998V18.5244L17.2651 14.7824H14.6094Z" fill="#0052B4"/>
-                                                    <path d="M21.4992 19.9998L14.6094 16.1718V19.9998H21.4992Z" fill="#0052B4"/>
-                                                    <path d="M14.6094 14.7824L24.0007 19.9998V18.5244L17.2651 14.7824H14.6094Z" fill="#F0F0F0"/>
-                                                    <path d="M14.6094 14.7824L24.0007 19.9998V18.5244L17.2651 14.7824H14.6094Z" fill="#D80027"/>
-                                                    <path d="M4.23473 14.7823L0 17.135V14.7823H4.23473Z" fill="#0052B4"/>
-                                                    <path d="M9.39174 15.4458V19.9998H1.19531L9.39174 15.4458Z" fill="#0052B4"/>
-                                                    <path d="M6.73561 14.7824L0 18.5244V19.9998L9.39131 14.7824H6.73561Z" fill="#D80027"/>
-                                                    <path d="M5.54133 9.21723L0 6.13867V9.21723H5.54133Z" fill="#0052B4"/>
-                                                    <path d="M9.39131 9.21722L0 3.99985V5.47519L6.73561 9.21722H9.39131Z" fill="#0052B4"/>
-                                                    <path d="M2.50195 3.99985L9.39174 7.82785V3.99985H2.50195Z" fill="#0052B4"/>
-                                                    <path d="M9.39131 9.21722L0 3.99985V5.47519L6.73561 9.21722H9.39131Z" fill="#F0F0F0"/>
-                                                    <path d="M9.39131 9.21722L0 3.99985V5.47519L6.73561 9.21722H9.39131Z" fill="#D80027"/>
-                                                    <path d="M19.7656 9.21731L24.0004 6.86465V9.21731H19.7656Z" fill="#0052B4"/>
-                                                    <path d="M14.6094 8.55383V3.99988H22.8058L14.6094 8.55383Z" fill="#0052B4"/>
-                                                    <path d="M17.2651 9.21722L24.0007 5.47519V3.99985L14.6094 9.21722H17.2651Z" fill="#D80027"/>
-                                                    </svg>                              
-                                                </span>
-                                                <span class="select-lang">ENG</span>
-                                            </li>
-                                            <li>
-                                                <span class="select-flug">
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8.00002 19.8619H0.413813C0.185297 19.8619 0 19.6766 0 19.4481V4.55157C0 4.32305 0.185297 4.13776 0.413813 4.13776H8.00002V19.8619Z" fill="#41479B"/>
-                                                    <path d="M16.0002 4.13797H8V19.8622H16.0002V4.13797Z" fill="#F5F5F5"/>
-                                                    <path d="M23.5862 19.8619H16V4.13779H23.5862C23.8147 4.13779 24 4.32308 24 4.5516V19.4481C24 19.6767 23.8147 19.8619 23.5862 19.8619Z" fill="#FF4B55"/>
-                                                    </svg>                                                           
-                                                </span>
-                                                <span class="select-lang">FRA</span>
-                                            </li>
-                                            <li>
-                                                <span class="select-flug">
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M24 3.99988H0V20H24V3.99988Z" fill="#D80027"/>
-                                                    <path d="M24 3.99988H0V9.33308H24V3.99988Z" fill="black"/>
-                                                    <path d="M24 14.6664H0V19.9996H24V14.6664Z" fill="#FFDA44"/>
-                                                    </svg>                                                     
-                                                </span>
-                                                <span class="select-lang">GER</span>
-                                            </li>
+                                            <form method="post" id="languageForm" action="{{ route('superadmin.user_language') }}" class="language-selector">
+                                                @csrf
+                                                @foreach ($all_languages as $all_language)
+                                                <li>
+                                                    <a class="language-item" href="javascript:;" data-language-name="{{ $all_language->name }}">{{ ucwords($all_language->name) }}</a>
+                                                </li>
+                                                @endforeach
+                                                <input type="hidden" name="language" id="selectedLanguageName">
+                                            </form>
                                         </ul>
                                     </div>
                                 </div>
-                                <!-- Selected value input -->
-                                <input type="hidden" id="selected-language" class="selected-language" name="" value="ENG">
+                                
                             </form>
+                        </div> --}}
+                        <div class="adminTable-action">
+                            <button
+                              type="button"
+                              class="eBtn eBtn-black dropdown-toggle table-action-btn-2"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              style="min-width: 91px; height: 29px; padding: 0;"
+                            >
+                               <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="ep0rzf NMm5M" style="width: 17px"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
+                               
+                               @if(!empty($userlanguage))
+                               <span style="font-size: 10px;">{{ucwords($userlanguage)}}</span>
+                               @else
+                               <span style="font-size: 10px;">{{ucwords(get_settings('language'))}}</span>
+                               @endif
+                            </button>
+                            
+                            <ul style="min-width: 0;" class="dropdown-menu dropdown-menu-end eDropdown-menu-2 eDropdown-table-action">
+                              <form method="post" id="languageForm" action="{{ route('superadmin.user_language') }}">
+                                @csrf
+                                @foreach ($all_languages as $all_language)
+                                    <li>
+                                        <a class="dropdown-item language-item {{ $all_language->name == $userlanguage ?  'lactive':'' }}" href="javascript:;" data-language-name="{{ $all_language->name }}">{{ ucwords($all_language->name) }}</a>
+                                    </li>
+                                @endforeach
+                                <input type="hidden" name="language" id="selectedLanguageName">
+                            </form>
+                            </ul>
+                        </div>
+                        @endif
+                        @else
+                        @php
+                            $all_languages = get_all_language();
+                            
+                        @endphp
+                        <div class="adminTable-action">
+                            <button
+                              type="button"
+                              class="eBtn eBtn-black dropdown-toggle table-action-btn-2"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                              style="min-width: 91px; height: 29px; padding: 0;"
+                            >
+                               <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="ep0rzf NMm5M" style="width: 17px"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
+                               
+                               @if(session()->has('language'))
+                               <span style="font-size: 10px;">{{ ucwords(session('language') )}}</span>
+                               @elseif(session('location') == "Bangladesh")
+                               <span style="font-size: 10px;">{{get_phrase('Bangla')}}</span>
+                               @else
+                               <span style="font-size: 10px;">{{ ucwords(get_settings('language')) }}</span>
+                               @endif
+                            </button>
+                            
+                            <ul style="min-width: 0;" class="dropdown-menu dropdown-menu-end eDropdown-menu-2 eDropdown-table-action">
+                              <form method="post" id="languageForm" action="{{ route('session_language') }}">
+                                @csrf
+                                @foreach ($all_languages as $all_language)
+                                    <li>
+                                        <a class="dropdown-item language-item" href="javascript:;" data-language-name="{{ $all_language->name }}">{{ ucwords($all_language->name) }}</a>
+                                    </li>
+                                @endforeach
+                                <input type="hidden" name="language" id="selectedLanguageName">
+                            </form>
+                            </ul>
                         </div>
                         @endif
                     </div>
@@ -474,4 +496,20 @@
         </div>
     </div>
 </header>
+<script>
+    // JavaScript to handle language selection
+    document.addEventListener('DOMContentLoaded', function() {
+            let languageLinks = document.querySelectorAll('.language-item');
+            
+            languageLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let languageName = this.getAttribute('data-language-name');
+                    document.getElementById('selectedLanguageName').value = languageName;
+                    document.getElementById('languageForm').submit();
+                });
+            });
+          });
+
+</script>
 <!-- End Main Header -->
