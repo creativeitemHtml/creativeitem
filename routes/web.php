@@ -16,12 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Cache clearing route
-Route::get('/clear-cache', function (Router $route) {
-    $r = $route->getRoutes();
-    foreach ($r as $value) {
-        echo $value->uri();
-        echo "<br/>";
-    }
+Route::get('/clear-cache', function () {
+    
 
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
