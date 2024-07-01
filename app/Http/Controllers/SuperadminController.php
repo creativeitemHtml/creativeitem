@@ -8,7 +8,7 @@ use App\Models\{User, Product, ProductType, Topic, Article, Documentation, Blog,
 use Illuminate\Support\Facades\Hash;
 use Validator;
 use Response;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use File;
 use App\Mail\ProjectReport;
 use Illuminate\Support\Facades\Mail;
