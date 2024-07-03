@@ -88,6 +88,7 @@
 
     @if(Route::currentRouteName() == 'lms.home')
     <link href="{{ asset('assets/css/lms-main.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/lms-signup.css') }}" rel="stylesheet" />
     @endif
 
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" />

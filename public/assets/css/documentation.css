@@ -492,7 +492,7 @@
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: start;
     gap: 0.78125rem;
     background-color: #fff;
     border: 0.0625rem solid #e6eaee;

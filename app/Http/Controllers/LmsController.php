@@ -74,6 +74,7 @@ class LmsController extends Controller
 
     public function register_company_lms(Request $request) 
     {
+        die();
         if(!empty($request->all()))
         {
 
@@ -182,5 +183,20 @@ class LmsController extends Controller
         } else {
             return redirect()->back()->with('error', 'Please fill up the form first.');
         }
+    }
+
+    public function company_lms_register(Request $request)
+    {
+        if(!empty($request->company_name) && !empty($request->email) && !empty($request->password)) 
+        {
+            return $request->all();
+        } else {
+            return 'none';
+        }
+    }
+
+    public function company_email_verify(Request $request) 
+    {
+        return view('frontend.creative_lms.company_email_verify');
     }
 }

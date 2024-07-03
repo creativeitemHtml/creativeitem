@@ -22,5 +22,10 @@ Route::name('lms.')->prefix('creative-lms')->controller(LmsController::class)->g
     Route::get('/solution-training', 'solution_training')->name('solution_training');
     Route::get('/demo', 'demo')->name('demo');
     Route::post('/register-company-lms', 'register_company_lms')->name('register_company_lms');
+
+    Route::post('/company-lms-register', 'company_lms_register')->name('company_lms_register');
+
+    Route::get('/company-email-verify', 'company_email_verify')->name('company_email_verify');
+
     
 });

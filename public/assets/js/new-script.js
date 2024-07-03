@@ -165,7 +165,9 @@ $(document).ready(function () {
 
     // Variable
     var $tagifyTags = $('.enTags'),
-    $chosenSelect = $('.chzn-select');
+    $chosenSelect = $('.chzn-select'),
+    $slideup = $('.swiper-vertical'),
+    $slidedown = $('.swiper-vertical-reverse');
     // Tagify for tag
     if ($tagifyTags.length > 0){
         $('.enTags').tagify();
@@ -173,6 +175,41 @@ $(document).ready(function () {
     // Chosen for Select Search
     if ($chosenSelect.length > 0){
         $(".chzn-select").chosen();
+    }
+    // Slide Up
+    if ($slideup.length > 0){
+        var swiperup1 = new Swiper(".swiper-vertical", {
+            direction: "vertical",
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            freeMode: true,
+            speed:1600,
+            autoplay: {
+              delay: 0.5,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            },
+            loop: true,
+            centeredSlides: true,
+        });
+    }
+    // Slide Down
+    if ($slidedown.length > 0){
+        var swiperdown1 = new Swiper(".swiper-vertical-reverse", {
+            direction: "vertical",
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            freeMode: true,
+            speed:1600,
+            autoplay: {
+              delay: 0.5,
+              disableOnInteraction: false,
+              reverseDirection: true,
+              pauseOnMouseEnter: true,
+            },
+            loop: true,
+            centeredSlides: true,
+        });
     }
 
    
@@ -569,6 +606,8 @@ $(document).ready(function () {
 // Wow JS 
 new WOW().init();
 
+
+
 // Venobox Active 
 new VenoBox({
     selector: '.my-image-links',
@@ -579,15 +618,13 @@ new VenoBox({
 });
 
 // Player js 
-// const player = new Plyr('#player');
-const player_2 = new Plyr('#player2', {autoplay: true});
-function service_pause() {
-    player_2.destroy();
-}
-// const player_3 = new Plyr('#player-3');
-// const player_4 = new Plyr('#player-4');
-// const player_5 = new Plyr('#player-5');
-// const player_6 = new Plyr('#player-6');
+const player = new Plyr('#player');
+const player_2 = new Plyr('#player-2');
+const player_3 = new Plyr('#player-3');
+const player_4 = new Plyr('#player-4');
+const player_5 = new Plyr('#player-5');
+const player_6 = new Plyr('#player-6');
+
 
 
 

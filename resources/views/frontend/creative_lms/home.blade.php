@@ -8,18 +8,18 @@ use App\Models\SaasCompany;
 
 @endphp
 
-<!-- Start LMS Video Area -->
-<section class="lms-video-section">
+<!-- Start Signup Form Area -->
+<section class="lms-signup-section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="lms-video-area d-flex justify-content-between align-items-center">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="d-flex justify-content-center justify-content-md-start">
                     <!-- Left -->
-                    <div class="lms-video-details">
-                        <h5 class="text-18">Creative LMS</h5>
-                        <h1 class="text-58">The Pathfinder of your <span>Success</span></h1>
-                        <p class="video-details-notice">A leading LMS that empowers you to <a href="#">learn</a>, <a href="#">manage</a>, and <a href="#">earn</a> wisely. </p>
-                        <a href="#" class="video-sign-up">Free Sign Up</a>
+                    <div class="max-w-507px w-100">
+                        <h5 class="text-18 mb-12px lh-normal skin-color">Creative LMS</h5>
+                        <h1 class="text-58 mb-30px">The Pathfinder of your <span class="skin-color">Success</span></h1>
+                        <p class="mb-30px ci-left-border-notice">A leading LMS that empowers you to <a href="#" class="text-dark-link">learn</a>, <a href="#" class="text-dark-link">manage</a>, and <a href="#" class="text-dark-link">earn</a> wisely. </p>
+                        <a href="#" class="btn btn-primary-ci1 py-28px mb-3">Free Sign Up</a>
                         <div class="creator-website d-flex align-items-center">
                             <div class="creator-profile d-flex align-items-center">
                                 <img src="{{ asset('assets/img/new-icons-images/creator-1.svg') }}" alt="creator">
@@ -29,73 +29,27 @@ use App\Models\SaasCompany;
                             <p>150,000+ creators have their websites live</p>
                         </div>
                     </div>
-                    <!-- Right -->
-                    <div class="col-lg-5">
-                        <div class="submit-project">
-                            @if(Auth::check())
-                                @php
-                                    $lms_company = SaasCompany::where('user_id', auth()->user()->id)
-                                                            ->where('saas_id', 1)
-                                                            ->first();
-                                @endphp
-                            @endif
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex justify-content-center justify-content-md-end">
+                    @if(Auth::check())
+                        @php
+                            $lms_company = SaasCompany::where('user_id', auth()->user()->id)
+                                                    ->where('saas_id', 1)
+                                                    ->first();
+                        @endphp
+                    @endif
 
-                            @if(Auth::check() && !empty($lms_company))
-                                <h4 class="title">Alredy Registerd</h4>
-                                <div class="d-flex justify-content-center mt-3">
-                                    <a href="https://lms.creativeitem.com/{{ $lms_company->company_slug }}" class="video-sign-up" target="_blank">
-                                        Go To Your LMS Site
-                                        <img src="{{ asset('assets/img/icon/right-white-arrow.svg') }}" alt="">
-                                    </a>
-                                </div>
-                            @else
-                                <h4 class="title">Sign Up For LMS</h4>
-                                <!-- Form -->
-                                <form id="project-form" action="{{ route('lms.register_company_lms') }}" class="project-form" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="project-form-wrap">
-                                        <div class="pForm-wrap">
-                                            <label for="company_name" class="form-label">{{ get_phrase('Company Name') }}<span>*</span></label>
-                                            <input type="text" class="form-control eForm-control" id="company_name" name="company_name" placeholder="Your Company Title" aria-label="Your Company Title" required />
-                                        </div>
-                                        @if(Auth::check())
-                                            <div class="pForm-wrap">
-                                            <label for="email" class="form-label">{{ get_phrase('Your Email') }}<span>*</span></label>
-                                                <input type="email" class="form-control eForm-control" id="email" name="email" value="{{ auth()->user()->email }}" disabled />
-                                            </div>
-                                        @else
-                                            <div class="pForm-wrap">
-                                                <label for="email" class="form-label">{{ get_phrase('Your Email') }}<span>*</span></label>
-                                                <input type="email" class="form-control eForm-control" id="email" name="email" placeholder="Your Email Address" aria-label="Your Email Address" required />
-                                            </div>
-                                        @endif
+                    @include('frontend.creative_lms.company_registration')
 
-                                        <div class="pForm-wrap">
-                                            <label for="password" class="form-label">{{ get_phrase('Password') }}<span>*</span></label>
-                                            <div class="password-input-wrap">
-                                                <input type="password" class="form-control eForm-control password-field" id="password" name="password" required autocomplete="current-password" placeholder="Enter password">
-                                                <div class="toggle-icons">
-                                                    <img src="{{ asset('assets/img/icon/visibility-off.svg') }}" class="password-icon" toggle=".password-field" alt="">
-                                                    <img src="{{ asset('assets/img/icon/visibility-on.svg') }}" class="password-icon d-none" toggle=".password-field" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <button type="submit" class="project-submit">
-                                        Submit
-                                        <img src="{{ asset('assets/img/icon/right-white-arrow.svg') }}" alt="">
-                                    </button>
-                                </form>
-                            @endif
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- End LMS Video Area -->
+<!-- End Signup Form Area -->
+
 
 <!-- Start LMS Problem Solve Area -->
 <section class="problem-solve-section padding-bottom-110">

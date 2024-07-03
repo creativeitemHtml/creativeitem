@@ -1843,7 +1843,7 @@ textarea.enForm-control {
 .invoice-items {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: start;
     position: relative;
     z-index: 1;
 }
