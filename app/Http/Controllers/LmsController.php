@@ -216,9 +216,10 @@ class LmsController extends Controller
                             );
 
                         Mail::to($request->email)->send(new VerifyEmailWithPassword($pin, $user, $request->password));
+                    } else {
+                        Mail::to($request->email)->send(new VerifyEmailWithPassword($passwordReset->token, $user, $request->password));
                     }
 
-                    Mail::to($request->email)->send(new VerifyEmailWithPassword($passwordReset->token, $user, $request->password));
                 }
                             
             } else {
@@ -349,22 +350,18 @@ class LmsController extends Controller
         $userEmail = Auth::user()->email;  // Assuming the user is logged in
 
         // Check the code from the password_resets table
-        $passwordResetEntry = DB::table('password_resets')
-            ->where('email', $userEmail)
-            ->where('token', $verificationCode)
-            ->first();
+        $passwordResetEntry = DB::table('password_resets')->where([
+            ['email', $userEmail]
+        ]);
 
-        if ($passwordResetEntry) {
+        if ($passwordResetEntry->exists()) {
+            
+            $passwordResetEntry->delete();
+            
             // Update the email_verified_at column in the users table
             DB::table('users')
                 ->where('email', $userEmail)
-                ->update(['email_verified_at' => date()]);
-
-            // Delete the entry from the password_resets table
-            DB::table('password_resets')
-                ->where('email', $userEmail)
-                ->where('token', $verificationCode)
-                ->delete();
+                ->update(['email_verified_at' => now()]);
 
             // Return the success view
             return view('frontend.creative_lms.company_create_success');

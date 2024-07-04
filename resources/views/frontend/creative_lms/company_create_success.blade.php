@@ -1,6 +1,6 @@
 @if(Auth::check())
     @php
-        $company = SaasCompany::where('user_id', auth()->user()->id)
+        $company = App\Models\SaasCompany::where('user_id', auth()->user()->id)
                 ->where('saas_id', 1)
                 ->first();
     @endphp

@@ -50,10 +50,11 @@
 @endif
 
 
+
 <script type="text/javascript">
 
     "use script";
-
+    
     function companyRegister() {
         let url = "{{ route('lms.company_lms_register') }}";
         let formData = new FormData(document.getElementById('project-form'));
@@ -84,11 +85,8 @@
         });
 
         // Create form data
-        let formData = new FormData();
+        let formData = new FormData(document.getElementById('verify-form'));
         formData.append('verification_code', verificationCode);
-
-        console.log(formData);
-        die();
 
         // Make AJAX request
         $.ajax({
@@ -98,7 +96,6 @@
             contentType: false,
             processData: false,
             success: function(response) {
-                console.log(response);
                 $('#register_form').html(response);
             },
             error: function(xhr) {
