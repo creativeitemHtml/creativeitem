@@ -40,7 +40,7 @@
                     <img src="{{ asset('assets/img/icon/visibility-on.svg') }}" class="password-icon d-none" toggle=".password-field" alt="">
                 </div> -->
             </div>
-            <button type="button" class="btn btn-primary-ci1 d-flex align-items-center gap-1 px-30px" onclick="verifyEmail()">
+            <button type="button" class="btn btn-primary-ci1 d-flex align-items-center gap-1 px-30px" onclick="companyRegister()">
                 <span>Submit</span>
                 <img src="{{ asset('assets/img/home-2/arrow-right-white-24.svg') }}" alt="icon">
             </button>
@@ -54,7 +54,7 @@
 
     "use script";
 
-    function verifyEmail() {
+    function companyRegister() {
         let url = "{{ route('lms.company_lms_register') }}";
         let formData = new FormData(document.getElementById('project-form'));
 
@@ -69,6 +69,36 @@
                 $('#register_form').html(response);
             },
             error: function(xhr){
+                // Handle error here
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function verifyEmail() {
+        // Get all input values
+        const inputs = document.querySelectorAll('.verify-input');
+        let verificationCode = '';
+        inputs.forEach(input => {
+            verificationCode += input.value;
+        });
+
+        // Create form data
+        let formData = new FormData();
+        formData.append('verification_code', verificationCode);
+
+        // Make AJAX request
+        $.ajax({
+            url: "{{ route('lms.company_email_verify') }}",
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log(response);
+                $('#register_form').html(response);
+            },
+            error: function(xhr) {
                 // Handle error here
                 console.error(xhr.responseText);
             }
