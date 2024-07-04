@@ -38,6 +38,7 @@ use App\Models\SaasCompany;
                             $lms_company = SaasCompany::where('user_id', auth()->user()->id)
                                                     ->where('saas_id', 1)
                                                     ->first();
+                            $check_verification = auth()->user()->email_verified_at;
                         @endphp
                     @endif
 

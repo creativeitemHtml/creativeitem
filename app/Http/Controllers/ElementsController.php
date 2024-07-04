@@ -263,7 +263,7 @@ class ElementsController extends Controller
                         'date_added' => strtotime(date('d-M-Y H:i:s')),
                     ]);
 
-                    $pin = rand(100000, 999999);
+                    $pin = rand(10000, 99999);
 
                     $check_entry = DB::table('password_resets')->where('email', $request->email)->first();
 
@@ -361,7 +361,7 @@ class ElementsController extends Controller
                         'date_added' => strtotime(date('d-M-Y H:i:s')),
                     ]);
 
-                    $pin = rand(100000, 999999);
+                    $pin = rand(10000, 99999);
 
                     DB::table('password_resets')
                         ->insert(

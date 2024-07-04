@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmailWithPassword;
 use Laravel\Sanctum\PersonalAccessToken;
 use GuzzleHttp\Client;
+use mysqli;
+use PDO;
 
 class LmsController extends Controller
 {
@@ -102,7 +104,7 @@ class LmsController extends Controller
                         'password' => Hash::make($password)
                     ]);
 
-                    $pin = rand(100000, 999999);
+                    $pin = rand(10000, 99999);
 
                     DB::table('password_resets')
                         ->insert(
@@ -201,9 +203,9 @@ class LmsController extends Controller
                         ->where('email', $request->email)
                         ->first();
 
-                    if(!empty($passwordReset)){
+                    if(empty($passwordReset)){
 
-                        $pin = rand(100000, 999999);
+                        $pin = rand(10000, 99999);
 
                         DB::table('password_resets')
                             ->insert(
@@ -241,7 +243,7 @@ class LmsController extends Controller
                         'password' => Hash::make($password)
                     ]);
 
-                    $pin = rand(100000, 999999);
+                    $pin = rand(10000, 99999);
 
                     DB::table('password_resets')
                         ->insert(

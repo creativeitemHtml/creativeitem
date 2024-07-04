@@ -70,7 +70,7 @@ class RegisteredUserController extends Controller
                 if ($verify2->exists()) {
                     $verify2->delete();
                 }
-                $pin = rand(100000, 999999);
+                $pin = rand(10000, 99999);
                 DB::table('password_resets')
                     ->insert(
                         [

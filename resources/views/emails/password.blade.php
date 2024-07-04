@@ -19,7 +19,7 @@
                                         <img style="width:170px;  margin: 8px 0;" src="https://creativeitem.com/public/assets/image/icon-positive-vote-1.png" alt="image">
                                         <div class="feature-text" style="margin-bottom:27px;">
                                             <p style="margin-bottom:9px; font-family:Arial,Helvetica,sans-serif ;color:#181C32; font-size: 28px; font-weight:700">Hey {{ $user->name }}, You Just Made a Password Change Request!</p>
-                                            <p>Your six-digit code is {{$pin}}</p>
+                                            <p>Your five-digit code is {{$pin}}</p>
                                             <p class="small-text" style="font-size:15px; margin-bottom: 2px;
                                             color: #7E8299; font-family:Arial,Helvetica,sans-serif">Lots of people make mistakes while creating</p>
                                             <p class="small-text" style="font-size:15px; margin-bottom: 2px;

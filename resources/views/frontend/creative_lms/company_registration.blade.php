@@ -1,4 +1,4 @@
-@if(Auth::check() && !empty($lms_company))
+@if(Auth::check() && !empty($lms_company) && !is_null($check_verification))
 <div class="ci1-card max-w-490px w-100">
     <div class="ci1-card-body p-30px">
         <h3 class="man-title-26px mb-30px">Already Registerd</h3>
@@ -86,6 +86,9 @@
         // Create form data
         let formData = new FormData();
         formData.append('verification_code', verificationCode);
+
+        console.log(formData);
+        die();
 
         // Make AJAX request
         $.ajax({
