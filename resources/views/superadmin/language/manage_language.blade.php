@@ -71,21 +71,25 @@
                     ?>
                     <div class="tab-pane fade {{ !empty($edit_profile) ? 'show active':'' }} pt-3  " id="editphrase" role="tabpanel" aria-labelledby="editphrase-tab">
                         <div class="row">
-                            <?php foreach ($phrases as $phrase): ?>
+                            <?php foreach ($phrases as $key => $phrase): ?>
                             <div class="col-md-3">
                               <div class="eCard eCard-2">
                                 <div class="eCard-body">
-                                  <p class="eCard-text text-center">
-                                      <label for="text" class="eForm-label">{{ $phrase->phrase }}</label>
+                                  <p class="eCard-text text-center translation-fields">
+                                      <label for="text" class="eForm-label ">{{ $phrase->phrase }}</label>
                                     <input type="text" class="form-control eForm-control" name="updated_phrase" id = "phrase-<?php echo $phrase->id; ?>" value="<?php echo $phrase->translated; ?>">
                                   </p>
                                   <div class="d-flex flex-column align-items-start align-items-md-center mt-3">
-                                    <a href="javascript:void(0)" class="new-project-btn new-project-btn-desktop" id="btn-<?php echo $phrase->id; ?>" onclick="updatePhrase('<?php echo $phrase->phrase; ?>', '{{ $current_editing_language }}', '<?php echo $phrase->id; ?>')">{{ get_phrase('Update') }}</a>
+                                    <a href="javascript:void(0)" class="new-project-btn new-project-btn-desktop update-translation-fields" id="btn-<?php echo $phrase->id; ?>" onclick="updatePhrase('<?php echo $phrase->phrase; ?>', '{{ $current_editing_language }}', '<?php echo $phrase->id; ?>')">{{ get_phrase('Update') }}</a>
                                   </div>
                                 </div>
                               </div>
                             </div>
                             <?php endforeach; ?>
+
+
+
+                            
                             
                         </div>
                     </div>
@@ -172,4 +176,37 @@
 		});
 	}
 
+
+
+
+    function replaceInputData(){
+        $('.translation-fields:not(.added)').each(function(index){
+
+            var element = $(this);
+            // setTimeout(function(){
+                var translated_text = element.find('label').text();
+                element.find('input').val(translated_text);
+                element.addClass('added');
+                console.log(translated_text)
+            // }, index * 500); // index * 1000 will delay each by 1 second
+        });
+    }
+
+    function replaceInputDataUpdate(){
+        
+        $('.update-translation-fields').each(function(index){
+            var element = $(this);
+            setTimeout(function(){
+                element.click();
+                element.addClass('d-none');
+            }, index * 1000); // index * 1000 will delay each by 1 second
+        });
+
+    }
+
+    
+
 </script>
+
+<button type="button" onclick="replaceInputData()">Replace input field data</button>
+<button type="button" onclick="replaceInputDataUpdate()">Update Now</button>

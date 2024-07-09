@@ -24,6 +24,10 @@
 			</thead>
 			<tbody>
 				@foreach($packages as $package)
+                @php
+                    $prices = json_decode($package->price, true);
+                    $dis_prices = json_decode($package->discounted_price, true);
+                @endphp
 				<tr>
 				    <td>
 				      <div class="min-w-100">
@@ -31,10 +35,18 @@
 				      </div>
 				    </td>
                     <td>
-                        {{ currency((double)$package->price) }}
+                        <div class="min-w-100">
+                            @foreach($prices as $price)
+                                <span>{{ $price['currency'] }}: </span>{{ $price['amount'] }} <br><br>
+                            @endforeach
+                        </div>
                     </td>
                     <td>
-                        {{ currency((double)$package->discounted_price) }}
+                        <div class="min-w-100">
+                            @foreach($dis_prices as $dis_price)
+                                <span>{{ $dis_price['currency'] }}: </span>{{ $dis_price['amount'] }} <br><br>
+                            @endforeach
+                        </div>
                     </td>
                     <td>
                         {{ $package->interval }}
@@ -43,7 +55,11 @@
                         {{ $package->interval == 'lifetime' ? '-' : $package->interval_period }}
                     </td>
                     <td>
-				      	{{ $package->interval == 'lifetime' ? currency((double)$package->discounted_price) : currency((double)$package->discounted_price * (double)$package->interval_period) }}
+                        <div class="min-w-100">
+                            @foreach($dis_prices as $dis_price)
+                                <span>{{ $dis_price['currency'] }}: </span>{{ $package->interval == 'lifetime' ? (double)$dis_price['amount'] : (double)$dis_price['amount'] * (double)$package->interval_period }} <br><br>
+                            @endforeach
+                        </div>
 				    </td>
                     <td>
                         @if($package->visibility != '1'):

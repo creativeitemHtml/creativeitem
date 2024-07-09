@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(RolesAndPermission::class,'role_id','id');
     }
+
+    public function payments()
+    {
+        return $this->hasMany(ElementProductPayment::class, 'user_id');
+    }
 }

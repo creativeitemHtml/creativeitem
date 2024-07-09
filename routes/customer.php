@@ -56,7 +56,7 @@ Route::controller(CustomerController::class)->middleware('auth', 'customer')->gr
     Route::get('/customer/subscription/payment/fail/{user_data}/{response}', 'subscription_fee_fail_payment')->name('subscription_fee_fail_payment');
 
     //Single Payment by customer
-    Route::get('/customer/creative-elements/single-purchase/{product_id}', 'single_purchase')->name('customer.single_purchase');
+    Route::get('/customer/creative-elements/single-purchase/{product_id}/{payment_method}', 'single_purchase')->name('customer.single_purchase');
     Route::get('/customer/single-purchase/success/{purchase_data}/{response}', 'single_purchase_success_payment')->name('single_purchase_success_payment');
     Route::get('/customer/single-purchase/fail/{purchase_data}/{response}', 'single_purchase_fail_payment')->name('single_purchase_fail_payment');
 

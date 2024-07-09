@@ -139,15 +139,22 @@
                     <ul class="productPriceOption">
                         <li>
                             <div class="form-check">
-                                <input class="form-check-input ciRadio ciRadio-OutlinePrimary" type="radio" id="price_type" name="price_type" value="free" />
-                                <label class="form-check-label" for="onlyFree">{{ get_phrase('Free') }}</label>
+                                <input class="form-check-input ciRadio ciRadio-OutlinePrimary" type="radio" id="price_type_free" name="price_type" value="free" />
+                                <label class="form-check-label" for="price_type_free">{{ get_phrase('Free') }}</label>
                             </div>
                         </li>
                         <li>
                             <div class="form-check">
-                                <input class="form-check-input ciRadio ciRadio-OutlinePrimary" type="radio" id="price_type" name="price_type" value="paid" />
-                                <label class="form-check-label" for="onlyPaid">{{ get_phrase('Paid') }}</label>
-                                <input type="text" class="form-control enForm-control" id="price" name="price" placeholder="$00" aria-label="$00" min="0" />
+                                <input class="form-check-input ciRadio ciRadio-OutlinePrimary" type="radio" id="price_type_paid" name="price_type" value="paid" />
+                                <label class="form-check-label" for="price_type_paid">{{ get_phrase('Paid') }}</label>
+                                <div class="price-fields" id="price_fields" style="display: none;">
+                                    <?php foreach ($currencies as $currency): ?>
+                                        <div class="col-sm-10 col-md-9 col-lg-10">
+                                            <label for="{{ $currency->code }}" class="col-sm-2 enForm-label">{{ get_phrase($currency->code) }}</label>
+                                            <input type="text" class="form-control enForm-control" id="{{ $currency->code }}" name="prices[{{ $currency->code }}]" placeholder="{{ '$00' }}" aria-label="{{ '$00' }}" min="0" />
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -166,9 +173,9 @@
 
     "use strict";
 
-    $(".up-uploadFile-btn").click(function () {
-        $(this).replaceWith("<img src='{{ asset("assets/img/loading.gif") }}'>");
-    });
+    // $(".up-uploadFile-btn").click(function () {
+    //     $(this).replaceWith("<img src='{{ asset("assets/img/loading.gif") }}'>");
+    // });
 
     $(document).ready(function () {
         $('#description').summernote({
@@ -203,6 +210,33 @@
             $('#previewUrlbody').addClass('d-none')
         }
     })
+
+    document.addEventListener('DOMContentLoaded', function() {
+        function togglePriceFields() {
+            const priceFields = document.getElementById('price_fields');
+            const paidOption = document.getElementById('price_type_paid');
+
+            if (paidOption && paidOption.checked) {
+                priceFields.style.display = 'block';
+            } else {
+                priceFields.style.display = 'none';
+            }
+        }
+
+        // Attach event listeners
+        const freeOption = document.getElementById('price_type_free');
+        const paidOption = document.getElementById('price_type_paid');
+
+        if (freeOption) {
+            freeOption.addEventListener('change', togglePriceFields);
+        }
+        if (paidOption) {
+            paidOption.addEventListener('change', togglePriceFields);
+        }
+
+        // Initial check
+        togglePriceFields();
+    });
 
     
 

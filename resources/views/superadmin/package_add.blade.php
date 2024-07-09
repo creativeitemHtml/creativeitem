@@ -40,12 +40,30 @@
 
     <div class="input-wrap mt-2">
         <label for="price" class="eForm-label">{{ get_phrase('Package price') }}</label>
-        <input type="number" class="form-control eForm-control" id="price" name="price" min="0" placeholder="Provide package price" required>
+        <div class="row m-2">
+            <?php foreach ($currencies as $currency): ?>
+                <div class="col-sm-2 col-md-2 col-lg-2 pt-2">
+                    <label for="{{ $currency->code }}" class="col-sm-2 enForm-label ps-5">{{ get_phrase($currency->code) }}</label>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control enForm-control" id="{{ $currency->code }}" name="price[{{ $currency->code }}]" placeholder="{{ '$00' }}" aria-label="{{ '$00' }}" min="0" required/>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 
     <div class="input-wrap mt-2">
         <label for="discounted_price" class="eForm-label">{{ get_phrase('Discounted price') }}</label>
-        <input type="number" class="form-control eForm-control" id="discounted_price" name="discounted_price" min="0" placeholder="Provide package discounted price">
+        <div class="row m-2">
+            <?php foreach ($currencies as $currency): ?>
+                <div class="col-sm-2 col-md-2 col-lg-2 pt-2">
+                    <label for="{{ $currency->code }}" class="col-sm-2 enForm-label ps-5">{{ get_phrase($currency->code) }}</label>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control enForm-control" id="{{ $currency->code }}" name="discounted_price[{{ $currency->code }}]" placeholder="{{ '$00' }}" aria-label="{{ '$00' }}" min="0" />
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 
     <div class="input-wrap mt-2">

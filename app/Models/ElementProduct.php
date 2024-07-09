@@ -34,5 +34,10 @@ class ElementProduct extends Model
         // Use the Tag model to retrieve the tags based on the IDs
         return Tag::whereIn('id', $tagIds)->get();
     }
+
+    public function payments()
+    {
+        return $this->hasMany(ElementProductPayment::class, 'element_product_id');
+    }
     
 }

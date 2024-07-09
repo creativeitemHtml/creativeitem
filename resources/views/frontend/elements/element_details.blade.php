@@ -97,7 +97,7 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                             <div class="venobox-img-wrap">
 
                                 @if($selected_product->product_to_elementCategory->slug == 'ui-kits' || $selected_product->product_to_elementCategory->slug == 'laravel-themes')
-                                    <a class="my-image-links live-preview-btn" data-gall="gallery01" href="{{ $preview_thumbnails[0]->src }}">{{get_phrase('Screenshots')}}</a>
+                                    <a class="my-image-links live-preview-btn" data-gall="gallery01" href="{{ $preview_thumbnails[0]->src }}">{{ get_phrase('Screenshots') }}</a>
                                     @foreach($preview_thumbnails as $thumbnail)
                                         <a class="my-image-links" data-gall="gallery01" href="{{ $thumbnail->src }}"></a>
                                     @endforeach
@@ -122,7 +122,7 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                 @endif
                             </a>
                             @if(!empty($selected_product->previewUrl))
-                            <a class="live-preview-btn" target="_blank" href="{{ $selected_product->previewUrl}}">{{get_phrase('Preview')}}</a>
+                            <a class="live-preview-btn" target="_blank" href="{{ $selected_product->previewUrl}}">{{ get_phrase('Preview') }}</a>
                             @else
                             @endif
                         </div>
@@ -171,7 +171,7 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                     <div class="icon">
                                         <img src="{{ asset('assets/img/icon/share.svg') }}" alt="" />
                                     </div>
-                                    <span>Share</span>
+                                    <span>{{ get_phrase('Share') }}</span>
                                 </button>
                                 <ul class="shareDropdown-menu">
                                     <li class="shareDropdown-content">
@@ -182,11 +182,11 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                             </a>
                                             <button class="copyBtn" id="copy-button">
                                                 <img id="copy-image" src="{{ asset('assets/img/icon/duplicate.svg') }}" alt="" />
-                                                Copy
+                                                {{ get_phrase('Copy') }}
                                             </button>
                                             <div class="copy-overlay">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-                                                <p>Copied</p>
+                                                <p>{{ get_phrase('Copied') }}</p>
                                             </div>
                                         </div>
                                         <ul class="shareDropdown-social">
@@ -194,25 +194,25 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                             <li>
                                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ $url }}&display=popup" target="_blank">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
-                                                    Facebook
+                                                    {{ get_phrase('Facebook') }}
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="http://twitter.com/share?url={{ $url }}" title="Click to share this post on Twitter" target="_blank">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
-                                                    Twitter
+                                                    {{ get_phrase('Twitter') }}
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="https://pinterest.com/pin/create/button/?url={{ $url }}&media={{ element_server_url($selected_product->product_id, $selected_product->product_to_elementCategory->slug).$selected_product->thumbnail }}&description={{ $selected_product->title }}" rel="me" title="Pinterest" target="_blank">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><path d="M204 6.5C101.4 6.5 0 74.9 0 185.6 0 256 39.6 296 63.6 296c9.9 0 15.6-27.6 15.6-35.4 0-9.3-23.7-29.1-23.7-67.8 0-80.4 61.2-137.4 140.4-137.4 68.1 0 118.5 38.7 118.5 109.8 0 53.1-21.3 152.7-90.3 152.7-24.9 0-46.2-18-46.2-43.8 0-37.8 26.4-74.4 26.4-113.4 0-66.2-93.9-54.2-93.9 25.8 0 16.8 2.1 35.4 9.6 50.7-13.8 59.4-42 147.9-42 209.1 0 18.9 2.7 37.5 4.5 56.4 3.4 3.8 1.7 3.4 6.9 1.5 50.4-69 48.6-82.5 71.4-172.8 12.3 23.4 44.1 36 69.3 36 106.2 0 153.9-103.5 153.9-196.8C384 71.3 298.2 6.5 204 6.5z"/></svg>
-                                                    Pinterest
+                                                    {{ get_phrase('Pinterest') }}
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ $url }}" target="_blank">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
-                                                    Linkedin
+                                                    {{ get_phrase('Linkedin') }}
                                                 </a>
                                             </li>
                                         </ul>
@@ -222,39 +222,55 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                         </div>
                         <!-- Price -->
                         <div class="elitem-price p-30 bd-r-10 box-shadow-13 mb-30">
-                            <h4 class="price">Price : <span>{{ currency($selected_product->price) }}</span></h4>
+                            @php
+                                try {
+                                    $prices = json_decode($selected_product->price, true);
+                                    $currency = strtoupper(session('session_currency'));
+                                    $price = collect($prices)->firstWhere('currency', $currency)['amount'];
+                                    $isJson = (json_last_error() == JSON_ERROR_NONE);
+                                } catch (\Exception $e) {
+                                    $isJson = false;
+                                }
+                            @endphp
+                            @if ($isJson)
+                                <h4 class="price">Price : <span>{{ currency($price) }}</span></h4>
+                            @else
+                                <h4 class="price">Price : <span>{{ currency($selected_product->price) }}</span></h4>
+                            @endif
                             @if(Auth::check())
-                                @if((isset($current_subscription) &&  ($current_subscription->subscription_to_package->interval == 'lifetime' || $current_subscription->expire_date > $today)) || !empty($is_purchased))
+                                @if(null !== $is_purchased && $is_purchased->status == 'pending')
+                                <a href="#" class="el-btn-buy mb-12">{{ get_phrase('Pending') }}</a>
+                                @elseif ((isset($current_subscription) &&  ($current_subscription->subscription_to_package->interval == 'lifetime' || $current_subscription->expire_date > $today)) || !empty($is_purchased))
                                 <a href="{{ route('customer.download_link_generate', ['product_id' => $selected_product->id]) }}" class="el-btn-buy mb-12" target="_blank">Download</a>
                                 <div class="elitem-allFile">
                                     <img src="{{ asset('assets/img/icon/download.svg') }}" alt="" />
                                     <p>
-                                        Download limit left {{ $remaining_download_limit }} out of {{ $current_subscription->subscription_to_package->download_limit }} times
+                                        {{ get_phrase('Download limit left').' '.$remaining_download_limit.' '.get_phrase('out of').' '.$current_subscription->subscription_to_package->download_limit.' '.get_phrase('times') }}
                                     </p>
                                 </div>
                                 @else
 
                                 <a href="javascript:;" class="el-btn-buy mb-12" onclick="commonModal('{{ route('element_buy_now', ['product_id' => $selected_product->id]) }}) }}')">{{ get_phrase('Buy Now') }}</a>
-                                <span class="seperate">or</span>
-                                <a href="{{ route('elements_package_pricing') }}" class="el-btn-subscribe mb-20">Subscribe</a>
+                                <span class="seperate">{{ get_phrase('or') }}</span>
+                                <a href="{{ route('elements_package_pricing') }}" class="el-btn-subscribe mb-20">{{ get_phrase('Subscribe') }}</a>
                                 <div class="elitem-allFile">
                                     <img src="{{ asset('assets/img/icon/unlock.svg') }}" alt="" />
-                                    <p>Unlock all file for $4.5/month</p>
+                                    <p>{{ get_phrase('Unlock all file for $4.5/month') }}</p>
                                 </div>
                                 @endif
                             @else
                                 <a href="javascript:;" class="el-btn-buy mb-12" onclick="commonModal('{{ route('element_buy_now', ['product_id' => $selected_product->id]) }}) }}')">{{ get_phrase('Buy Now') }}</a>
                                 <span class="seperate">or</span>
-                                <a href="{{ route('elements_package_pricing') }}" class="el-btn-subscribe mb-20">Subscribe</a>
+                                <a href="{{ route('elements_package_pricing') }}" class="el-btn-subscribe mb-20">{{ get_phrase('Subscribe') }}</a>
                                 <div class="elitem-allFile">
-                                <img src="{{ asset('assets/img/icon/unlock.svg') }}" alt="" />
-                                <p>Unlock all file for $4.5/month</p>
+                                    <img src="{{ asset('assets/img/icon/unlock.svg') }}" alt="" />
+                                    <p>{{ get_phrase('Unlock all file for $4.5/month') }}</p>
                                 </div>
                             @endif
                         </div>
                         <!-- Specification -->
                         <div class="el-specification py-30 bd-r-10 box-shadow-13">
-                            <h4 class="el-sp-title">Specification</h4>
+                            <h4 class="el-sp-title">{{ get_phrase('Specification') }}</h4>
                             <div class="el-sp-table px-30">
                                 <table class="table eTable">
                                     <tbody>
@@ -262,7 +278,7 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                             <td>
                                                 <div class="el_table_title">
                                                 <img src="{{ asset('assets/img/icon/dashboard-2.svg') }}" alt="" />
-                                                    <p>Category :</p>
+                                                    <p>{{ get_phrase('Category') }} :</p>
                                                 </div>
                                             </td>
                                             <td>
@@ -275,7 +291,7 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                             <td>
                                                 <div class="el_table_title">
                                                     <img src="{{ asset('assets/img/icon/calendar-minus.svg') }}" alt="" />
-                                                    <p>Published :</p>
+                                                    <p>{{ get_phrase('Published') }} :</p>
                                                 </div>
                                             </td>
                                             <td>
@@ -288,7 +304,7 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                             <td>
                                             <div class="el_table_title">
                                                     <img src="{{ asset('assets/img/icon/add-folder.svg') }}" alt="" />
-                                                    <p>File type :</p>
+                                                    <p>{{ get_phrase('File type') }} :</p>
                                                 </div>
                                             </td>
                                             <td>
@@ -301,7 +317,7 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                             <td>
                                                 <div class="el_table_title">
                                                     <img src="{{ asset('assets/img/icon/add-folder.svg') }}" alt="" />
-                                                    <p>File size :</p>
+                                                    <p>{{ get_phrase('File size') }} :</p>
                                                 </div>
                                             </td>
                                             <td>
@@ -321,9 +337,9 @@ if(Auth::check() && auth()->user()->role_id == 6) {
         <!-- More Items -->
         <div class="elDetails-more-items pb-50">
             <div class="d-flex justify-content-between align-items-center flex-wrap g-20 pb-16">
-            <h4 class="fz-24-eb-black">More Items</h4>
+            <h4 class="fz-24-eb-black">{{ get_phrase('More Items') }}</h4>
                 <a href="{{ route('search_element_products', ['slug' => $selected_product->product_to_elementCategory->slug]) }}" class="view-all-btn">
-                    View all
+                    View all{{ get_phrase('') }}
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"/></svg>
                 </a>
             </div>
@@ -355,7 +371,21 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                             <div class="product-title-author">
                                 <h4 class="product-title">{{ $product->title }}</h4>
                             </div>
-                            <span class="product-price">{{ currency($product->price) }}</span>
+                            @php
+                                try {
+                                    $prices = json_decode($product->price, true);
+                                    $currency = strtoupper(session('session_currency'));
+                                    $price = collect($prices)->firstWhere('currency', $currency)['amount'];
+                                    $isJson = (json_last_error() == JSON_ERROR_NONE);
+                                } catch (\Exception $e) {
+                                    $isJson = false;
+                                }
+                            @endphp
+                            @if ($isJson)
+                                <span class="product-price">{{ currency($price) }}</span>
+                            @else
+                                <span class="product-price">{{ currency($product->price) }}</span>
+                            @endif
                         </div>
                     </div>
                 </div>

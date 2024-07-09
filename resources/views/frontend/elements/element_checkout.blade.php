@@ -25,7 +25,7 @@
                     <div v-if="!$page.props.auth.user" class="cForm-wrap">
                         <div class="cFormInput-wrap">
                             <label for="yourEmail" class="eForm-label">Email</label>
-                            <input type="email" class="form-control eForm-control" id="email" name="email" placeholder="Your Email" aria-label="Your Email" />
+                            <input type="email" class="form-control eForm-control" id="email" name="email" placeholder="Your Email" aria-label="Your Email" required />
                         </div>
                     </div>
                     @endif
@@ -61,6 +61,14 @@
                                     $interval = '';
                                     $interval_period_text = 'Lifetime access';
                                 }
+
+
+                                $prices = json_decode($package->price, true);
+                                $dis_price = json_decode($package->discounted_price, true);
+                                $currency = strtoupper(session('session_currency'));
+                                $price = collect($prices)->firstWhere('currency', $currency)['amount'];
+                                $dis_price = collect($dis_price)->firstWhere('currency', $currency)['amount'];
+
                                 @endphp
                                 <button
                                     class="nav-link checkThis @if($package->id == $selected_package->id) active @endif"
@@ -71,7 +79,7 @@
                                     role="tab"
                                     aria-controls="v-pills-{{ $package->name }}"
                                     aria-selected="{{ $package->id == $selected_package->id ? 'true' : 'false' }}"
-                                    data-package-price="{{ $package->discounted_price }}"
+                                    data-package-price="{{ $dis_price }}"
                                     data-interval-period="{{ $package->interval_period }}"
                                     data-package-id="{{ $package->id }}"
                                 >
@@ -82,7 +90,7 @@
                                         <div class="col-auto">
                                             <label class="form-check-label" for="flexCheckBasic">{{ get_phrase('Creative elements').' - '.$package->name }}</label>
                                             <p>
-                                                ${{ $package->discounted_price.$per }} ( {{ $interval_period_text }} )
+                                                {{ currency($dis_price.$per) }} ( {{ $interval_period_text }} )
                                             </p>
                                         </div>
                                     </div>
@@ -93,8 +101,15 @@
                     </div>
                     <div class="ml-24 mr-25 py-20 d-flex justify-content-between align-items-center flex-wrap g-10">
                         <h4 class="fz-18-sb-black">Total</h4>
+                        @php
+
+                        $selected_dis_price = json_decode($selected_package->discounted_price, true);
+                        $currency = strtoupper(session('session_currency'));
+                        $selected_dis_price = collect($selected_dis_price)->firstWhere('currency', $currency)['amount'];
+
+                        @endphp
                         <h4 class="fz-18-sb-black" id="selected-package-price">
-                            {{ $selected_package->interval == 'lifetime' ? currency((double)$selected_package->discounted_price) : currency((double)$selected_package->discounted_price * (double)$selected_package->interval_period) }}
+                            {{ $selected_package->interval == 'lifetime' ? currency().(double)$selected_dis_price : currency().(double)$selected_dis_price * (double)$selected_package->interval_period }}
                         </h4>
                     </div>
                     <div class="bd-all bd-r-10 pt-16 pb-20 ml-24 mr-25">
@@ -136,7 +151,7 @@
     var totalSelectedPackagePrice = selectedIntervalPeriod ? selectedPackagePrice * selectedIntervalPeriod : selectedPackagePrice;
 
     // Update the displayed price with $ sign
-    $("#selected-package-price").text("$" + totalSelectedPackagePrice.toFixed(2));
+    $("#selected-package-price").text("<?= currency(); ?>" + totalSelectedPackagePrice.toFixed(2));
   });
 
   document.getElementById("checkout-form").addEventListener("submit", function(event) {

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyEmailWithPassword;
 use Laravel\Sanctum\PersonalAccessToken;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Validator;
 use mysqli;
 use PDO;
 
@@ -223,9 +224,29 @@ class LmsController extends Controller
                 }
                             
             } else {
-                $this->validate($request, [
-                    'email' => 'required|email',
+                // Define a stricter regex pattern for email validation
+                $emailRegex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+
+                // Use the regex pattern in the validator
+                $validator = Validator::make($request->all(), [
+                    'email' => ['required', 'regex:' . $emailRegex],
                 ]);
+
+                if ($validator->fails()) {
+                    // Get the error messages as a string
+                    $errorMessages = $validator->messages()->all();
+                    $errorString = implode(' ', $errorMessages);
+                    
+                    // Pass the error messages to the session
+                    $response = [
+                        'status' => '500',
+                        'message' => 'Check your email Address',
+                    ];
+            
+                    $response = json_encode($response);
+            
+                    return $response;
+                }
 
                 $name = strstr($request->email, '@', true);
 

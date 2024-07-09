@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
-use App\Models\{User, Product, ProductType, Topic, Article, Documentation, Blog, BlogCategory, Ad, AdDimension, Project, OnlineMeeting, PaymentMilestone, RolesAndPermission, SeoField, Package, Tag, Setting, ElementCategory, ElementProduct, Subscription, ElementDownload, ElementFileType, ServicePackage, Service, Language};
+use App\Models\{User, Product, ProductType, Topic, Article, Documentation, Blog, BlogCategory, Ad, AdDimension, Project, OnlineMeeting, PaymentMilestone, RolesAndPermission, SeoField, Package, Tag, Setting, ElementCategory, ElementProduct, Subscription, ElementDownload, ElementFileType, ServicePackage, Service, Language, Currency, ElementProductPayment};
 use Illuminate\Support\Facades\Hash;
 use Validator;
 use Response;
@@ -1759,12 +1759,38 @@ class SuperadminController extends Controller
     public function package_create(Request $request)
     {
         $page_data = array();
+        $page_data['currencies'] = Currency::all();
 
         if(!empty($request->all())){
 
             $data['name'] = $request->name;
-            $data['price'] = $request->price;
-            $data['discounted_price'] = $request->discounted_price;
+
+            // Extract the prices array from the request
+            $pricesArray = $request->input('price');
+
+            // Transform the prices array into the desired format
+            $formattedPrices = [];
+            foreach ($pricesArray as $currency => $amount) {
+                $formattedPrices[] = [
+                    'currency' => $currency,
+                    'amount' => $amount,
+                ];
+            }
+
+            // Extract the prices array from the request
+            $disPricesArray = $request->input('discounted_price');
+
+            // Transform the prices array into the desired format
+            $formattedDisPrices = [];
+            foreach ($disPricesArray as $currency => $amount) {
+                $formattedDisPrices[] = [
+                    'currency' => $currency,
+                    'amount' => $amount,
+                ];
+            }
+
+            $data['price'] = json_encode($formattedPrices);
+            $data['discounted_price'] = json_encode($formattedDisPrices);
             $data['stripe_package_id'] = $request->stripe_package_id;
             $data['interval'] = $request->interval;
             if(!empty($request->interval_period)) {
@@ -1784,12 +1810,39 @@ class SuperadminController extends Controller
 
     public function package_update(Request $request, $id) {
         $page_data = array();
+        $page_data['currencies'] = Currency::all();
 
         if(!empty($request->all())){
 
             $data['name'] = $request->name;
-            $data['price'] = $request->price;
-            $data['discounted_price'] = $request->discounted_price;
+            
+            // Extract the prices array from the request
+            $pricesArray = $request->input('price');
+
+            // Transform the prices array into the desired format
+            $formattedPrices = [];
+            foreach ($pricesArray as $currency => $amount) {
+                $formattedPrices[] = [
+                    'currency' => $currency,
+                    'amount' => $amount,
+                ];
+            }
+
+            // Extract the prices array from the request
+            $disPricesArray = $request->input('discounted_price');
+
+            // Transform the prices array into the desired format
+            $formattedDisPrices = [];
+            foreach ($disPricesArray as $currency => $amount) {
+                $formattedDisPrices[] = [
+                    'currency' => $currency,
+                    'amount' => $amount,
+                ];
+            }
+
+            $data['price'] = json_encode($formattedPrices);
+            $data['discounted_price'] = json_encode($formattedDisPrices);
+            
             $data['stripe_package_id'] = $request->stripe_package_id;
             $data['interval'] = $request->interval;
             if(!empty($request->interval_period)) {
@@ -1983,8 +2036,8 @@ class SuperadminController extends Controller
     public function product_create()
     {
         $page_data = array();
-        
 
+        $page_data['currencies'] = Currency::all();
         $page_data['element_products'] = ElementProduct::all();
         $page_data['element_products_count'] = ElementProduct::all();
         $page_data['subscriptions'] = Subscription::all();
@@ -2032,6 +2085,18 @@ class SuperadminController extends Controller
             {
                 $send_data['file_3d'] = $request->file_3d;
             }
+
+            // Extract the prices array from the request
+            $pricesArray = $request->input('prices');
+
+            // Transform the prices array into the desired format
+            $formattedPrices = [];
+            foreach ($pricesArray as $currency => $amount) {
+                $formattedPrices[] = [
+                    'currency' => $currency,
+                    'amount' => $amount,
+                ];
+            }
             
 
             $file_types = implode(',', $request->file_types);
@@ -2049,7 +2114,7 @@ class SuperadminController extends Controller
             $send_data['element_category_id'] = $request->element_category_id;
             $send_data['sub_category_id'] = $request->sub_category_id;
             $send_data['price_type'] = $request->price_type;
-            $send_data['price'] = $request->price;
+            $send_data['price'] = json_encode($formattedPrices);
             $send_data['file_size'] = $request->file_size;
             $send_data['file_types'] = $file_types;
             $send_data['tag_ids'] = $tags;
@@ -2068,6 +2133,7 @@ class SuperadminController extends Controller
         $page_data = array();
         
 
+        $page_data['currencies'] = Currency::all();
         $page_data['element_products_count'] = ElementProduct::all();
         $page_data['subscriptions'] = Subscription::all();
         $page_data['file_types'] = ElementFileType::all();
@@ -2121,6 +2187,19 @@ class SuperadminController extends Controller
 
             $send_data['title'] = $request->title;
             $send_data['summary'] = $request->summary;
+
+
+            // Extract the prices array from the request
+            $pricesArray = $request->input('prices');
+
+            // Transform the prices array into the desired format
+            $formattedPrices = [];
+            foreach ($pricesArray as $currency => $amount) {
+                $formattedPrices[] = [
+                    'currency' => $currency,
+                    'amount' => $amount,
+                ];
+            }
             
             $dom = new \DomDocument();
             $dom->loadHtml($request->description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
@@ -2130,7 +2209,7 @@ class SuperadminController extends Controller
             $send_data['element_category_id'] = $request->element_category_id;
             $send_data['sub_category_id'] = $request->sub_category_id;
             $send_data['price_type'] = $request->price_type;
-            $send_data['price'] = $request->price;
+            $send_data['price'] = json_encode($formattedPrices);
             $send_data['file_size'] = $request->file_size;
             $send_data['file_types'] = $file_types;
             $send_data['tag_ids'] = $tags;
@@ -2251,5 +2330,35 @@ class SuperadminController extends Controller
 
         return redirect()->back()->with('message', 'You have successfully transleted language.');
     }
+
+    public function paymentRequestView()
+    {
+        $page_data['page_title'] = 'Payment Request';
+        $page_data['payment_request'] = 'active';
+        $page_data['file_name'] = 'payment_request';
+        $page_data['payments'] = ElementProductPayment::with(['user', 'product'])->get();
+
+        return view('superadmin.navigation', $page_data);
+    }
+    
+    public function paymentRequestAprrove($id)
+     {
+
+        $payment = ElementProductPayment::with(['user', 'product'])->find($id);
+
+        $data = ElementProductPayment::findOrFail($id);
+        $data->status = 'approved';
+        $data->save();
+
+        Mail::to($payment->user->email)->send(new ApprovePurchaseInvoice($payment));
+        return redirect()->back()->with('message', 'Payment Apporved');
+     }
+
+     public function paymentRequestDelete($id)
+     {
+        ElementProductPayment::where('id', $id)->delete();
+
+        return redirect()->back()->with('message', 'Delete successfully.');
+     }
     
 }

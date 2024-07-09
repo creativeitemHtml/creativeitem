@@ -3,7 +3,46 @@ use App\Models\Article;
 use App\Models\User;  
 use GuzzleHttp\Client;
 use App\Models\ElementProduct;
+use Illuminate\Support\Facades\Session;
 //All common helper functions
+
+if(! function_exists('location_set')) {
+    function location_set() {
+        // $ip = $request->ip(); // remove the command when it's have in a domain
+        $ip = '27.147.191.220';
+        $location = Location::get($ip);
+
+        if(!empty($location->countryName)){
+            Session::put('location', $location->countryName);
+        }
+
+        if(Auth::check())
+        {
+            $code = auth()->user()->currency_code;
+            if(isset($code)) {
+                Session::put('session_currency', $code);
+            } else {
+                if(session('location') == "Bangladesh") {
+                    Session::put('session_currency', 'bdt');
+                } else {
+                    Session::put('session_currency', 'usd'); 
+                }
+
+                $page_data['currency_code'] = strtoupper(session('session_currency'));
+
+                User::where('id', auth()->user()->id)->update($page_data);
+            }
+        } else {
+            if(empty(session('session_currency'))) {
+                if(session('location') == "Bangladesh") {
+                    Session::put('session_currency', 'bdt');
+                } else {
+                    Session::put('session_currency', 'usd'); 
+                }
+            }
+        }
+    }
+}
 
 //User image
 if (! function_exists('get_user_image')) {
@@ -60,7 +99,6 @@ if ( ! function_exists('get_all_language'))
 if ( ! function_exists('get_phrase'))
 {
     function get_phrase($phrase = '') {
-        
 
         if(isset(auth()->user()->id)) {
             $active_language = User::where('id', auth()->user()->id)->value('language');
@@ -209,15 +247,38 @@ if (!function_exists('reformat_image_path')) {
 if (!function_exists('currency')) {
     function currency($price = "")
     {
-        $currency_position = DB::table('settings')->where('key', 'currency_position')->value('value');
-        $code = DB::table('settings')->where('key', 'system_currency')->value('value');
-        $symbol = DB::table('currency')->where('code', $code)->value('symbol');
+        location_set();
 
-        if($currency_position == 'left'){
-            return $symbol.''.$price;
-        } else {
-            return $price.''.$symbol;
+        if(isset(auth()->user()->id)) {
+            $code = User::where('id', auth()->user()->id)->value('currency_code');
         }
+        elseif(!empty(session('session_currency')))
+        {
+            $code = strtoupper(session('session_currency'));
+        }
+        elseif(session('location') == "Bangladesh")
+        {
+            $code = 'BDT';
+        }
+        else
+        {
+            $code = DB::table('settings')->where('key', 'system_currency')->value('value');
+        }
+
+        // $currency_position = DB::table('currency')->where('code', $code)->value('position');
+
+        // $symbol = DB::table('currency')->where('code', $code)->value('symbol');
+
+        if(!empty($price)) {
+            return $code.' '.$price;
+        } else {
+            return $code.' ';
+        }
+        // if($currency_position == 'left'){
+        //     return $symbol.''.$price;
+        // } else {
+        //     return $price.''.$symbol;
+        // }
     }
 }
 

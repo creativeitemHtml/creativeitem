@@ -78,7 +78,23 @@ $pprice_type = ['Free', 'Paid'];
                     <td>
                         <div class="dl_property_type">
                             @if($element_product->price_type == 'paid')
-                                <p>{{ currency($element_product->price) }}</p>
+
+                                @php
+                                    try {
+                                        $prices = json_decode($element_product->price, true);
+                                        $isJson = (json_last_error() == JSON_ERROR_NONE);
+                                    } catch (\Exception $e) {
+                                        $isJson = false;
+                                    }
+                                @endphp
+
+                                @if ($isJson && is_array($prices))
+                                    @foreach($prices as $price)
+                                    <p><span>{{ $price['currency'] }}: </span>{{ $price['amount'] }}</p>
+                                    @endforeach
+                                @else
+                                    <p>{{ currency($element_product->price) }}</p>
+                                @endif
                             @else
                                 <p>{{ get_phrase('Free') }}</p>
                             @endif

@@ -108,6 +108,30 @@ $element_categories = ElementCategory::where('parent_id', NULL)->where('status',
                     <li><a href="{{ route('refund_policy') }}">{{ get_phrase('Refund Policy') }}</a></li>
                     <li><a href="{{ route('privacy_policy') }}">{{ get_phrase('Privacy Policy') }}</a></li>
                     <li><a href="{{ route('support_policy') }}">{{ get_phrase('Support Policy') }}</a></li>
+                    <li><div class="main-menu-profile currency">
+                        <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a href="">
+                                @if (session('session_currency') == 'bdt')
+                                    BDT
+                                @else
+                                    USD
+                                @endif
+                            </a> 
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <form method="post" action="{{ route('session_user_currency') }}" id="currencyForm" >
+                                @csrf
+                                <li>
+                                    <a class="dropdown-item currency-item  {{ session('session_currency') == 'usd' ?  'active':'' }}" data-currency-name="usd" href="#">USD</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item currency-item  {{ session('session_currency') == 'bdt' ?  'active':'' }}"  data-currency-name="bdt" href="#">BDT</a>
+                                </li>
+                                <input type="hidden" name="session_currency" id="session_currency">
+                            </form>
+                        </ul>
+                      </div>
+                    </li>
                 </ul>
                 <p class="copy_right">
                     &copy; 2011-2024 {{ get_phrase('Creativeitem. All Rights Reserved.') }}
@@ -117,3 +141,20 @@ $element_categories = ElementCategory::where('parent_id', NULL)->where('status',
     </div>
 </footer>
 <!-- End Footer -->
+
+<script>
+    // JavaScript to handle language selection
+    document.addEventListener('DOMContentLoaded', function() {
+            let languageLinks = document.querySelectorAll('.currency-item');
+            
+            languageLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let languageName = this.getAttribute('data-currency-name');
+                    document.getElementById('session_currency').value = languageName;
+                    document.getElementById('currencyForm').submit();
+                });
+            });
+          });
+
+</script>

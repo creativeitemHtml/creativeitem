@@ -8,8 +8,8 @@
             <div class="col-md-12">
                 <!-- Section Title -->
                 <div class="blog-section-title">
-                    <h1 class="text-54">Creativeitem Blog</h1>
-                    <p class="blog-p">Crafting Stories, Igniting Ideas: Your Premier Source for Creativity Where Imagination Meets Innovation. </p>
+                    <h1 class="text-54">{{ get_phrase('Creativeitem Blog') }}</h1>
+                    <p class="blog-p">{{ get_phrase('Crafting Stories, Igniting Ideas: Your Premier Source for Creativity Where Imagination Meets Innovation. ') }}</p>
                 </div>
                 <!-- Blog search -->
                 <div class="blog-search">
@@ -17,7 +17,7 @@
                         <input type="search" class="form-control" placeholder="Search…" id="search" name="search" value="{{ $searched_word }}">
                         <button type="submit">
                             <img src="{{ asset('assets/img/new-icons-images/white-search.svg') }}" alt="">
-                            Search
+                            {{ get_phrase('Search') }}
                         </button>
                     </form>
                 </div>

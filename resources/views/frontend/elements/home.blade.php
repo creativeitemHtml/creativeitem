@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="elements-3-title-wrap">
-                    <h2 class="elements-32">Elevate Your Online Presence with</h2>
-                    <h1 class="elements-40">Exclusive Elements</h1>
+                    <h2 class="elements-32">{{ get_phrase('Elevate Your Online Presence with') }}</h2>
+                    <h1 class="elements-40">{{ get_phrase('Exclusive Elements') }}</h1>
                     <!-- Select And Search -->
                     <form id="search-element-form" action="{{ route('search_element_products', ['slug' => 'ui-kits']) }}" method="GET">
                         <div class="elements-3-search-wrap d-flex align-items-center">
@@ -31,7 +31,7 @@
                                             </defs>
                                         </svg>                          
                                     </span>
-                                    <span class="select-title">All Items</span>
+                                    <span class="select-title">{{ get_phrase('All Items') }}</span>
                                 </div>
                                 <div class="select-dropdown">
                                     <ul>
@@ -48,7 +48,7 @@
                                                     </defs>
                                                 </svg>
                                             </span>
-                                            <span class="select-title">Ui-kits</span>
+                                            <span class="select-title">{{ get_phrase('Ui-kits') }}</span>
                                         </li>
                                         <li class="select-item">
                                             <span id="select-icon">
@@ -56,7 +56,7 @@
                                                 <path d="M0.65823 10.4797C0.493672 10.4797 0.342828 10.4123 0.205697 10.2774C0.0685656 10.1425 0 9.97539 0 9.77601C0 9.57663 0.0658905 9.40771 0.197671 9.26925C0.329436 9.1308 0.474516 9.06157 0.632913 9.06157H6.12625C6.31283 9.06157 6.46923 9.12901 6.59546 9.26388C6.72169 9.39875 6.78481 9.56588 6.78481 9.76526C6.78481 9.96465 6.72399 10.1336 6.60235 10.272C6.4807 10.4105 6.32971 10.4797 6.14939 10.4797H0.65823ZM0.65823 14C0.493672 14 0.342828 13.9326 0.205697 13.7977C0.0685656 13.6628 0 13.4957 0 13.2963C0 13.0969 0.0658905 12.928 0.197671 12.7895C0.329436 12.6511 0.474516 12.5818 0.632913 12.5818H6.12625C6.31283 12.5818 6.46923 12.6493 6.59546 12.7841C6.72169 12.919 6.78481 13.0862 6.78481 13.2855C6.78481 13.4849 6.72399 13.6538 6.60235 13.7923C6.4807 13.9308 6.32971 14 6.14939 14H0.65823ZM0.65823 6.9657C0.493672 6.9657 0.342828 6.89827 0.205697 6.7634C0.0685656 6.62852 0 6.46139 0 6.26201C0 6.06263 0.0658905 5.89371 0.197671 5.75525C0.329436 5.6168 0.474516 5.54757 0.632913 5.54757H6.12625C6.31283 5.54757 6.46923 5.61501 6.59546 5.74988C6.72169 5.88475 6.78481 6.05188 6.78481 6.25127C6.78481 6.45065 6.72399 6.61957 6.60235 6.75802C6.4807 6.89648 6.32971 6.9657 6.14939 6.9657H0.65823ZM0.65823 3.41816C0.493672 3.41816 0.342828 3.35072 0.205697 3.21585C0.0685656 3.08098 0 2.91385 0 2.71447C0 2.51508 0.0658905 2.34617 0.197671 2.20771C0.329436 2.06924 0.474516 2 0.632913 2H6.12625C6.31283 2 6.46923 2.06745 6.59546 2.20234C6.72169 2.33721 6.78481 2.50434 6.78481 2.70372C6.78481 2.90311 6.72399 3.07202 6.60235 3.21048C6.4807 3.34893 6.32971 3.41816 6.14939 3.41816H0.65823ZM10.5392 14C10.3075 14 10.1133 13.916 9.95664 13.7479C9.79991 13.5798 9.72155 13.3715 9.72155 13.1231V2.90421C9.72155 2.6612 9.79979 2.44976 9.95628 2.26987C10.1128 2.08996 10.3066 2 10.538 2H15.2027C15.434 2 15.6247 2.08996 15.7748 2.26987C15.9249 2.44976 16 2.6612 16 2.90421V13.1231C16 13.3715 15.9244 13.5798 15.7732 13.7479C15.6221 13.916 15.4347 14 15.2113 14H10.5392ZM11.038 3.41816V12.5818H14.6836V3.41816H11.038Z" fill="#676C7D"/>
                                             </svg>                                
                                             </span>
-                                            <span class="select-title">Components</span>
+                                            <span class="select-title">{{ get_phrase('Components') }}</span>
                                         </li>
                                         <li class="select-item">
                                             <span id="select-icon">
@@ -71,7 +71,7 @@
                                                 </defs>
                                             </svg>
                                             </span>
-                                            <span class="select-title">Html</span>
+                                            <span class="select-title">{{ get_phrase('Html') }}</span>
                                         </li>
                                         <li class="select-item">
                                             <span id="select-icon">
@@ -86,7 +86,7 @@
                                                 </defs>
                                             </svg>                                                      
                                             </span>
-                                            <span class="select-title">Themes</span>
+                                            <span class="select-title">{{ get_phrase('Themes') }}</span>
                                         </li>
                                         <li class="select-item">
                                             <span id="select-icon">
@@ -101,7 +101,7 @@
                                                 </defs>
                                             </svg>                                                                      
                                             </span>
-                                            <span class="select-title">Presentation</span>
+                                            <span class="select-title">{{ get_phrase('Presentation') }}</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -160,7 +160,22 @@
                                         <img src="{{ element_server_url($element->product_id, $element->product_to_elementCategory->slug).$element->thumbnail }}" alt="" />
                                         <span class="product-price">
                                             @if($element->price_type == 'paid')
-                                                {{ currency($element->price) }}
+                                                @php
+                                                    try {
+                                                        $prices = json_decode($element->price, true);
+                                                        $currency = strtoupper(session('session_currency'));
+                                                        $price = collect($prices)->firstWhere('currency', $currency)['amount'];
+                                                        $isJson = (json_last_error() == JSON_ERROR_NONE);
+                                                    } catch (\Exception $e) {
+                                                        $isJson = false;
+                                                    }
+                                                @endphp
+
+                                                @if ($isJson)
+                                                {{ currency($price) }}
+                                                @else
+                                                    {{ currency($element->price) }}
+                                                @endif
                                             @else
                                                 {{ get_phrase('Free') }}
                                             @endif
@@ -205,7 +220,7 @@
                                     </p>
                                     <div class="card-overlay">
                                         <div class="overlay-copy-see d-flex align-items-center justify-content-between">
-                                            <button class="overlay-copy">Copy component</button>
+                                            <button class="overlay-copy">{{ get_phrase('Copy component') }}</button>
                                             <button type="button" class="overlay-see" data-bs-placement="top" data-bs-title="Preview" data-bs-toggle="tooltip" onclick="elementModal('{{ route('element_product_details_modal', ['title' => slugify($element->title.'-'.$element->id)]) }}')">
                                                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M9.00192 9.14742C9.87671 9.14742 10.6197 8.84124 11.2308 8.22888C11.8419 7.6165 12.1474 6.87291 12.1474 5.9981C12.1474 5.12331 11.8413 4.38036 11.2289 3.76925C10.6165 3.15814 9.87294 2.85258 8.99813 2.85258C8.12334 2.85258 7.38039 3.15876 6.76928 3.77112C6.15817 4.3835 5.85261 5.12709 5.85261 6.0019C5.85261 6.87669 6.15879 7.61964 6.77115 8.23075C7.38353 8.84186 8.12712 9.14742 9.00192 9.14742ZM9.00003 8C8.44447 8 7.97225 7.80556 7.58336 7.41667C7.19447 7.02778 7.00003 6.55556 7.00003 6C7.00003 5.44444 7.19447 4.97222 7.58336 4.58333C7.97225 4.19444 8.44447 4 9.00003 4C9.55558 4 10.0278 4.19444 10.4167 4.58333C10.8056 4.97222 11 5.44444 11 6C11 6.55556 10.8056 7.02778 10.4167 7.41667C10.0278 7.80556 9.55558 8 9.00003 8ZM9.00003 11.5833C7.30132 11.5833 5.73509 11.1327 4.30134 10.2315C2.86757 9.33038 1.71694 8.14422 0.849422 6.67306C0.779978 6.5673 0.7327 6.45872 0.707589 6.34733C0.682477 6.23596 0.669922 6.12165 0.669922 6.0044C0.669922 5.88715 0.682477 5.77137 0.707589 5.65706C0.7327 5.54274 0.779978 5.4327 0.849422 5.32694C1.71694 3.85578 2.86757 2.66962 4.30134 1.76846C5.73509 0.867278 7.30132 0.416687 9.00003 0.416687C10.6987 0.416687 12.265 0.867278 13.6987 1.76846C15.1325 2.66962 16.2831 3.85578 17.1506 5.32694C17.2201 5.4327 17.2674 5.54128 17.2925 5.65267C17.3176 5.76404 17.3301 5.87835 17.3301 5.9956C17.3301 6.11285 17.3176 6.22863 17.2925 6.34294C17.2674 6.45726 17.2201 6.5673 17.1506 6.67306C16.2831 8.14422 15.1325 9.33038 13.6987 10.2315C12.265 11.1327 10.6987 11.5833 9.00003 11.5833ZM9.00003 10.5C10.5556 10.5 11.9931 10.0972 13.3125 9.29167C14.632 8.48611 15.6459 7.38889 16.3542 6C15.6459 4.61111 14.632 3.51389 13.3125 2.70833C11.9931 1.90278 10.5556 1.5 9.00003 1.5C7.44447 1.5 6.00697 1.90278 4.68753 2.70833C3.36808 3.51389 2.35419 4.61111 1.64586 6C2.35419 7.38889 3.36808 8.48611 4.68753 9.29167C6.00697 10.0972 7.44447 10.5 9.00003 10.5Z" fill="#1C1B1F"/>
@@ -234,7 +249,7 @@
                     <!-- See More button -->
                     <div class="col-md-12">
                         <div class="element-more-btn-wrap d-flex justify-content-center">
-                            <a href="{{ route('search_element_products', ['slug' => $element_category->slug]) }}" class="element-more-btn d-flex align-items-center">See More<i class="fa-solid fa-long-arrow-right"></i></a>
+                            <a href="{{ route('search_element_products', ['slug' => $element_category->slug]) }}" class="element-more-btn d-flex align-items-center">{{ get_phrase('See More') }}<i class="fa-solid fa-long-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -314,7 +329,7 @@
             @foreach($packages as $key => $package)
             @php
             if($package->interval == 'monthly'){
-                $interval = 'month';
+                $interval = '/ month';
 
                 if($package->interval_period == 6){
                     $interval_period_text = 'Billed 1/2 yearly';
@@ -324,7 +339,7 @@
                     $interval_period_text = 'Access for'.' '.$package->interval_period.' '.$interval;
                 }
             } else {
-                $interval = 'one time';
+                $interval = '';
                 $interval_period_text = 'Lifetime access';
             }
             @endphp
@@ -333,9 +348,16 @@
                     <div class="pricing-n-popular d-flex align-items-center justify-content-between">
                         <h4 class="text-22">{{ $package->name }}</h4>
                     </div>
+                    @php
+                        $prices = json_decode($package->price, true);
+                        $dis_price = json_decode($package->discounted_price, true);
+                        $currency = strtoupper(session('session_currency'));
+                        $price = collect($prices)->firstWhere('currency', $currency)['amount'];
+                        $dis_price = collect($dis_price)->firstWhere('currency', $currency)['amount'];
+                    @endphp
                     <div class="pricing-n-price d-flex">
-                        <h2 class="pricing-price-l d-flex"><span>$</span><span>{{ $package->discounted_price }}</span></h2>
-                        <h3 class="pricing-price-r d-flex"><span>{{ currency($package->price) }}</span><span>/ {{ $interval }}</span></h3>
+                        <h2 class="pricing-price-l d-flex"><span>{{ currency($dis_price) }}</span></h2>
+                        <h3 class="pricing-price-r d-flex"><span>{{ $price }}</span><span> {{ $interval }}</span></h3>
                     </div>
                     <p class="text-15 pricing-n-batch">{{ $interval_period_text }}</p>
                     @php
@@ -360,13 +382,13 @@
 <!-- Start Trending Categoris -->
 <section class="el-treading pb-60">
     <div class="container">
-        <h4 class="el-title-two text-center pb-40">Browse Trending <span>Categories</span></h4>
+        <h4 class="el-title-two text-center pb-40">{{ get_phrase('Browse Trending') }} {{ get_phrase('') }}<span>{{ get_phrase('Categories') }}</span></h4>
         <div class="row justify-content-center">
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="trending-item-wrap">
                     <a href="{{ route('search_element_products', ['slug' => 'ui-kits']) }}" class="trending-item-one" style="--bg: linear-gradient(135deg, rgba(255, 233, 239, 1) 0%, rgba(246, 229, 252, 1) 100%)">
                         <div class="img"><img src="{{ asset('assets/img/webp/graphics.png') }}" alt=""></div>
-                        <p class="title">UI Kits</p>
+                        <p class="title">{{ get_phrase('UI Kits') }}</p>
                     </a>
                 </div>
             </div>
@@ -374,7 +396,7 @@
                 <div class="trending-item-wrap">
                     <a href="{{ route('search_element_products', ['slug' => 'components']) }}" class="trending-item-one" style="--bg: linear-gradient(135deg, rgba(242, 252, 255, 1) 0%, rgba(213, 235, 255, 1) 100%)">
                         <div class="img"><img src="{{ asset('assets/img/webp/components.webp') }}" alt=""></div>
-                        <p class="title">Components</p>
+                        <p class="title">{{ get_phrase('Components') }}</p>
                     </a>
                 </div>
             </div>
@@ -382,7 +404,7 @@
                 <div class="trending-item-wrap">
                     <a href="{{ route('search_element_products', ['slug' => 'html']) }}" class="trending-item-one" style="--bg: linear-gradient(135deg, rgba(239, 253, 250, 1) 0%, rgba(224, 250, 241, 1) 100%)">
                         <div class="img"><img src="{{ asset('assets/img/webp/coding.webp') }}" alt=""></div>
-                        <p class="title">HTML</p>
+                        <p class="title">{{ get_phrase('HTML') }}</p>
                     </a>
                 </div>
             </div>
@@ -390,7 +412,7 @@
                 <div class="trending-item-wrap">
                     <a href="{{ route('search_element_products', ['slug' => 'video']) }}" class="trending-item-one" style="--bg: linear-gradient(135deg, rgba(252, 250, 239, 1) 0%, rgba(247, 235, 211, 1) 100%)">
                         <div class="img"><img src="{{ asset('assets/img/webp/video-player.webp') }}" alt=""></div>
-                        <p class="title">Video</p>
+                        <p class="title">{{ get_phrase('Video') }}</p>
                     </a>
                 </div>
             </div>
@@ -398,7 +420,7 @@
                 <div class="trending-item-wrap">
                     <a href="{{ route('search_element_products', ['slug' => '3d']) }}" class="trending-item-one" style="--bg: linear-gradient(135deg, rgba(244, 235, 254, 1) 0%, rgba(248, 233, 255, 1) 100%)">
                         <div class="img"><img src="{{ asset('assets/img/webp/3d-cube.webp') }}" alt=""></div>
-                        <p class="title">3D</p>
+                        <p class="title">{{ get_phrase('3D') }}</p>
                     </a>
                 </div>
             </div>
@@ -406,7 +428,7 @@
                 <div class="trending-item-wrap">
                     <a href="{{ route('search_element_products', ['slug' => 'graphics']) }}" class="trending-item-one" style="--bg: linear-gradient(135deg, rgba(228, 250, 255, 1) 0%, rgba(217, 244, 253, 1) 100%)">
                         <div class="img"><img src="{{ asset('assets/img/webp/web-graphics.webp') }}" alt=""></div>
-                        <p class="title">Graphics</p>
+                        <p class="title">{{ get_phrase('Graphics') }}</p>
                     </a>
                 </div>
             </div>
@@ -422,7 +444,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="text-center pb-60">
-                    <h2 class="fz-34-sb-black pb-15">Faqs</h2>
+                    <h2 class="fz-34-sb-black pb-15">{{ get_phrase('Faqs') }}</h2>
                     <p class="fz-16-m-black-2">{{ get_phrase('Here are some helpful answers to your common questions and queries regarding our products') }}</p>
                 </div>
             </div>
@@ -509,8 +531,8 @@
                         </ul>
                         <p class="info">{{ get_phrase('My experience with Creative Elements has been fantastic. The support service is responsive, and the templates are excellent. I\'ve been able to design beautiful websites for my clients, and they are always pleased with the results') }}.</p>
                         <div class="d-flex align-items-end g-10">
-                            <h4 class="name">Sarah Davis</h4>
-                            <p class="subtitle">Customer, Australia</p>
+                            <h4 class="name">{{ get_phrase('Sarah Davis') }}</h4>
+                            <p class="subtitle">{{ get_phrase('Customer, Australia') }}</p>
                         </div>
                     </div>
                 </div>
@@ -530,8 +552,8 @@
                         </ul>
                         <p class="info">{{ get_phrase('I have nothing but praise for Creative Elements. My projects remain current and fresh thanks to their design releases. For my web design business, it has been a game-changer, and I heartily endorse it to other professionals') }}.</p>
                         <div class="d-flex align-items-end g-10">
-                            <h4 class="name">Janot Smith</h4>
-                            <p class="subtitle">Customer, Canada</p>
+                            <h4 class="name">{{ get_phrase('Janot Smith') }}</h4>
+                            <p class="subtitle">{{ get_phrase('Customer, Canada') }}</p>
                         </div>
                     </div>
                 </div>

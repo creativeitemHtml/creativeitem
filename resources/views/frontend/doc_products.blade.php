@@ -6,10 +6,10 @@
     <div class="container">
         <div class="hero-banner-wrap text-center">
             <h1 class="fz-60-b-black fz-sm-40-sb-black pb-20">
-                Search Documentation
+                {{ get_phrase('Search Documentation') }}
             </h1>
             <p class="fz-18-m-black-2 w-lg-50 mx-auto px-lg-4 pb-50">
-                Here you'll find all the information you need to get started with our products, including installation, user guides, tutorials, troubleshooting, FAQs, and more.
+                 {{ get_phrase('Here you will find all the information you need to get started with our products, including installation, user guides, tutorials, troubleshooting, FAQs, and more.') }}
             </p>
             <!-- Search -->
         </div>
@@ -45,13 +45,13 @@
         <div class="contact-one-wrap d-flex justify-content-between align-items-center flex-wrap g-20">
             <div class="content">
                 <h2 class="fz-44-eb-black fz-sm-30-sb-black pb-20">
-                    Still need any help?
+                    {{ get_phrase('Still need any help?') }}
                 </h2>
                 <p class="fz-16-m-black">
-                    Whether you have a question, need assistance with a product, or are experiencing technical difficulties, our team of experts is ready to assist you.
+                    {{ get_phrase('Whether you have a question, need assistance with a product, or are experiencing technical difficulties, our team of experts is ready to assist you.') }}
                 </p>
             </div>
-            <a href="javascript:;" onclick="support()" class="btn-main btn-contact-one">Contact Us</a>
+            <a href="javascript:;" onclick="support()" class="btn-main btn-contact-one">{{ get_phrase('Contact Us') }}</a>
         </div>
     </div>
 </section>

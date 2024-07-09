@@ -14,7 +14,7 @@ class ElementProductPayment extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'element_product_id', 'user_id', 'paid_amount', 'payment_method', 'transaction_keys', 'date_added' ];
+    protected $fillable = [ 'element_product_id', 'user_id', 'paid_amount', 'payment_method', 'transaction_keys', 'date_added', 'account_number', 'status' ];
 
     public function payment_to_elementProduct()
     {
@@ -24,5 +24,15 @@ class ElementProductPayment extends Model
     public function payment_to_user()
     {
         return $this->belongsTo(User::class,'user_id','id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(ElementProduct::class, 'element_product_id');
     }
 }

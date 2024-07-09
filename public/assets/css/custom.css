@@ -694,3 +694,33 @@ span.model-title-value {
     font-weight: 500;
     color: #797c8b;
 }
+
+.payment_method{
+    margin-top: 13px;
+}
+
+.paymethod_choose {
+    margin-top: 23px;
+  }
+
+  .form-check.payment_method_body {
+    border: 1.5px solid #e7e8ee;
+    padding: 10px 10px 10px 48px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .paymethod_choose img{
+    cursor: pointer;
+  }
+
+  .currency .dropdown-toggle::after {
+    top: -6px;
+}
+
+.currency .dropdown-menu {
+    min-width: auto;
+    left: 111px;
+}
+
+  

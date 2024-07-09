@@ -196,7 +196,22 @@ $licenses = ['Free', 'Paid'];
                                             <div class="product-title-author">
                                                 <h4 class="product-title">{{ $element_product->title }}</h4>
                                             </div>
-                                            <span class="product-price">{{ currency($element_product->price) }}</span>
+                                            @php
+                                                try {
+                                                    $prices = json_decode($element_product->price, true);
+                                                    $currency = strtoupper(session('session_currency'));
+                                                    $price = collect($prices)->firstWhere('currency', $currency)['amount'];
+                                                    $isJson = (json_last_error() == JSON_ERROR_NONE);
+                                                } catch (\Exception $e) {
+                                                    $isJson = false;
+                                                }
+                                            @endphp
+
+                                            @if ($isJson)
+                                                <span class="product-price">{{ currency($price) }}</span>
+                                            @else
+                                                <span class="product-price">{{ currency($element_product->price) }}</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +222,22 @@ $licenses = ['Free', 'Paid'];
                                         <img src="{{ element_server_url($element_product->product_id, $element_product->product_to_elementCategory->slug).$element_product->thumbnail }}" alt="">
                                         <p class="card-free">
                                             @if($element_product->price_type == 'paid')
-                                                {{ currency($element_product->price) }}
+                                                @php
+                                                    try {
+                                                        $prices = json_decode($element_product->price, true);
+                                                        $currency = strtoupper(session('session_currency'));
+                                                        $price = collect($prices)->firstWhere('currency', $currency)['amount'];
+                                                        $isJson = (json_last_error() == JSON_ERROR_NONE);
+                                                    } catch (\Exception $e) {
+                                                        $isJson = false;
+                                                    }
+                                                @endphp
+
+                                                @if ($isJson)
+                                                    {{ currency($price) }}
+                                                @else
+                                                    {{ currency($element_product->price) }}
+                                                @endif
                                             @else
                                                 {{ get_phrase('Free') }}
                                             @endif

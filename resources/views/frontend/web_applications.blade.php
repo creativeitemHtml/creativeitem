@@ -8,8 +8,8 @@
             <!-- Title Area -->
             <div class="col-md-12">
                 <div class="web-application-title">
-                    <h1 class="text-54">Web Applications</h1>
-                    <p class="product-text">Explore the Pinnacle of Web Applications & Revolutionize Your Online Presence With Seamless Solutions, Infinite Possibilities. </p>
+                    <h1 class="text-54">{{ get_phrase('Web Applications') }}</h1>
+                    <p class="product-text">{{ get_phrase('Explore the Pinnacle of Web Applications & Revolutionize Your Online Presence With Seamless Solutions, Infinite Possibilities.') }}</p>
                 </div>
             </div>
             @foreach($products as $product)

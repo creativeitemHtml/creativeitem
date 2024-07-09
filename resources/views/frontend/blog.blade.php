@@ -8,8 +8,8 @@
             <div class="col-md-12">
                 <!-- Section Title -->
                 <div class="blog-section-title">
-                    <h1 class="text-54">{{get_phrase('Creativeitem Blog')}}</h1>
-                    <p class="blog-p">Crafting Stories, Igniting Ideas: Your Premier Source for Creativity Where Imagination Meets Innovation. </p>
+                    <h1 class="text-54">{{ get_phrase('Creativeitem Blog') }}</h1>
+                    <p class="blog-p">{{ get_phrase('Crafting Stories, Igniting Ideas: Your Premier Source for Creativity Where Imagination Meets Innovation. ') }}</p>
                 </div>
                 <!-- Blog search -->
                 <div class="blog-search">
@@ -17,7 +17,7 @@
                         <input type="search" class="form-control" placeholder="Search…" id="search" name="search" >
                         <button type="submit">
                             <img src="{{ asset('assets/img/new-icons-images/white-search.svg') }}" alt="">
-                            Search
+                            {{ get_phrase('Search') }}
                         </button>
                     </form>
                 </div>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="blog-read-more">
                             <h3 class="d-flex align-items-center text-15">
-                            <span>Read More</span>
+                            <span>{{ get_phrase('Read More') }}</span>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16.1442 7.80381L6.81147 17.1269C6.673 17.2654 6.49897 17.333 6.28937 17.3298C6.07975 17.3266 5.90572 17.2558 5.76727 17.1173C5.6288 16.9788 5.55957 16.8064 5.55957 16.6C5.55957 16.3936 5.6288 16.2212 5.76727 16.0827L15.0904 6.74998H6.89417C6.68167 6.74998 6.50355 6.67808 6.3598 6.53428C6.21606 6.39046 6.1442 6.21226 6.1442 5.99968C6.1442 5.78708 6.21606 5.60899 6.3598 5.46541C6.50355 5.32182 6.68167 5.25003 6.89417 5.25003H16.7403C16.9964 5.25003 17.2111 5.33665 17.3843 5.50988C17.5575 5.68311 17.6441 5.89777 17.6441 6.15386V16C17.6441 16.2125 17.5722 16.3906 17.4284 16.5344C17.2846 16.6781 17.1064 16.75 16.8938 16.75C16.6812 16.75 16.5032 16.6781 16.3596 16.5344C16.216 16.3906 16.1442 16.2125 16.1442 16V7.80381Z" fill="#212534"/>
                             </svg>                    
@@ -74,7 +74,7 @@
                                 <h2 class="text-20">{{ strlen($latest_blog->title) < 62 ? $latest_blog->title : substr($latest_blog->title, 0, 62).'...' }}</h2>
                                 <div class="blog-read-more">
                                     <h4 class="d-flex align-items-center text-15">
-                                        <span>Read More</span>
+                                        <span>{{ get_phrase('Read More') }}</span>
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M16.1442 7.80381L6.81147 17.1269C6.673 17.2654 6.49897 17.333 6.28937 17.3298C6.07975 17.3266 5.90572 17.2558 5.76727 17.1173C5.6288 16.9788 5.55957 16.8064 5.55957 16.6C5.55957 16.3936 5.6288 16.2212 5.76727 16.0827L15.0904 6.74998H6.89417C6.68167 6.74998 6.50355 6.67808 6.3598 6.53428C6.21606 6.39046 6.1442 6.21226 6.1442 5.99968C6.1442 5.78708 6.21606 5.60899 6.3598 5.46541C6.50355 5.32182 6.68167 5.25003 6.89417 5.25003H16.7403C16.9964 5.25003 17.2111 5.33665 17.3843 5.50988C17.5575 5.68311 17.6441 5.89777 17.6441 6.15386V16C17.6441 16.2125 17.5722 16.3906 17.4284 16.5344C17.2846 16.6781 17.1064 16.75 16.8938 16.75C16.6812 16.75 16.5032 16.6781 16.3596 16.5344C16.216 16.3906 16.1442 16.2125 16.1442 16V7.80381Z" fill="#212534"/>
                                         </svg>                    
@@ -97,7 +97,7 @@
         <div class="row pb-60 justify-content-center">
             <div class="col-md-12">
                 <div class="featured-title">
-                    <h2 class="text-24">Featured Topic</h2>
+                    <h2 class="text-24">{{ get_phrase('Featured Topic') }}</h2>
                 </div>
             </div>
             @foreach($featured_blogs as $featured)
@@ -121,7 +121,7 @@
             @endforeach
             <div class="col-md-12">
                 <div class="see-more-blog d-flex justify-content-center">
-                    <a href="#" class="more-blog-btn">See More Blogs</a>
+                    <a href="#" class="more-blog-btn">{{ get_phrase('See More Blogs') }}</a>
                 </div>
             </div>
         </div>

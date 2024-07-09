@@ -313,8 +313,12 @@ class ElementsController extends Controller
 
     public function purchase_product(Request $request, $product_id="")
     {
-        if(auth()->user()) {
-            return redirect()->route('customer.single_purchase', ['product_id' => $product_id]);
+        if (auth()->user()) {
+            return redirect()->route('customer.single_purchase', [
+                'product_id' => $product_id,
+                'payment_method' => $request->input('payment_method'),
+                'requestData' => $request->all()
+            ]);
         } else {
 
             // Define a stricter regex pattern for email validation
@@ -378,7 +382,10 @@ class ElementsController extends Controller
 
                 relogin_user($user->id);
 
-                return redirect()->route('customer.single_purchase', ['product_id' => $product_id]);
+                return redirect()->route('customer.single_purchase', [
+                    'payment_method' => $request->input('payment_method'),
+                    'product_id' => $product_id
+                ]);;
 
             } else {
                 return redirect()->back()->with('error', 'Fill all the required field');

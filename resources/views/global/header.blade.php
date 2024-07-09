@@ -373,8 +373,8 @@
                         @else
                         <!-- Login Logout Button -->
                         <div class="main-menu-login d-flex align-items-center">
-                            <a href="{{ route('login') }}" class="log-in">Log in</a>
-                            <a href="{{ route('register') }}" class="sign-up">Sign Up</a>
+                            <a href="{{ route('login') }}" class="log-in">{{ get_phrase('Log in') }}</a>
+                            <a href="{{ route('register') }}" class="sign-up">{{ get_phrase('Sign Up') }}</a>
                         </div>
                         <!-- Mobile Login Button -->
                         <div class="menu-mobile-login">

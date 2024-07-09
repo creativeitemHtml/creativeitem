@@ -9,6 +9,7 @@ use Inertia\Inertia;
 use App\Models\{Setting, Package, Subscription, ElementProduct, User, ElementProductComment, ElementProductPayment, ElementDownload, Project, OnlineMeeting, PaymentMilestone, RolesAndPermission, ElementCategory, ServicePackage, Service};
 use Illuminate\Support\Facades\Hash;
 use Stripe;
+use Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PurchaseInvoice;
 use App\Mail\SubscriptionMail;
@@ -626,8 +627,9 @@ class CustomerController extends Controller
         return $recover_user_data;
     }
 
-    public function single_purchase($product_id)
+    public function single_purchase(Request $request, $product_id, $payment_method)
     {
+        $requestData = $request->input('requestData');
 
         $global_system_currency = get_settings('system_currency');
 
@@ -661,33 +663,94 @@ class CustomerController extends Controller
         $success_url = 'single_purchase_success_payment';
         $cancel_url = 'single_purchase_fail_payment';
 
-        try {
+        if($payment_method == "stripe"){
+            try {
 
-            Stripe\Stripe::setApiKey($STRIPE_SECRET);
-
-            $session = \Stripe\Checkout\Session::create([
-                'line_items' => [[
-                    'price_data' => [
-                        'currency' => $global_system_currency,
-                        'product_data' => [
-                            'name' => $product_details->title,
+                Stripe\Stripe::setApiKey($STRIPE_SECRET);
+    
+                $session = \Stripe\Checkout\Session::create([
+                    'line_items' => [[
+                        'price_data' => [
+                            'currency' => $global_system_currency,
+                            'product_data' => [
+                                'name' => $product_details->title,
+                            ],
+                            'unit_amount' => $product_details->price * 100,
                         ],
-                        'unit_amount' => $product_details->price * 100,
-                    ],
-                    'quantity' => 1,
-                ]],
-                'mode' => 'payment',
-                'success_url' => route($success_url, ['purchase_data' => $purchase_data, 'response' => 'check $product_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => route($cancel_url, ['purchase_data' => $purchase_data, 'response' => 'check $product_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+                        'quantity' => 1,
+                    ]],
+                    'mode' => 'payment',
+                    'success_url' => route($success_url, ['purchase_data' => $purchase_data, 'response' => 'check $product_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+                    'cancel_url' => route($cancel_url, ['purchase_data' => $purchase_data, 'response' => 'check $product_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+                ]);
+    
+                return redirect($session->url);
+    
+            } catch (\Exception$e) {
+    
+                return $e->getMessage();
+            }
+    
+        } if($payment_method == "stripe"){
+            try {
+
+                Stripe\Stripe::setApiKey($STRIPE_SECRET);
+    
+                $session = \Stripe\Checkout\Session::create([
+                    'line_items' => [[
+                        'price_data' => [
+                            'currency' => $global_system_currency,
+                            'product_data' => [
+                                'name' => $product_details->title,
+                            ],
+                            'unit_amount' => $product_details->price * 100,
+                        ],
+                        'quantity' => 1,
+                    ]],
+                    'mode' => 'payment',
+                    'success_url' => route($success_url, ['purchase_data' => $purchase_data, 'response' => 'check $product_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+                    'cancel_url' => route($cancel_url, ['purchase_data' => $purchase_data, 'response' => 'check $product_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+                ]);
+    
+                return redirect($session->url);
+    
+            } catch (\Exception$e) {
+    
+                return $e->getMessage();
+            }
+    
+        } else {
+
+            $validator = Validator::make($request->all(), [
+                'trans_id' => 'required',
+                'account_number' => 'required',
             ]);
 
-            return redirect($session->url);
+            // print_r($validator->errors());
+            // die();
+        
+            // if ($validator->fails()) {
+            //     return redirect()->back()->with('warning', 'field is required');
+            // }
 
-        } catch (\Exception$e) {
+            $purchase_details = ElementProductPayment::create([
+                'element_product_id' => $product_id,
+                'user_id' => auth()->user()->id,
+                'payment_method' => $payment_method,
+                'paid_amount' => $product_details->price,
+                'status' => 'pending',
+                'transaction_keys' => $requestData['trans_id'],
+                'account_number' => $requestData['account_number'],
+                'date_added' => strtotime(date('d-M-Y H:i:s')),
+            ]);
 
-            return $e->getMessage();
+            // $user = User::find($purchase_details->user_id);
+
+            Mail::to(auth()->user()->email)->send(new PurchaseInvoice($purchase_details, $user));
+            // Mail::to('project@creativeitem.com')->send(new PurchaseInvoice($purchase_details, $user));
+
+            return redirect()->route('customer.purchase_history')->with('success', 'Payment request submitted. Please wait for the appoval.');
         }
-
         // print_r($product_id);
         // die();
     }

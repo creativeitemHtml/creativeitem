@@ -23,8 +23,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        $ip = $request->ip(); // remove the command when it's have in a domain
-        // $ip = '27.147.191.220';
+        // $ip = $request->ip(); // remove the command when it's have in a domain
+        $ip = '27.147.191.220';
         $location = Location::get($ip);
 
         if(!empty($location->countryName)){
@@ -546,6 +546,17 @@ class HomeController extends Controller
         $data = $request->language;
         Session::put('language', $data);
         return redirect()->back()->with('message', 'You have successfully transleted language.');
+    }
+
+    function session_user_currency_store(Request $request){
+        $data = $request->session_currency;
+        Session::put('session_currency', $data);
+        if(isset(auth()->user()->id)) {
+            $page_data['currency_code'] = strtoupper($data);
+
+            User::where('id', auth()->user()->id)->update($page_data);
+        }
+        return redirect()->back()->with('message', 'You have successfully changed currency.');
     }
     
 }

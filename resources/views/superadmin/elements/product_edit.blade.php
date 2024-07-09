@@ -140,15 +140,36 @@
                     <ul class="productPriceOption">
                         <li>
                             <div class="form-check">
-                                <input class="form-check-input ciRadio ciRadio-OutlinePrimary" type="radio" id="price_type" name="price_type" value="free" @php if($product_details->price_type == 'free') echo 'checked' @endphp />
-                                <label class="form-check-label" for="onlyFree">{{ get_phrase('Free') }}</label>
+                                <input class="form-check-input ciRadio ciRadio-OutlinePrimary" type="radio" id="price_type_free" name="price_type" value="free" @php if($product_details->price_type == 'free') echo 'checked' @endphp />
+                                <label class="form-check-label" for="price_type_free">{{ get_phrase('Free') }}</label>
                             </div>
                         </li>
                         <li>
                             <div class="form-check">
-                                <input class="form-check-input ciRadio ciRadio-OutlinePrimary" type="radio" id="price_type" name="price_type" value="paid"  @php if($product_details->price_type == 'paid') echo 'checked' @endphp />
-                                <label class="form-check-label" for="onlyPaid">{{ get_phrase('Paid') }}</label>
-                                <input type="text" class="form-control enForm-control" id="price" name="price" placeholder="$00" aria-label="$00" min="0" value="{{ $product_details->price }}" />
+                                <input class="form-check-input ciRadio ciRadio-OutlinePrimary" type="radio" id="price_type_paid" name="price_type" value="paid"  @php if($product_details->price_type == 'paid') echo 'checked' @endphp />
+                                <label class="form-check-label" for="price_type_paid">{{ get_phrase('Paid') }}</label>
+                                <div class="price-fields" id="price_fields" style="display: none;">
+                                    @php
+                                    $prices = json_decode($product_details->price, true);
+                                    @endphp
+                                    @foreach ($currencies as $currency)
+                                        @php
+                                            $price_value = '';
+                                            if (is_array($prices)) {
+                                                foreach ($prices as $price) {
+                                                    if ($price['currency'] === $currency->code) {
+                                                        $price_value = $price['amount'];
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        @endphp
+                                        <div class="col-sm-10 col-md-9 col-lg-10">
+                                            <label for="{{ $currency->code }}" class="col-sm-2 enForm-label">{{ get_phrase($currency->code) }}</label>
+                                            <input type="text" class="form-control enForm-control" id="{{ $currency->code }}" name="prices[{{ $currency->code }}]" placeholder="{{ '$00' }}" aria-label="{{ '$00' }}" min="0" value="{{ $price_value }}" />
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -167,9 +188,9 @@
 
     "use strict";
 
-    $(".up-uploadFile-btn").click(function () {
-        $(this).replaceWith("<img src='{{ asset("assets/img/loading.gif") }}'>");
-    });
+    // $(".up-uploadFile-btn").click(function () {
+    //     $(this).replaceWith("<img src='{{ asset("assets/img/loading.gif") }}'>");
+    // });
 
     $(document).ready(function () {
         $('#description').summernote({
@@ -196,4 +217,25 @@
             $('#previewUrlbody').addClass('d-none')
         }
     })
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var priceTypePaid = document.getElementById('price_type_paid');
+        var priceTypeFree = document.getElementById('price_type_free');
+        var priceFields = document.getElementById('price_fields');
+
+        function togglePriceFields() {
+            if (priceTypePaid.checked) {
+                priceFields.style.display = 'block';
+            } else {
+                priceFields.style.display = 'none';
+            }
+        }
+
+        // Initial check on page load
+        togglePriceFields();
+
+        // Add event listeners to radio buttons
+        priceTypePaid.addEventListener('change', togglePriceFields);
+        priceTypeFree.addEventListener('change', togglePriceFields);
+    });
 </script>
