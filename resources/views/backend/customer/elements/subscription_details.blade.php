@@ -5,7 +5,7 @@
     <div class="title-btn-menu-wrap d-flex justify-content-between align-items-center flex-wrap g-10 pb-30 mb-20">
         <h4 class="fz-20-sb-black">{{ get_phrase($page_title) }}</h4>
         <a href="{{ route('elements') }}" class="new-goelement-btn">
-            Go to Elements
+             {{ get_phrase('Go to Elements') }}
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"/></svg>
         </a>
         <button class="d-lg-none mobile-menu-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
@@ -30,7 +30,24 @@
                                 <td>
                                     <div class="el_table_title">
                                         <img src="{{ asset('assets/img/icon/pulse.svg') }}" alt="" />
-                                        <p>Current subscription status:</p>
+                                        <p>{{ get_phrase('Current subscription status') }}:</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="el_table_info">
+                                        @if($current_subscription->status == 'approved')
+                                        <p class="status-btn status-up">{{ get_phrase('Active') }}</p>
+                                        @else
+                                        <p class="status-btn status-down">{{ get_phrase('Pending') }}</p>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="el_table_title">
+                                        <img src="{{ asset('assets/img/icon/pulse.svg') }}" alt="" />
+                                        <p>{{get_phrase('Package Name')}}:</p>
                                     </div>
                                 </td>
                                 <td>
@@ -47,7 +64,7 @@
                                         src="{{ asset('assets/img/icon/calendar-minus.svg') }}"
                                         alt=""
                                     />
-                                    <p>Next payment date:</p>
+                                    <p>{{ get_phrase('Next payment date') }}:</p>
                                     </div>
                                 </td>
                                 <td>
@@ -62,7 +79,7 @@
                                         src="{{ asset('assets/img/icon/calendar-minus.svg') }}"
                                         alt=""
                                     />
-                                    <p>Package Status:</p>
+                                    <p>{{ get_phrase('Package Status') }}:</p>
                                     </div>
                                 </td>
                                 <td>
@@ -79,7 +96,7 @@
                                             :src="{{ asset('assets/img/icon/credit-card-2.svg') }}"
                                             alt=""
                                         />
-                                        <p>Payment amount:</p>
+                                        <p>{{ get_phrase('Payment amount') }}:</p>
                                     </div>
                                 </td>
                                 <td>
@@ -96,7 +113,7 @@
                         <a class="cancel-subscription m-auto" href="javascript:;" onclick="confirmModal('{{ route('customer.stripe.subscription_cancel') }}', 'undefined')">{{ get_phrase('Cancel Subscription') }}</a>
                     @else
                         <div class="sbbtn">
-                            <a href="javascript:;" class="cancel-subscription m-auto">Subscription Cancelled</a>
+                            <a href="javascript:;" class="cancel-subscription m-auto">{{ get_phrase('Subscription Cancelled') }}</a>
                             <a class="cancel-subscription m-auto" href="javascript:;" onclick="confirmModal('{{ route('customer.stripe.subscription_again') }}', 'undefined')">{{ get_phrase('Subscribe Again') }}</a>
                         </div>
                     @endif
@@ -116,9 +133,9 @@
                     <img src="{{ asset('assets/img/admin-customer/subscription-status.png') }}" alt="" />
                     <h4 class="title">
                         <img src="{{ asset('assets/img/icon/warning.svg') }}" alt="" />
-                        Expired / No Subscription
+                        {{ get_phrase('Expired / No Subscription') }}
                     </h4>
-                    <a href="{{ route('elements_package_pricing') }}">Subscribe Now</a>
+                    <a href="{{ route('elements_package_pricing') }}">{{ get_phrase('Subscribe Now') }}</a>
                 </div>
             </div>
         </div>

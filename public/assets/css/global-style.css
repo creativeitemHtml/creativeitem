@@ -122,6 +122,9 @@ a{
     color: inherit;
     transition: 0.3s all ease-in-out;
 }
+a:hover {
+    color: #0A7EFB;
+}
 img{
     max-width: 100%;
     height: auto;
@@ -213,6 +216,10 @@ img{
     gap: 30px;
 }
 
+/* line height */
+.lh-normal{
+    line-height: normal !important;
+}
 
 /* margin bottom */
 .mb-2px{
@@ -363,6 +370,10 @@ img{
     color: var(--skinColor) !important;
 }
 
+.cin1-border-bottom{
+    border-bottom: 1px solid #DDE2E6;
+}
+
 
 /* Other Common Css */
 /* Scroll Top */
@@ -410,6 +421,26 @@ img{
       -webkit-transform: translateY(-15px);
       transform: translateY(-15px);
     }
+}
+
+/* Buttons */
+.btn-primary-ci1{
+    background-color: var(--skinColor);
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-family: 'Manrope';
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--whiteColor);
+    border: none;
+}
+.btn-primary-ci1:focus{
+    box-shadow: none;
+}
+.btn-primary-ci1:hover{
+    background-color: var(--skinHover);
+    color: var(--whiteColor);
 }
 /* Default Css End ***
 **********************/
@@ -1094,6 +1125,213 @@ img{
 **********************/
 
 
+/* Font size */
+.man-title-32px{
+    color: #212534;
+    font-family: 'Manrope';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.man-title-20px{
+    color: #212534;
+    font-family: 'Manrope';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 30px */
+}
+.man-title-16px{
+    color: #212534;
+    font-family: 'Manrope';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; /* 150% */
+}
+
+
+
+.man-subtitle-20px{
+    color: var(--grayColor);
+    font-family: 'Manrope';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.man-subtitle-15px{
+    color: var(--grayColor);
+    font-family: 'Manrope';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 160% */
+}
+/* Font size */
+
+
+/* Something Wrong Css Start ***
+******************************/
+.something-wrong-area{
+    padding: 80px 0;
+}
+/* Something Wrong Css End ***
+****************************/
+
+
+/* Checkout Modal Css End ***
+***************************/
+.cin1-modal-content{
+    border: none;
+    border-radius: 12px;
+    background: var(--whiteColor);
+    padding: 20px;
+}
+.cin1-modal-btn-close {
+    height: 14px;
+    width: 14px;
+    background-size: 12px;
+}
+.cin1-modal-btn-close:focus{
+    box-shadow: none;
+}
+.cin1-bordered-card{
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #D1D7DE;
+}
+.cin1-sm-banner{
+    width: 100px;
+    min-width: 100px;
+    height: 80px;
+}
+.cin1-sm-banner > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.max-w-310px{
+    max-width: 310px;
+}
+.max-w-320px{
+    max-width: 320px;
+}
+.gray-bordered-link{
+    color: var(--grayColor);
+    font-family: 'Manrope';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration-line: underline;
+    transition: .3s;
+}
+.gray-bordered-link:hover{
+    color: var(--skinColor);
+}
+.cin1-btn-primary-light{
+    border-radius: 6px;
+    background: #E7F2FF;
+    border: none;
+    padding: 8px 12px;
+    color: var(--skinColor);
+    font-family: 'Manrope';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.cin1-btn-primary-light:focus{
+    box-shadow: none;
+}
+.cin1-btn-primary-light:hover{
+    background: var(--skinColor);
+    color: var(--whiteColor);
+}
+.cin1-btn-primary-light:active{
+    background: var(--skinColor);
+    color: var(--whiteColor);
+}
+
+.cin1-form-control{
+    border-radius: 4px;
+    border: 1px solid #D1D7DE;
+    color: var(--grayColor);
+    font-family: 'Manrope';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
+}
+.cin1-form-control:focus{
+    box-shadow: none;
+    border-color: var(--skinColor);
+    color: var(--grayColor);
+}
+.cin1-form-control:hover{
+    border-color: var(--skinColor);
+}
+.cin1-form-control::-webkit-inner-spin-button, 
+.cin1-form-control::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+/* Check box */
+.cin1-btn-group.btn-group>.btn:not(:first-child) {
+    margin-left: 0px;
+}
+.cin1-radio-checkbox{
+    box-shadow: none !important;
+    width: 113px;
+    height: 56px;
+    border-radius: 6px !important;
+    background: #F4F7FB;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+}
+.cin1-radio-checkbox:focus{
+    box-shadow: none !important;
+}
+.btn-check:checked+.btn-outline-primary.cin1-radio-checkbox:focus{
+    box-shadow: none !important;
+}
+.btn-check:checked+.btn-outline-primary.cin1-radio-checkbox{
+    color: #fff;
+    background-color: var(--whiteColor);
+    border-color: var(--skinColor);
+}
+.cin1-radio-checkbox:hover{
+    background-color: var(--whiteColor);
+    border-color: var(--skinColor);
+}
+.cin1-radio-checkbox:active{
+    background-color: var(--whiteColor) !important;
+    border-color: var(--skinColor) !important;
+}
+
+.cin1-badge-success-light{
+    border-radius: 6px;
+    background: #E9FFF7;
+    padding: 6px 12px;
+    color: #06A468;
+    font-family: 'Manrope';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* Checkout Modal Css Start ***
+*****************************/
+
+
 
 
 /* Responsive */
@@ -1101,6 +1339,15 @@ img{
     /* menu */
     .ml-xl-100{
         margin-left: 100px;
+    }
+    /* checkout modal */
+    .cin1-modal-xl {
+        max-width: 1080px;
+    }
+}
+@media screen and (min-width: 992px){
+    .cin1-modal-lg{
+        max-width: 660px;
     }
 }
 @media screen and (max-width: 1199px){
@@ -1271,11 +1518,33 @@ img{
         padding-left: 0;
     }
     /* Footer Css End */
-    
-
 
 }
+
+@media screen and (max-width: 767px){
+    .man-title-32px {
+        font-size: 29px;
+    }
+    .man-subtitle-20px {
+        font-size: 19px;
+    }
+    .man-title-20px{
+        font-size: 19px;
+    }
+}
+
+
 @media screen and (max-width: 575px){
+    .man-title-32px {
+        font-size: 26px;
+    }
+    .man-subtitle-20px {
+        font-size: 18px;
+    }
+    .man-title-20px{
+        font-size: 18px;
+    }
+}
     /* Scroll Top */
     .scroll-top-main {
         bottom: 1.125rem;

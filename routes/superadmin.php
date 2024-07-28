@@ -112,6 +112,7 @@ Route::name('superadmin.')->prefix('superadmin')->middleware('auth', 'superadmin
         Route::get('payment-request', 'paymentRequestView')->name('payment_request');
         Route::get('payment-request-approve/{id}', 'paymentRequestAprrove')->name('paymentRequestApprove');
         Route::get('payment-request-delete/{id}', 'paymentRequestDelete')->name('paymentRequestDelete');
-        
+        Route::get('subpayment-request-approve/{id}', 'subpaymentRequestApprove')->name('subpaymentRequestApprove');
+        Route::get('subpayment-request-delete/{id}', 'subpaymentRequestDelete')->name('subpaymentRequestDelete');
     });
 });

@@ -91,4 +91,42 @@ class ApiController extends Controller
 
         return new JsonResponse(['status' => 'success', 'data' => $company_details], 200);
     }
+
+    public function list() 
+    {
+        $element_htmls = ElementProduct::where('element_category_id', 9)->get();
+
+        if (count($element_htmls) > 0) {
+            // Build the JSON response structure
+            $response = [
+                'creativeelement' => [
+                    'title' => 'Creative Elements',
+                    'description' => 'No description No description No description No description No description No description No description No description No description',
+                    'products' => [],
+                ],
+            ];
+
+            // Populate the 'products' array
+            foreach ($element_htmls as $elementHtml) {
+                $response['creativeelement']['products'][$elementHtml->product_id] = [
+                    'framework' => 'laravel',
+                    'demo_url' => $elementHtml->previewUrl,
+                    'title' => $elementHtml->title,
+                    'description' => $elementHtml->summary,
+                    'thumbnail' => element_server_url($elementHtml->product_id, $elementHtml->product_to_elementCategory->slug).$elementHtml->thumbnail,
+                    'documentation' => 'https://creativeitem.com/docs/elements/what-is-creative-elements-videos',
+                    'youtube' => 'https://www.youtube.com/playlist?list=PLR1GrQCi5Zqvhh7wgtt-ShMAM1RROYJgE',
+                    'buy_now' => url('elements/product/'.$elementHtml->id),
+                ];
+            }
+
+            // Return the JSON response
+            return response()->json($response, 200);
+        } else {
+            return response()->json([
+                'message' => 'No html product found!',
+            ], 400);
+        }
+    }
+
 }

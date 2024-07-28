@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
     <div class="row justify-content-center">
-        <h2 class="service-help-txt">Service Details</h2>
+        <h2 class="service-help-txt">{{ get_phrase('Service Details') }} </h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12">

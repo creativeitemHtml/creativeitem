@@ -20,7 +20,6 @@
                                         <div class="feature-text" style="margin-bottom:27px;">
                                             
                                             <p style="margin-bottom:9px; font-family:Arial,Helvetica,sans-serif ;color:#181C32; font-size: 28px; font-weight:700">Hey {{ $user->name }}, thanks for signing up!</p>
-                                            <p>Your password is: {{$password}}</p>
                                             <p>Your five-digit code for email verification is: {{$pin}}</p>
                                             <p class="small-text" style="font-size:15px; margin-bottom: 2px;
                                             color: #7E8299; font-family:Arial,Helvetica,sans-serif">Lots of people make mistakes while creating</p>

@@ -723,4 +723,24 @@ span.model-title-value {
     left: 111px;
 }
 
+.status-pending {
+    background-color: #fff5f8;
+    color: #FEC022;
+}
+.status-pending path{
+    fill: #FEC022;
+}
+
+.cin1-badge-pending-light{
+    border-radius: 6px;
+    background: #faf7cb;
+    padding: 6px 12px;
+    color: #FEC022;
+    font-family: 'Manrope';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
   

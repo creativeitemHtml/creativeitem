@@ -71,7 +71,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <a href="javascript:;" class="pricing-n-btn text-18" onclick="commonModal('{{ route('element_checkout', ['id' => $package->id]) }}')">{{ get_phrase('Upgrade Plan') }}</a>
+                    <a href="javascript:;" class="pricing-n-btn text-18" onclick="elementCheckoutModal('{{ route('element_checkout', ['id' => $package->id]) }}')">{{ get_phrase('Upgrade Plan') }}</a>
                     </a>
                 </div>
             </div>

@@ -204,7 +204,11 @@ class ElementsController extends Controller
             $current_subscription = Subscription::where('user_id', auth()->user()->id)->latest()->first();
 
             if(isset($current_subscription) && $current_subscription->expire_date > $today) {
-                return redirect()->route('customer.subscription_details');
+
+                // return redirect()->route('customer.subscription_details');
+
+                $page_data['current_subscription'] = Subscription::where('user_id', auth()->user()->id)->latest()->first();
+                return view('frontend.elements.already_subscribed', $page_data);
             }
         }
 
@@ -216,8 +220,14 @@ class ElementsController extends Controller
 
     public function purchase_subscription(Request $request, $package_id="")
     {
+
         if(auth()->user()) {
-            return redirect()->route('customer.subscription_purchase', ['package_id' => $package_id]);
+            return redirect()->route('customer.subscription_purchase',
+            [
+                'package_id' => $package_id,
+                'payment_method' => $request->input('payment_method'),
+                'requestData' => $request->all()
+            ]);
         } else {
             // Define a stricter regex pattern for email validation
             $emailRegex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
@@ -365,7 +375,7 @@ class ElementsController extends Controller
                         'date_added' => strtotime(date('d-M-Y H:i:s')),
                     ]);
 
-                    $pin = rand(10000, 99999);
+                    $pin = rand(100000, 999999);
 
                     DB::table('password_resets')
                         ->insert(

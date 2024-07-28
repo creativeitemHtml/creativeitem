@@ -39,7 +39,12 @@
                         <table style="border:1px solid #E4E7EC; margin-top: 15px;" cellpadding="20" cellspacing="0" width="600" id="emailContainer">
                             <tr style="background-color: #E4E7EC;">
                                 <th><p style="margin: 0; font-size: 16px; color: #0C141D;">Name</p></th>
+                                @if(!empty($payment->product->title) )
                                 <th><p style="margin: 0; font-size: 16px; color: #0C141D;">Element</p></th>
+                                @else
+                                <th><p style="margin: 0; font-size: 16px; color: #0C141D;">Package</p></th>
+                                @endif
+                                
                                 <th><p style="margin: 0; font-size: 16px; color: #0C141D;">price</p></th>
                                 <th><p style="margin: 0; font-size: 16px; color: #0C141D;">Amount</p></th>
                             </tr>
@@ -48,13 +53,17 @@
                                     <p style="margin: 0;  color: #0C141D; font-size: 15px;">{{ $payment->user->name }}</p>
                                 </td>
                                 <td style="text-align: center; padding:16px 0 ; border-bottom: 1px solid #E4E7EC;">
+                                    @if(!empty($payment->product->title) )
                                     <p style="margin: 0;  color: #0C141D; font-size: 15px;">{{ $payment->product->title }}</p>
+                                    @else
+                                    <p style="margin: 0;  color: #0C141D; font-size: 15px;">{{ $payment->package->name }}</p>
+                                    @endif
                                 </td>
                                 <td style="text-align: center; padding: 16px 0 ; border-bottom: 1px solid #E4E7EC;">
-                                    <p style="margin: 0; font-size: 15px; color: #0C141D;">{{ $payment->paid_amount }}</p>
+                                    <p style="margin: 0; font-size: 15px; color: #0C141D;">BDT {{ $payment->paid_amount }} </p>
                                 </td>
                                 <td style="text-align: center; padding: 16px  0; border-bottom: 1px solid #E4E7EC;">
-                                    <p style="margin: 0; font-size: 15px; color: #0C141D;">{{ $payment->paid_amount }}</p>
+                                    <p style="margin: 0; font-size: 15px; color: #0C141D;">BDT {{ $payment->paid_amount }} </p>
                                 </td>
                             </tr>
                             <tr>
@@ -64,7 +73,7 @@
                                 <td style="text-align: center; padding: 16px 0 ;"> </td>
                                 <td style="text-align: center; padding: 16px 0 ;"> </td>
                                 <td style="text-align: center; padding: 16px 0 ;">
-                                    <p style="margin: 0; font-size: 16px; font-weight: 500; color: #007BFF;">{{ $payment->paid_amount }}</p>
+                                    <p style="margin: 0; font-size: 16px; font-weight: 500; color: #007BFF;">BDT {{ $payment->paid_amount }}</p>
                                 </td>
                             </tr>
                         </table>

@@ -11,6 +11,7 @@ use Response;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use File;
 use App\Mail\ProjectReport;
+use App\Mail\ApprovePurchaseInvoice;
 use Illuminate\Support\Facades\Mail;
 
 class SuperadminController extends Controller
@@ -2336,13 +2337,15 @@ class SuperadminController extends Controller
         $page_data['page_title'] = 'Payment Request';
         $page_data['payment_request'] = 'active';
         $page_data['file_name'] = 'payment_request';
-        $page_data['payments'] = ElementProductPayment::with(['user', 'product'])->get();
+        $page_data['subpayments'] = Subscription::with(['user', 'package'])->orderBy('created_at', 'DESC')->get();
+        
+        $page_data['payments'] = ElementProductPayment::with(['user', 'product'])->orderBy('created_at', 'DESC')->get();
 
         return view('superadmin.navigation', $page_data);
     }
     
     public function paymentRequestAprrove($id)
-     {
+    {
 
         $payment = ElementProductPayment::with(['user', 'product'])->find($id);
 
@@ -2352,13 +2355,43 @@ class SuperadminController extends Controller
 
         Mail::to($payment->user->email)->send(new ApprovePurchaseInvoice($payment));
         return redirect()->back()->with('message', 'Payment Apporved');
-     }
+    }
 
-     public function paymentRequestDelete($id)
-     {
+    public function paymentRequestDelete($id)
+    {
         ElementProductPayment::where('id', $id)->delete();
 
         return redirect()->back()->with('message', 'Delete successfully.');
-     }
+    }
+
+    public function subpaymentRequestApprove($id)
+    {
+
+        $payment = Subscription::with(['user', 'package'])->find($id);
+
+        if (strtolower($payment->package->interval) == 'monthly') {
+            $monthly = $payment->package->interval_period * 30;
+            $expire_date = strtotime('+' . $monthly . ' days', strtotime(date("Y-m-d H:i:s")));
+
+        } elseif (strtolower($payment->package->interval) == 'lifetime') {
+            $expire_date = 'lifetime';
+
+        }
+
+        $data = Subscription::findOrFail($id);
+        $data->status = 'approved';
+        $data->expire_date = $expire_date;
+        $data->save();
+
+        Mail::to($payment->user->email)->send(new ApprovePurchaseInvoice($payment));
+        return redirect()->back()->with('message', 'Payment Apporved');
+    }
+
+    public function subpaymentRequestDelete($id)
+    {
+        Subscription::where('id', $id)->delete();
+
+        return redirect()->back()->with('message', 'Delete successfully.');
+    }
     
 }

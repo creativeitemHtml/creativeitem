@@ -37,7 +37,7 @@
 </style>
 <div class="subscription-main-wrap l_col_main">
     <div class="title-btn-menu-wrap d-flex justify-content-between align-items-center flex-wrap g-10 pb-30 mb-20">
-        <h4 class="fz-20-sb-black">Dashboard</h4>
+        <h4 class="fz-20-sb-black">{{ get_phrase('Dashboard') }}</h4>
         <button class="d-lg-none mobile-menu-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
             <img src="{{ asset('assets/img/new-icons-images/menu-icon.svg') }}" alt="menu">
         </button>
@@ -48,7 +48,7 @@
             <div class="dashboard_col">
                 <div class="card color_2">
                     <div class="card-head">
-                        <h4>Subscription payment amont</h4>
+                        <h4>{{ get_phrase('Subscription payment amount') }}</h4>
                         <p>{{ currency($total_paid_amount) }}</p>
                     </div>
                     <span class="svg_arrow">
@@ -61,7 +61,7 @@
             <div class="dashboard_col">
                 <div class="card color_3">
                     <div class="card-head">
-                        <h4>My Projects</h4>
+                        <h4>{{ get_phrase('My Projects') }}</h4>
                         <p> {{ $total_projects }}</p>
                     </div>
                     <span class="svg_arrow">

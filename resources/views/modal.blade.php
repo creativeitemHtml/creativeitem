@@ -282,3 +282,37 @@
 		});
 	}
 </script>
+
+
+<div class="modal fade" id="elementCheckoutModal" tabindex="-1" aria-labelledby="elementCheckoutModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-xl cin1-modal-xl">
+		<div class="modal-content cin1-modal-content">
+			...
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	"use strict";
+
+	var callBackFunction;
+	var callBackFunctionForGenericConfirmationModal;
+	function elementCheckoutModal(url)
+	{
+		// SHOWING AJAX PRELOADER IMAGE
+		jQuery('#elementCheckoutModal .modal-content').html('<div style="text-align:center;margin-top:200px;"><img style="width: 100px; opacity: 0.4; " src="{{ asset('assets/img/straight-loader.gif') }}" /></div>');
+		// LOADING THE AJAX MODAL
+		jQuery('#elementCheckoutModal').modal('show', {backdrop: 'true'});
+
+		// SHOW AJAX RESPONSE ON REQUEST SUCCESS
+		$.ajax({
+			url: url,
+			success: function(response)
+			{
+				jQuery('#elementCheckoutModal .modal-content').html(response);
+			}
+		});
+	}
+
+</script>

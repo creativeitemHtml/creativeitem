@@ -238,19 +238,28 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                 <h4 class="price">Price : <span>{{ currency($selected_product->price) }}</span></h4>
                             @endif
                             @if(Auth::check())
-                                @if(null !== $is_purchased && $is_purchased->status == 'pending')
-                                <a href="#" class="el-btn-buy mb-12">{{ get_phrase('Pending') }}</a>
-                                @elseif ((isset($current_subscription) &&  ($current_subscription->subscription_to_package->interval == 'lifetime' || $current_subscription->expire_date > $today)) || !empty($is_purchased))
-                                <a href="{{ route('customer.download_link_generate', ['product_id' => $selected_product->id]) }}" class="el-btn-buy mb-12" target="_blank">Download</a>
-                                <div class="elitem-allFile">
-                                    <img src="{{ asset('assets/img/icon/download.svg') }}" alt="" />
-                                    <p>
-                                        {{ get_phrase('Download limit left').' '.$remaining_download_limit.' '.get_phrase('out of').' '.$current_subscription->subscription_to_package->download_limit.' '.get_phrase('times') }}
-                                    </p>
-                                </div>
+                                
+                                @if ((isset($current_subscription) &&  ($current_subscription->subscription_to_package->interval == 'lifetime' || $current_subscription->expire_date > $today)))
+                                    @if($current_subscription->payment_method == 'stripe' || $current_subscription->status == 'approved')
+                                    
+                                    <a href="{{ route('customer.download_link_generate', ['product_id' => $selected_product->id]) }}" class="el-btn-buy mb-12" target="_blank">Download</a>
+                                    <div class="elitem-allFile">
+                                        <img src="{{ asset('assets/img/icon/download.svg') }}" alt="" />
+                                        <p>
+                                            {{ get_phrase('Download limit left') }}{{ $remaining_download_limit }} {{ get_phrase('out of') }} {{ $current_subscription->subscription_to_package->download_limit }} {{ get_phrase('times') }}
+                                        </p>
+                                    </div>
+                                    @else
+                                    <a href="#" class="el-btn-buy mb-12" target="_blank">{{ get_phrase('Pending') }}</a>
+                                    @endif
+                                
+                                @elseif(null !== $is_purchased && $is_purchased->status == 'pending' || $current_subscription->status == 'pending')
+                                <a href="#" class="el-btn-buy mb-12" target="_blank">{{ get_phrase('Pending') }}</a>
+                                <span class="seperate">{{ get_phrase('or') }}</span>
+                                <a href="{{ route('elements_package_pricing') }}" class="el-btn-subscribe mb-20">{{ get_phrase('Subscribe') }}</a>
                                 @else
 
-                                <a href="javascript:;" class="el-btn-buy mb-12" onclick="commonModal('{{ route('element_buy_now', ['product_id' => $selected_product->id]) }}) }}')">{{ get_phrase('Buy Now') }}</a>
+                                <a href="javascript:;" class="el-btn-buy mb-12" onclick="elementCheckoutModal('{{ route('element_buy_now', ['product_id' => $selected_product->id]) }}) }}')">{{ get_phrase('Buy Now') }}</a>
                                 <span class="seperate">{{ get_phrase('or') }}</span>
                                 <a href="{{ route('elements_package_pricing') }}" class="el-btn-subscribe mb-20">{{ get_phrase('Subscribe') }}</a>
                                 <div class="elitem-allFile">
@@ -259,12 +268,12 @@ if(Auth::check() && auth()->user()->role_id == 6) {
                                 </div>
                                 @endif
                             @else
-                                <a href="javascript:;" class="el-btn-buy mb-12" onclick="commonModal('{{ route('element_buy_now', ['product_id' => $selected_product->id]) }}) }}')">{{ get_phrase('Buy Now') }}</a>
+                                <a href="javascript:;" class="el-btn-buy mb-12" onclick="elementCheckoutModal('{{ route('element_buy_now', ['product_id' => $selected_product->id]) }}) }}')">{{ get_phrase('Buy Now') }}</a>
                                 <span class="seperate">or</span>
                                 <a href="{{ route('elements_package_pricing') }}" class="el-btn-subscribe mb-20">{{ get_phrase('Subscribe') }}</a>
                                 <div class="elitem-allFile">
-                                    <img src="{{ asset('assets/img/icon/unlock.svg') }}" alt="" />
-                                    <p>{{ get_phrase('Unlock all file for $4.5/month') }}</p>
+                                <img src="{{ asset('assets/img/icon/unlock.svg') }}" alt="" />
+                                <p>{{ get_phrase('Unlock all file for $4.5/month') }}</p>
                                 </div>
                             @endif
                         </div>

@@ -15,7 +15,7 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'package_id', 'paid_amount', 'payment_method', 'transaction_keys', 'auto_subscription', 'expire_date', 'date_added'
+        'user_id', 'package_id', 'paid_amount', 'payment_method', 'transaction_keys', 'auto_subscription', 'expire_date', 'date_added', 'account_number', 'status'
     ];
 
     public function subscription_to_package()
@@ -26,5 +26,15 @@ class Subscription extends Model
     public function subscription_to_user()
     {
         return $this->belongsTo(User::class,'user_id','id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
     }
 }

@@ -49,7 +49,7 @@ Route::controller(CustomerController::class)->middleware('auth', 'customer')->gr
     Route::any('/customer/profile/update', 'profile_update')->name('customer.profile_update');
     Route::post('/customer/password-change', 'password_change')->name('customer.password_change');
 
-    Route::get('customer/subscription-purchase/{package_id}', 'subscription_purchase')->name('customer.subscription_purchase');
+    Route::get('customer/subscription-purchase/{package_id}/{payment_method}', 'subscription_purchase')->name('customer.subscription_purchase');
 
     // Subcription Payment by Customer
     Route::get('/customer/subscription/payment/success/{user_data}/{response}', 'subscription_fee_success_payment')->name('subscription_fee_success_payment');

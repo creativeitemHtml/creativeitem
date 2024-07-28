@@ -16,4 +16,9 @@ class Package extends Model
      */
     protected $fillable = [ 'id', 'name', 'stripe_package_id', 'price', 'discounted_price', 'interval', 'interval_period', 'download_limit', 'visibility', 'feature_list' ];
 
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
 }

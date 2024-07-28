@@ -88,7 +88,8 @@
                             <?php endforeach; ?>
 
 
-
+                            <button type="button" class="btn-main new-project-btn" onclick="replaceInputData()">Replace input field data</button>
+                            <button type="button" class="btn-main new-project-btn"  onclick="replaceInputDataUpdate()">Update Now</button>
                             
                             
                         </div>
@@ -208,5 +209,3 @@
 
 </script>
 
-<button type="button" onclick="replaceInputData()">Replace input field data</button>
-<button type="button" onclick="replaceInputDataUpdate()">Update Now</button>

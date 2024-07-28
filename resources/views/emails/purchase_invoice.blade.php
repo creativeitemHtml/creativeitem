@@ -48,13 +48,19 @@
                                     <p style="margin: 0;  color: #0C141D; font-size: 15px;">{{ $user->name }}</p>
                                 </td>
                                 <td style="text-align: center; padding:16px 0 ; border-bottom: 1px solid #E4E7EC;">
-                                    <p style="margin: 0;  color: #0C141D; font-size: 15px;">{{ $purchase_details->payment_to_elementProduct->title }}</p>
+                                    <p style="margin: 0;  color: #0C141D; font-size: 15px;">
+                                        @if(!empty($payment))
+                                        {{$payment->title}}
+                                        @else
+                                        {{ $purchase_details->payment_to_elementProduct->title }}
+                                        @endif
+                                        </p>
                                 </td>
                                 <td style="text-align: center; padding: 16px 0 ; border-bottom: 1px solid #E4E7EC;">
-                                    <p style="margin: 0; font-size: 15px; color: #0C141D;">${{ $purchase_details->paid_amount }}</p>
+                                    <p style="margin: 0; font-size: 15px; color: #0C141D;">{{ currency($purchase_details->paid_amount) }}</p>
                                 </td>
                                 <td style="text-align: center; padding: 16px  0; border-bottom: 1px solid #E4E7EC;">
-                                    <p style="margin: 0; font-size: 15px; color: #0C141D;">${{ $purchase_details->paid_amount }}</p>
+                                    <p style="margin: 0; font-size: 15px; color: #0C141D;">{{ currency($purchase_details->paid_amount) }}</p>
                                 </td>
                             </tr>
                             <tr>
@@ -64,7 +70,7 @@
                                 <td style="text-align: center; padding: 16px 0 ;"> </td>
                                 <td style="text-align: center; padding: 16px 0 ;"> </td>
                                 <td style="text-align: center; padding: 16px 0 ;">
-                                    <p style="margin: 0; font-size: 16px; font-weight: 500; color: #007BFF;">${{ $purchase_details->paid_amount }}</p>
+                                    <p style="margin: 0; font-size: 16px; font-weight: 500; color: #007BFF;">{{ currency($purchase_details->paid_amount) }}</p>
                                 </td>
                             </tr>
                         </table>

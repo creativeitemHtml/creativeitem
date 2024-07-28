@@ -52,7 +52,7 @@
                 </div>
             
                 <div class="pForm-wrap">
-                    <label for="timeline" class="enForm-label">Timeline</label>
+                    <label for="timeline" class="enForm-label">{{ get_phrase('Timeline') }}</label>
                     <select
                         class="enForm-select enForm-nice-select"
                         id="timeline"

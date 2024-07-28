@@ -39,5 +39,10 @@ class ElementProduct extends Model
     {
         return $this->hasMany(ElementProductPayment::class, 'element_product_id');
     }
+
+    public function subscriptionpayments()
+    {
+        return $this->hasMany(Subscription::class, 'element_product_id');
+    }
     
 }

@@ -9,7 +9,6 @@ use Inertia\Inertia;
 use App\Models\{Setting, Package, Subscription, ElementProduct, User, ElementProductComment, ElementProductPayment, ElementDownload, Project, OnlineMeeting, PaymentMilestone, RolesAndPermission, ElementCategory, ServicePackage, Service};
 use Illuminate\Support\Facades\Hash;
 use Stripe;
-use Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PurchaseInvoice;
 use App\Mail\SubscriptionMail;
@@ -20,6 +19,7 @@ use App\Mail\ProjectReport;
 use File;
 use PDF;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Validator;
 
 
 class CustomerController extends Controller
@@ -57,7 +57,7 @@ class CustomerController extends Controller
         $page_data = array();
         $current_subscription = Subscription::where('user_id', auth()->user()->id)->latest()->first();
 
-        if(!empty($current_subscription) && $current_subscription->subscription_to_package->interval == 'monthly') {
+        if(!empty($current_subscription) && $current_subscription->payment_method == 'stripe' && $current_subscription->subscription_to_package->interval == 'monthly') {
             //check for new subscription peyment
             $payment_keys = json_decode($current_subscription->transaction_keys);
             $subscription_id = $payment_keys->subscription_id;
@@ -378,12 +378,20 @@ class CustomerController extends Controller
         return redirect()->back()->with('message', get_phrase('Password changed successfully'));
     }
 
-    public function subscription_purchase($package_id) 
+    public function subscription_purchase(Request $request, $package_id, $payment_method) 
     {
-        // print_r('coming soon customer');
-        // die();
 
+        $requestData = $request->input('requestData');
         $selected_package = Package::find($package_id);
+
+        if (strtolower($selected_package->interval) == 'monthly') {
+            $monthly = $selected_package->interval_period * 30;
+            $expire_date = strtotime('+' . $monthly . ' days', strtotime(date("Y-m-d H:i:s")));
+
+        } elseif (strtolower($selected_package->interval) == 'lifetime') {
+            $expire_date = 'lifetime';
+
+        }
 
         if($selected_package->name == 'Free') {
 
@@ -416,7 +424,7 @@ class CustomerController extends Controller
             $STRIPE_SECRET = $stripe_keys->secret_live_key;
         }
 
-        $user_data['payment_method'] = 'stripe';
+        $user_data['payment_method'] = $payment_method;
 
         $user_data['user_id'] = auth()->user()->id;
         $user_data['package_id'] = $package_id;
@@ -436,54 +444,102 @@ class CustomerController extends Controller
             return "$key:$value";
         }, array_keys($user_data), $user_data));
 
-        if($expense_type == 'subscription') {
-            try {
+        if($payment_method == "stripe"){
+            if($expense_type == 'subscription') {
+                try {
 
-                Stripe\Stripe::setApiKey($STRIPE_SECRET);
+                    Stripe\Stripe::setApiKey($STRIPE_SECRET);
 
-                $session = \Stripe\Checkout\Session::create([
-                    'line_items' => [[
-                        'price' => $priceId,
-                        'quantity' => 1,
-                    ]],
-                    'mode' => 'subscription',
-                    'success_url' => route($success_url, ['user_data' => $user_data, 'response' => 'check request->all() to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
-                    'cancel_url' => route($cancel_url, ['user_data' => $user_data, 'response' => 'check request->all() to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
-                ]);
+                    $session = \Stripe\Checkout\Session::create([
+                        'line_items' => [[
+                            'price' => $priceId,
+                            'quantity' => 1,
+                        ]],
+                        'mode' => 'subscription',
+                        'success_url' => route($success_url, ['user_data' => $user_data, 'response' => 'check request->all() to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+                        'cancel_url' => route($cancel_url, ['user_data' => $user_data, 'response' => 'check request->all() to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+                    ]);
 
-                // return Inertia::location($session->url);
+                    // return Inertia::location($session->url);
 
-                return redirect($session->url);
+                    return redirect($session->url);
 
-            } catch (\Exception$e) {
+                } catch (\Exception$e) {
 
-                return $e->getMessage();
+                    return $e->getMessage();
+                }
+            } else {
+
+                //Lifetime subscription here
+                try {
+
+                    Stripe\Stripe::setApiKey($STRIPE_SECRET);
+
+                    $session = \Stripe\Checkout\Session::create([
+                        'line_items' => [[
+                            'price' => $priceId,
+                            'quantity' => 1,
+                        ]],
+                        'mode' => 'payment',
+                        'success_url' => route($success_url, ['user_data' => $user_data, 'response' => 'check request->all() to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+                        'cancel_url' => route($cancel_url, ['user_data' => $user_data, 'response' => 'check request->all() to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+                    ]);
+
+                    // return Inertia::location($session->url);
+
+                    return redirect($session->url);
+
+                } catch (\Exception$e) {
+
+                    return $e->getMessage();
+                }
             }
-        } else {
+        } else{
 
-            //Lifetime subscription here
-            try {
+            
+            // Create an associative array
+            $transaction_data = [
+                'transaction_keys' => $requestData['trans_id'],
+                'account_number' => $requestData['account_number']
+            ];
 
-                Stripe\Stripe::setApiKey($STRIPE_SECRET);
+            $transaction = json_encode($transaction_data);
 
-                $session = \Stripe\Checkout\Session::create([
-                    'line_items' => [[
-                        'price' => $priceId,
-                        'quantity' => 1,
-                    ]],
-                    'mode' => 'payment',
-                    'success_url' => route($success_url, ['user_data' => $user_data, 'response' => 'check request->all() to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
-                    'cancel_url' => route($cancel_url, ['user_data' => $user_data, 'response' => 'check request->all() to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
-                ]);
+            
+                if (strtolower($selected_package->interval) == 'lifetime'){
+                    $purchase_details = Subscription::create([
+                        'user_id' => auth()->user()->id,
+                        'package_id' => $package_id,
+                        'paid_amount' => $requestData['amount'],
+                        'payment_method' => $payment_method,
+                        'status' => 'pending',
+                        'transaction_keys' => $transaction,
+                        'date_added' => time(),
+                    ]);
+                }else{
+                    $purchase_details = Subscription::create([
+                        'user_id' => auth()->user()->id,
+                        'package_id' => $package_id,
+                        'paid_amount' => $requestData['amount'],
+                        'payment_method' => $payment_method,
+                        'status' => 'pending',
+                        'transaction_keys' => $transaction,
+                        'date_added' => time(),
+                        'expire_date' => $expire_date,
+                    ]);
 
-                // return Inertia::location($session->url);
+                }
+                
 
-                return redirect($session->url);
+            $user = User::find($purchase_details->user_id);
+            $payment = Package::find($purchase_details->package_id);
 
-            } catch (\Exception$e) {
+            Mail::to(auth()->user()->email)->send(new PurchaseInvoice($purchase_details, $user, $payment));
+            Mail::to('project@creativeitem.com')->send(new PurchaseInvoice($purchase_details, $user, $payment));
 
-                return $e->getMessage();
-            }
+            return view('frontend.elements.pending_modal', ['purchase_details' => $purchase_details]);
+
+            // return redirect()->route('customer.element_checkout_success')->with('success', 'Payment Pending');
         }
     }
 
@@ -629,6 +685,8 @@ class CustomerController extends Controller
 
     public function single_purchase(Request $request, $product_id, $payment_method)
     {
+        // $requestData = $request->all();
+        // return view('frontend.elements.pending_modal', ['requestData' => $requestData]);
         $requestData = $request->input('requestData');
 
         $global_system_currency = get_settings('system_currency');
@@ -691,47 +749,14 @@ class CustomerController extends Controller
                 return $e->getMessage();
             }
     
-        } if($payment_method == "stripe"){
-            try {
+        } else{
 
-                Stripe\Stripe::setApiKey($STRIPE_SECRET);
-    
-                $session = \Stripe\Checkout\Session::create([
-                    'line_items' => [[
-                        'price_data' => [
-                            'currency' => $global_system_currency,
-                            'product_data' => [
-                                'name' => $product_details->title,
-                            ],
-                            'unit_amount' => $product_details->price * 100,
-                        ],
-                        'quantity' => 1,
-                    ]],
-                    'mode' => 'payment',
-                    'success_url' => route($success_url, ['purchase_data' => $purchase_data, 'response' => 'check $product_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
-                    'cancel_url' => route($cancel_url, ['purchase_data' => $purchase_data, 'response' => 'check $product_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
-                ]);
-    
-                return redirect($session->url);
-    
-            } catch (\Exception$e) {
-    
-                return $e->getMessage();
-            }
-    
-        } else {
+            $transaction_data = [
+                'transaction_keys' => $requestData['trans_id'],
+                'account_number' => $requestData['account_number']
+            ];
 
-            $validator = Validator::make($request->all(), [
-                'trans_id' => 'required',
-                'account_number' => 'required',
-            ]);
-
-            // print_r($validator->errors());
-            // die();
-        
-            // if ($validator->fails()) {
-            //     return redirect()->back()->with('warning', 'field is required');
-            // }
+            $transaction = json_encode($transaction_data);
 
             $purchase_details = ElementProductPayment::create([
                 'element_product_id' => $product_id,
@@ -739,17 +764,19 @@ class CustomerController extends Controller
                 'payment_method' => $payment_method,
                 'paid_amount' => $product_details->price,
                 'status' => 'pending',
-                'transaction_keys' => $requestData['trans_id'],
-                'account_number' => $requestData['account_number'],
+                'transaction_keys' =>  $transaction,
                 'date_added' => strtotime(date('d-M-Y H:i:s')),
             ]);
 
-            // $user = User::find($purchase_details->user_id);
+            $user = User::find($purchase_details->user_id);
+            $payment = Package::find($purchase_details->package_id);
 
-            Mail::to(auth()->user()->email)->send(new PurchaseInvoice($purchase_details, $user));
-            // Mail::to('project@creativeitem.com')->send(new PurchaseInvoice($purchase_details, $user));
+            Mail::to(auth()->user()->email)->send(new PurchaseInvoice($purchase_details, $user, $payment));
+            Mail::to('project@creativeitem.com')->send(new PurchaseInvoice($purchase_details, $user, $payment));
 
-            return redirect()->route('customer.purchase_history')->with('success', 'Payment request submitted. Please wait for the appoval.');
+            return view('frontend.elements.pending_modal', ['purchase_details' => $purchase_details]);
+
+            // return redirect()->route('customer.purchase_history')->with('success', 'Payment Pending');
         }
         // print_r($product_id);
         // die();

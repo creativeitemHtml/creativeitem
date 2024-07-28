@@ -39,9 +39,15 @@
                         </div>
                     </td>
                     <td>
+                        @if($purchase_history->status != 'pending')
                         <div class="min-w-100">
                             <p class="status-btn status-up">{{ $purchase_history->payment_method }}</p>
                         </div>
+                        @else
+                        <div class="min-w-100">
+                            <p class="status-btn status-pending">{{ $purchase_history->payment_method }}</p>
+                        </div>
+                        @endif
                     </td>
                     <td>
                         <div class="min-w-100">
@@ -49,6 +55,7 @@
                         </div>
                     </td>
                     <td>
+                        @if($purchase_history->status != 'pending')
                         <div class="min-w-100 d-flex ">
                             <a href="{{ route('customer.purchase_invoice', ['purchase_id' => $purchase_history->id]) }}" class="payfile-download me-3" title="View Invoice">
                                 <img src="{{ asset('assets/img/icon/invoice.svg') }}" alt="" />
@@ -57,6 +64,11 @@
                                 <img src="{{ asset('assets/img/icon/download.svg') }}" alt="" />
                             </a>
                         </div>
+                        @else
+                        <div class="min-w-100">
+                            <p class="status-btn status-pending">{{ get_phrase('Pending') }}</p>
+                        </div>
+                        @endif
                     </td>
                 </tr>
                 @endforeach

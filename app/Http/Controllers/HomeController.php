@@ -23,8 +23,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        // $ip = $request->ip(); // remove the command when it's have in a domain
-        $ip = '27.147.191.220';
+        $ip = $request->ip(); // remove the command when it's have in a domain
+        // $ip = '27.147.191.220';
         $location = Location::get($ip);
 
         if(!empty($location->countryName)){

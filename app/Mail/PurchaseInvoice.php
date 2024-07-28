@@ -13,17 +13,18 @@ class PurchaseInvoice extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $purchase_details, $user;
+    public $purchase_details, $user, $payment;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($purchase_details, $user)
+    public function __construct($purchase_details, $user, $payment)
     {
         $this->purchase_details = $purchase_details;
         $this->user = $user;
+        $this->payment = $payment;
     }
 
     /**

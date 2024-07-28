@@ -166,6 +166,7 @@ $(document).ready(function () {
     // Variable
     var $tagifyTags = $('.enTags'),
     $chosenSelect = $('.chzn-select'),
+    $slideup2 = $('.swiper-vertical2'),
     $slideup = $('.swiper-vertical'),
     $slidedown = $('.swiper-vertical-reverse');
     // Tagify for tag
@@ -176,6 +177,24 @@ $(document).ready(function () {
     if ($chosenSelect.length > 0){
         $(".chzn-select").chosen();
     }
+    
+   // Slide Up 2
+   if ($slideup2.length > 0){
+        var swiperup2 = new Swiper(".swiper-vertical2", {
+            direction: "vertical",
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            freeMode: true,
+            speed:5500,
+            autoplay: {
+            delay: 0.5,
+            disableOnInteraction: false,
+            },
+            loop: true,
+            centeredSlides: true,
+        });
+    }
+
     // Slide Up
     if ($slideup.length > 0){
         var swiperup1 = new Swiper(".swiper-vertical", {
@@ -183,7 +202,7 @@ $(document).ready(function () {
             slidesPerView: 'auto',
             spaceBetween: 30,
             freeMode: true,
-            speed:3000,
+            speed:5500,
             autoplay: {
               delay: 0.5,
               disableOnInteraction: false,
@@ -200,7 +219,7 @@ $(document).ready(function () {
             slidesPerView: 'auto',
             spaceBetween: 30,
             freeMode: true,
-            speed:3000,
+            speed:5500,
             autoplay: {
               delay: 0.5,
               disableOnInteraction: false,
@@ -212,7 +231,6 @@ $(document).ready(function () {
         });
     }
 
-   
 
 
 
