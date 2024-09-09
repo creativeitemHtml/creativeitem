@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CommonController;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Models\{ElementProduct, ElementCategory, ServicePackage, Product, Service, SaasCompany};
+use App\Models\{User, ElementProduct, ElementCategory, ServicePackage, Product, Service, SaasCompany};
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyEmailWithPassword;
+use DB;
 
 class ApiController extends Controller
 {
@@ -83,13 +89,130 @@ class ApiController extends Controller
 
     public function saas_company_check($slug = "")
     {
-        $company_details = SaasComapny::where('company_slug', $slug)->first();
+        $company_details = SaasCompany::where('company_slug', $slug)->first();
+
+        $data['id'] = $company_details->id;
+        $data['user_id'] = $company_details->user_id;
+        $data['saas_id'] = $company_details->saas_id;
+        $data['company_name'] = $company_details->company_name;
+        $data['company_slug'] = $company_details->company_slug;
+        $data['config'] = $company_details->config;
+        $data['created_at'] = $company_details->created_at;
+        $data['updated_at'] = $company_details->updated_at;
 
         if (empty($company_details)) {
-            return response()->json(['status' => 'failed', 'message' => 'No data found'], 404);
+            return response()->json(['status' => 'failed', 'message' => 'Company not found'], 404);
         }
 
-        return new JsonResponse(['status' => 'success', 'data' => $company_details], 200);
+        return new JsonResponse(['status' => 'success', 'data' => $data], 200);
+    }
+
+    public function company_lms_register(Request $request)
+    {
+        // Check if required fields are present
+        if (!empty($request->company_name) && !empty($request->email) && !empty($request->password)) {
+
+            // Define a stricter regex pattern for email validation
+            $emailRegex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+
+            // Use the regex pattern in the validator
+            $validator = Validator::make($request->all(), [
+                'email' => ['required', 'regex:' . $emailRegex],
+            ]);
+
+            if ($validator->fails()) {
+                // Return validation errors in JSON format
+                return response()->json([
+                    'status' => '500',
+                    'message' => 'Check your email address',
+                ], 500);
+            }
+
+            // Check if the company name already exists
+            $company = $request->company_name;
+            $company_check = SaasCompany::where('company_name', $company)->first();
+
+            if (!empty($company_check)) {
+                // Return company name already in use message
+                return response()->json([
+                    'status' => '500',
+                    'message' => 'This company name is already in use. Try a different name',
+                ], 500);
+            }
+
+            // Check if the email already exists
+            $check_email = User::where('email', $request->email)->first();
+
+            if (!empty($check_email)) {
+                // Return email already exists message
+                return response()->json([
+                    'status' => '500',
+                    'message' => 'This email already exists. Please provide a new email address',
+                ], 500);
+            } 
+
+            // Create the user
+            $name = strstr($request->email, '@', true);
+            $password = $request->password;
+
+            $user = User::create([
+                'name' => $name,
+                'email' => $request->email,
+                'role_id' => '6',
+                'password' => Hash::make($password)
+            ]);
+
+            // Generate and insert password reset token
+            $pin = rand(10000, 99999);
+            DB::table('password_resets')->insert([
+                'email' => $request->email,
+                'token' => $pin
+            ]);
+
+            // Send email verification with the generated password
+            Mail::to($request->email)->send(new VerifyEmailWithPassword($pin, $user, $password));
+
+            // Now create the company after the user has been created
+            $company_data = [
+                'admin_name' => $user->name,
+                'admin_email' => $user->email,
+                'admin_password' => $request->password,
+                'company_name' => $company,
+                'user_id' => $user->id,
+            ];
+
+            // Convert company data to JSON
+            $company_data_json = json_encode($company_data);
+
+             // Instantiate the LmsController to access create_db method
+            $lmsController = new LmsController();
+
+            // Call the create_db method
+            $data = $lmsController->create_db($company_data_json);
+            $data1 = json_decode($data, true);
+
+            // Check the response from create_db API
+            if (is_array($data1) && $data1['status'] == 200) {
+                // Return success message
+                return response()->json([
+                    'status' => '200',
+                    'message' => 'Company and user created successfully',
+                ], 200);
+            } else {
+                // Return failure message if the company creation failed
+                return response()->json([
+                    'status' => '500',
+                    'message' => 'Failed to create company',
+                ], 500);
+            }
+
+        } else {
+            // Return missing fields message
+            return response()->json([
+                'status' => '500',
+                'message' => 'Required fields are missing',
+            ], 500);
+        }
     }
 
     public function list() 

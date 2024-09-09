@@ -24,5 +24,6 @@ Route::get('/category_wise_elements/{slug}', [ApiController::class, 'category_wi
 Route::get('/product_wise_packages/{slug}', [ApiController::class, 'product_wise_packages']);
 
 Route::get('/saas_company_check/{slug}', [ApiController::class, 'saas_company_check']);
+Route::post('/company_lms_register', [ApiController::class, 'company_lms_register']);
 
 Route::get('/elements/laravel-themes', [ApiController::class, 'list']);

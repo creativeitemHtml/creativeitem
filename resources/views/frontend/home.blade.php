@@ -21,6 +21,9 @@
                 </div>
             </div>
             <div class="col-md-6">
+                <img src="{{ asset('assets/img/home-2/hero-section_illustration.png') }}" alt="banner">
+            </div>
+            <!-- <div class="col-md-6">
                 <div class="d-flex flex-column align-items-center justify-content-center">
                     <div class="ci-home-banner-wrap1">
                         <div class="ci-home-banner1 wow bounceInRight" data-wow-duration="2s">
@@ -37,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
