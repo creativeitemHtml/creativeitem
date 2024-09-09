@@ -2,42 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\ProjectReport;
+use App\Mail\VerifyEmailWithPassword;
+use App\Models\Article;
+use App\Models\Blog;
+use App\Models\BlogCategory;
+use App\Models\Documentation;
+use App\Models\ElementCategory;
+use App\Models\ElementProduct;
+use App\Models\Product;
+use App\Models\Project;
+use App\Models\Service;
+use App\Models\ServicePackage;
+use App\Models\Setting;
+use App\Models\Subscription;
+use App\Models\Topic;
+use App\Models\User;use DB;
+use File;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Inertia\Inertia;
-use App\Models\{Product,Topic, Article, Documentation, Blog, BlogCategory, User, Project, Setting, ElementCategory, ElementProduct, Subscription, ServicePackage, Service};
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\VerifyEmailWithPassword;
-use App\Mail\ProjectReport;
-use DB;
-use File;
 use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 use Stevebauman\Location\Facades\Location;
-
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
-
-        $ip = $request->ip(); // remove the command when it's have in a domain
+        // $ip = $request->ip(); // remove the command when it's have in a domain
         // $ip = '27.147.191.220';
-        $location = Location::get($ip);
+        // $location = Location::get($ip);
 
-        if(!empty($location->countryName)){
-            Session::put('location', $location->countryName);
-        }
-        
-        
-        $element_categories = ElementCategory::where('parent_id', NULL)->where('status', 1)->orderBy('order', 'asc')->get();
-        
-        $page_data['seo'] = seo();
+        // if (! empty($location->countryName)) {
+        //     Session::put('location', $location->countryName);
+        // }
 
-        $page_data['element_categories'] = $element_categories;
-        $page_data['page_title'] = 'Home';
+        $page_data['seo']                = seo();
+        $page_data['page_title']         = 'Home';
+        $page_data['element_categories'] = ElementCategory::where('parent_id', null)->where('status', 1)->orderBy('order', 'asc')->get();
 
         return view('frontend.home', $page_data);
     }
@@ -47,7 +53,7 @@ class HomeController extends Controller
         $products = Product::where('visibility', 1)->where('slug', '!=', 'elements')->orderBy('order', 'asc')->get();
 
         $page_data['products'] = $products;
-        $page_data['seo'] = seo();
+        $page_data['seo']      = seo();
         return view('frontend.web_applications', $page_data);
 
     }
@@ -57,27 +63,24 @@ class HomeController extends Controller
         return view('frontend.product_academy');
     }
 
-    public function blog(Request $request, $type = "", $keyword ="")
+    public function blog(Request $request, $type = "", $keyword = "")
     {
         // $filter = $request->all();
-        $page_data['searched_word'] = '';
+        $page_data['searched_word']          = '';
         $page_data['selected_blog_category'] = '';
         $page_data['selected_category_slug'] = '';
-        $page_data['blog_categories'] = BlogCategory::all();
-        
+        $page_data['blog_categories']        = BlogCategory::all();
+
         $query = Blog::query();
 
-        if(!empty($type)) {
-            if($type == 'category')
-            {
+        if (! empty($type)) {
+            if ($type == 'category') {
                 $selected_blog_category = BlogCategory::where('slug', $keyword)->first();
                 $query->where('blog_category_id', $selected_blog_category->id);
 
                 $page_data['selected_category_slug'] = $keyword;
                 $page_data['selected_blog_category'] = $selected_blog_category;
-            } 
-            else if($type == 'tag') 
-            {
+            } else if ($type == 'tag') {
                 $query->where('tags', 'LIKE', "%{$keyword}%");
                 $page_data['searched_word'] = $keyword;
             }
@@ -85,9 +88,7 @@ class HomeController extends Controller
             $page_data['related_blogs'] = $query->where('visibility', 1)->orderBy('id', 'asc')->get();
 
             return view('frontend.blog_filter', $page_data);
-        } 
-        else if(!empty($request->all()))
-        {
+        } else if (! empty($request->all())) {
             $query->where('title', 'LIKE', "%{$request->search}%")
                 ->orWhere('tags', 'LIKE', "%{$request->search}%")
                 ->orWhere('excerpt', 'LIKE', "%{$request->search}%");
@@ -98,50 +99,50 @@ class HomeController extends Controller
 
             return view('frontend.blog_filter', $page_data);
         }
-        
-        $page_data['latest_blog'] =  Blog::where('visibility', 1)->latest()->first();
-        $page_data['latest_three'] =  Blog::where('visibility', 1)->orderBy('id', 'desc')->skip(1)->take(3)->get();
-        $page_data['featured_blogs'] =  Blog::where('visibility', 1)->where('is_featured', 1)->orderBy('id', 'desc')->get();
-        $page_data['seo'] = seo();
+
+        $page_data['latest_blog']    = Blog::where('visibility', 1)->latest()->first();
+        $page_data['latest_three']   = Blog::where('visibility', 1)->orderBy('id', 'desc')->skip(1)->take(3)->get();
+        $page_data['featured_blogs'] = Blog::where('visibility', 1)->where('is_featured', 1)->orderBy('id', 'desc')->get();
+        $page_data['seo']            = seo();
 
         return view('frontend.blog', $page_data);
     }
 
-    public function blog_details($slug="")
+    public function blog_details($slug = "")
     {
         $blog_details = Blog::where('slug', $slug)->first();
-        $htmlContent = $blog_details->details;
-    
+        $htmlContent  = $blog_details->details;
+
         // Parse HTML content to extract h2 tags
         $dom = new \DOMDocument();
         libxml_use_internal_errors(true);
         $dom->loadHTML($htmlContent);
         libxml_clear_errors();
 
-        $h2Tags = [];
+        $h2Tags   = [];
         $elements = $dom->getElementsByTagName('h2');
         foreach ($elements as $element) {
             $h2Tags[] = $element->nodeValue;
         }
 
-        $page_data['keywords'] = explode(', ', $blog_details->tags);
-        $page_data['related_blogs'] = Blog::where('blog_category_id', $blog_details->blog_category_id)->get();
+        $page_data['keywords']               = explode(', ', $blog_details->tags);
+        $page_data['related_blogs']          = Blog::where('blog_category_id', $blog_details->blog_category_id)->get();
         $page_data['selected_blog_category'] = BlogCategory::find($blog_details->blog_category_id);
         // $page_type = 'blog_detail';
 
-        $page_data['blog_details'] =  $blog_details;
-        $page_data['h2Tags'] =  $h2Tags;
-        $page_data['seo'] = seo($blog_details, 'blog');
+        $page_data['blog_details'] = $blog_details;
+        $page_data['h2Tags']       = $h2Tags;
+        $page_data['seo']          = seo($blog_details, 'blog');
 
         return view('frontend.blog_details', $page_data);
     }
 
     public function docs()
     {
-        $page_data = array();
+        $page_data               = array();
         $page_data['page_title'] = 'Creativeitem - Documentation';
-        $page_data['products'] = Product::where('visibility', 1)->orderBy('order', 'asc')->get();
-        $page_data['seo'] = seo();
+        $page_data['products']   = Product::where('visibility', 1)->orderBy('order', 'asc')->get();
+        $page_data['seo']        = seo();
         return view('frontend.doc_products', $page_data);
     }
 
@@ -156,36 +157,36 @@ class HomeController extends Controller
             if (count($selected_article) == 0) {
                 return redirect()->route('docs');
             }
-            
-            return redirect()->route('documentation_details', ['product_slug'=> $product_slug, 'article_slug' => $selected_article[0]->slug]);
+
+            return redirect()->route('documentation_details', ['product_slug' => $product_slug, 'article_slug' => $selected_article[0]->slug]);
         }
 
         $selected_article = Article::where('slug', $article_slug)->where('product_id', $page_data['product_details']->id)->first();
 
-        $page_data['article_details'] = $selected_article;
+        $page_data['article_details']       = $selected_article;
         $page_data['documentation_details'] = Documentation::where('article_id', $selected_article->id)->first();
 
         $page_data['product_slug'] = $product_slug;
         $page_data['article_slug'] = $article_slug;
-        $page_data['topics'] = Topic::where('product_id', $page_data['product_details']->id)->where('visibility', 1)->orderBy('order', 'asc')->get();
-        $page_data['page_title']         =   'Documentation - '.$page_data['product_details']->name;
-        $page_data['meta_keyword']       =   'docs, documentation,';
+        $page_data['topics']       = Topic::where('product_id', $page_data['product_details']->id)->where('visibility', 1)->orderBy('order', 'asc')->get();
+        $page_data['page_title']   = 'Documentation - ' . $page_data['product_details']->name;
+        $page_data['meta_keyword'] = 'docs, documentation,';
         return view('frontend.documentation_details', $page_data);
     }
 
     public function services()
     {
-        $page_data = array();
-        $uniqueProductIds = ServicePackage::distinct()->pluck('product_id');
+        $page_data             = array();
+        $uniqueProductIds      = ServicePackage::distinct()->pluck('product_id');
         $page_data['products'] = Product::whereIn('id', $uniqueProductIds)->get();
-        $page_data['seo'] = seo();
+        $page_data['seo']      = seo();
         return view('frontend.service', $page_data);
     }
 
     public function checkout_custom_service(Request $request)
     {
         $page_data = array();
-        
+
         // Retrieve the 'services' parameter from the request, which is a comma-separated string of IDs
         $serviceIds = $request->input('services');
 
@@ -198,35 +199,35 @@ class HomeController extends Controller
         return view('frontend.service_custom_checkout_modal', $page_data);
     }
 
-    public function purchase_custom_service(Request $request) 
+    public function purchase_custom_service(Request $request)
     {
 
         // print_r($request->selectedServices);
         // die();
 
-        if(auth()->user()) {
+        if (auth()->user()) {
             return redirect()->route('customer.service_custom_purchase', ['selected_services' => $request->selected_services]);
         } else {
             $validated = $request->validate([
                 'email' => 'required|email',
             ]);
 
-            if(!empty($request->email)) {
+            if (! empty($request->email)) {
                 $name = strstr($request->email, '@', true);
 
                 $check_email = User::where('email', $request->email)->first();
 
-                if(!empty($check_email)){
+                if (! empty($check_email)) {
                     // $user = $check_email;
                     return redirect()->route('login')->with('info', 'This email already exists. Please login or provide new email address');
                 } else {
                     $password = random(8);
 
                     $user = User::create([
-                        'name' => $name,
-                        'email' => $request->email,
-                        'role_id' => '6',
-                        'password' => Hash::make($password)
+                        'name'     => $name,
+                        'email'    => $request->email,
+                        'role_id'  => '6',
+                        'password' => Hash::make($password),
                     ]);
 
                     $pin = rand(10000, 99999);
@@ -234,8 +235,8 @@ class HomeController extends Controller
                     DB::table('password_resets')
                         ->insert(
                             [
-                                'email' => $request->email, 
-                                'token' => $pin
+                                'email' => $request->email,
+                                'token' => $pin,
                             ]
                         );
 
@@ -256,21 +257,21 @@ class HomeController extends Controller
 
     public function hire_us()
     {
-        $page_data = array();
+        $page_data        = array();
         $page_data['seo'] = seo();
         return view('frontend.hire_us', $page_data);
     }
 
-    public function service_buy_now($service_id="")
+    public function service_buy_now($service_id = "")
     {
-        $page_data = array();
+        $page_data            = array();
         $page_data['feature'] = ServicePackage::find($service_id);
         return view('frontend.service_checkout_modal', $page_data);
     }
 
-    public function service_help($service_id="")
+    public function service_help($service_id = "")
     {
-        $page_data = array();
+        $page_data            = array();
         $page_data['feature'] = ServicePackage::find($service_id);
 
         $services = json_decode($page_data['feature']->services, true);
@@ -301,48 +302,48 @@ class HomeController extends Controller
         return view('frontend.service_package_help_modal', $page_data);
     }
 
-    public function service_custom_help($product_id="")
+    public function service_custom_help($product_id = "")
     {
         $page_data = array();
-        $services = Service::where('product_id', $product_id)->get();
+        $services  = Service::where('product_id', $product_id)->get();
 
         // Separate services into even and odd based on their IDs
-        $page_data['evenServices'] = $services->filter(function($service) {
+        $page_data['evenServices'] = $services->filter(function ($service) {
             return $service->id % 2 == 0;
         });
 
-        $page_data['oddServices'] = $services->filter(function($service) {
+        $page_data['oddServices'] = $services->filter(function ($service) {
             return $service->id % 2 != 0;
         });
 
         return view('frontend.service_custom_help_modal', $page_data);
     }
 
-    public function purchase_service_package(Request $request, $service_id="")
+    public function purchase_service_package(Request $request, $service_id = "")
     {
-        if(auth()->user()) {
+        if (auth()->user()) {
             return redirect()->route('customer.service_purchase', ['service_id' => $service_id]);
         } else {
             $validated = $request->validate([
                 'email' => 'required|email',
             ]);
 
-            if(!empty($request->email)) {
+            if (! empty($request->email)) {
                 $name = strstr($request->email, '@', true);
 
                 $check_email = User::where('email', $request->email)->first();
 
-                if(!empty($check_email)){
+                if (! empty($check_email)) {
                     // $user = $check_email;
                     return redirect()->route('login')->with('info', 'This email already exists. Please login or provide new email address');
                 } else {
                     $password = random(8);
 
                     $user = User::create([
-                        'name' => $name,
-                        'email' => $request->email,
-                        'role_id' => '6',
-                        'password' => Hash::make($password)
+                        'name'     => $name,
+                        'email'    => $request->email,
+                        'role_id'  => '6',
+                        'password' => Hash::make($password),
                     ]);
 
                     $pin = rand(10000, 99999);
@@ -350,8 +351,8 @@ class HomeController extends Controller
                     DB::table('password_resets')
                         ->insert(
                             [
-                                'email' => $request->email, 
-                                'token' => $pin
+                                'email' => $request->email,
+                                'token' => $pin,
                             ]
                         );
 
@@ -395,54 +396,53 @@ class HomeController extends Controller
         return view('frontend.support_policy', $page_data);
     }
 
-    public function project_submit(Request $request) 
+    public function project_submit(Request $request)
     {
         // $isDuplicate = User::where('email', $request->email)->exists();
         // print_r($isDuplicate);
         // die();
 
-        $page_data = array();
+        $page_data        = array();
         $attachments_name = array();
-        $attachements = array();
+        $attachements     = array();
 
         $name = strstr($request->email, '@', true);
 
         $check_email = User::where('email', $request->email)->first();
 
-        if(Auth::check()){
+        if (Auth::check()) {
 
             $data = $request->all();
 
-            $page_data['title'] = $data['title'];
-            $page_data['description'] = $data['description'];
-            $page_data['budget_estimation'] = $data['budget_estimation'];
-            $page_data['timeline'] = $data['timeline'];
-            $page_data['user_id'] = auth()->user()->id;
-            $page_data['status'] = 'pending';
+            $page_data['title']               = $data['title'];
+            $page_data['description']         = $data['description'];
+            $page_data['budget_estimation']   = $data['budget_estimation'];
+            $page_data['timeline']            = $data['timeline'];
+            $page_data['user_id']             = auth()->user()->id;
+            $page_data['status']              = 'pending';
             $page_data['completion_progress'] = 0;
-            $page_data['paid_amount'] = 0;
+            $page_data['paid_amount']         = 0;
 
             // print_r($data['attachment']);
             // die();
 
-            if(!empty($data['attachment']))
-            {
+            if (! empty($data['attachment'])) {
                 array_push($attachments_name, $data['attachment']->getClientOriginalName());
                 $page_data['attachment_name'] = json_encode($attachments_name);
 
-                if (!File::exists(public_path('uploads/projects'))) {
+                if (! File::exists(public_path('uploads/projects'))) {
                     File::makeDirectory(public_path('uploads/projects'));
                 }
 
-                $attachment = time().'-'.random(2).'.'.$data['attachment']->extension();
-    
+                $attachment = time() . '-' . random(2) . '.' . $data['attachment']->extension();
+
                 $data['attachment']->move(public_path('uploads/projects/'), $attachment);
-    
+
                 array_push($attachements, $attachment);
                 $page_data['attachment'] = json_encode($attachements);
             } else {
                 $page_data['attachment_name'] = json_encode(array());
-                $page_data['attachment'] = json_encode(array());
+                $page_data['attachment']      = json_encode(array());
             }
 
             $project_details = Project::create($page_data);
@@ -456,42 +456,40 @@ class HomeController extends Controller
             Mail::to('project@creativeitem.com')->send(new ProjectReport($project_details, $user, $route));
 
             return redirect()->route('customer.projects')->with('message', 'Project created successfully');
-        } else if(!empty($check_email)){
+        } else if (! empty($check_email)) {
             // $user = $check_email;
             return redirect()->back()->with('info', 'This email already exists. Please login or provide new email address');
         } else {
             $password = random(8);
 
             $user = User::create([
-                'name' => $name,
-                'email' => $request->email,
-                'role_id' => '6',
-                'password' => Hash::make($password)
+                'name'     => $name,
+                'email'    => $request->email,
+                'role_id'  => '6',
+                'password' => Hash::make($password),
             ]);
 
             Subscription::create([
-                'user_id' => $user->id,
-                'package_id' => 5,
-                'paid_amount' => 0,
-                'payment_method' => 'None',
+                'user_id'          => $user->id,
+                'package_id'       => 5,
+                'paid_amount'      => 0,
+                'payment_method'   => 'None',
                 'transaction_keys' => '',
-                'date_added' => strtotime(date('d-M-Y H:i:s')),
+                'date_added'       => strtotime(date('d-M-Y H:i:s')),
             ]);
 
             $pin = rand(10000, 99999);
 
             $check_entry = DB::table('password_resets')->where('email', $request->email)->first();
 
-            if(empty($check_entry))
-            {
+            if (empty($check_entry)) {
                 DB::table('password_resets')->insert([
-                    'email' => $request->email, 
-                    'token' => $pin
+                    'email' => $request->email,
+                    'token' => $pin,
                 ]);
-            } 
-            else {
+            } else {
                 DB::table('password_resets')->where('email', $request->email)->update([
-                    'token' => $pin
+                    'token' => $pin,
                 ]);
             }
 
@@ -501,33 +499,32 @@ class HomeController extends Controller
 
             $data = $request->all();
 
-            $page_data['title'] = $data['title'];
-            $page_data['description'] = $data['description'];
-            $page_data['budget_estimation'] = $data['budget_estimation'];
-            $page_data['timeline'] = $data['timeline'];
-            $page_data['user_id'] = auth()->user()->id;
-            $page_data['status'] = 'pending';
+            $page_data['title']               = $data['title'];
+            $page_data['description']         = $data['description'];
+            $page_data['budget_estimation']   = $data['budget_estimation'];
+            $page_data['timeline']            = $data['timeline'];
+            $page_data['user_id']             = auth()->user()->id;
+            $page_data['status']              = 'pending';
             $page_data['completion_progress'] = 0;
-            $page_data['paid_amount'] = 0;
+            $page_data['paid_amount']         = 0;
 
-            if(!empty($data['attachment']))
-            {
+            if (! empty($data['attachment'])) {
                 array_push($attachments_name, $data['attachment']->getClientOriginalName());
                 $page_data['attachment_name'] = json_encode($attachments_name);
 
-                if (!File::exists(public_path('uploads/projects'))) {
+                if (! File::exists(public_path('uploads/projects'))) {
                     File::makeDirectory(public_path('uploads/projects'));
                 }
 
-                $attachment = time().'-'.random(2).'.'.$data['attachment']->extension();
-    
+                $attachment = time() . '-' . random(2) . '.' . $data['attachment']->extension();
+
                 $data['attachment']->move(public_path('uploads/projects/'), $attachment);
-    
+
                 array_push($attachements, $attachment);
                 $page_data['attachment'] = json_encode($attachements);
             } else {
                 $page_data['attachment_name'] = json_encode(array());
-                $page_data['attachment'] = json_encode(array());
+                $page_data['attachment']      = json_encode(array());
             }
 
             $project_details = Project::create($page_data);
@@ -542,21 +539,23 @@ class HomeController extends Controller
         }
 
     }
-    function session_language(Request $request){
+    public function session_language(Request $request)
+    {
         $data = $request->language;
         Session::put('language', $data);
         return redirect()->back()->with('message', 'You have successfully transleted language.');
     }
 
-    function session_user_currency_store(Request $request){
+    public function session_user_currency_store(Request $request)
+    {
         $data = $request->session_currency;
         Session::put('session_currency', $data);
-        if(isset(auth()->user()->id)) {
+        if (isset(auth()->user()->id)) {
             $page_data['currency_code'] = strtoupper($data);
 
             User::where('id', auth()->user()->id)->update($page_data);
         }
         return redirect()->back()->with('message', 'You have successfully changed currency.');
     }
-    
+
 }
