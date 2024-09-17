@@ -3,7 +3,12 @@ use App\Models\Article;
 use App\Models\ElementProduct;
 use App\Models\User;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Stevebauman\Location\Facades\Location;
+
 //All common helper functions
 
 if (! function_exists('location_set')) {

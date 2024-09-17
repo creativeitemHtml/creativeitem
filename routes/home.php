@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 Route::controller(HomeController::class)->group(function () {
 
     Route::get('/', 'index')->name('home');
@@ -22,7 +22,7 @@ Route::controller(HomeController::class)->group(function () {
 
     Route::get('/blog/{slug}', 'blog_details')->name('blog_details');
     Route::any('/blog/{type?}/{keyword?}', 'blog')->name('blog');
-    
+
     Route::get('/docs', 'docs')->name('docs');
     Route::get('/docs/{product_slug}/{article_slug?}', 'documentation_details')->name('documentation_details');
 

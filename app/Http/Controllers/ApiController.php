@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\CommonController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Mail\VerifyEmailWithPassword;
+use App\Models\ElementCategory;
+use App\Models\ElementProduct;
+use App\Models\Product;
+use App\Models\SaasCompany;
+use App\Models\Service;
+use App\Models\ServicePackage;
+use App\Models\User;use DB;
 use Illuminate\Http\JsonResponse;
-use App\Models\{User, ElementProduct, ElementCategory, ServicePackage, Product, Service, SaasCompany};
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\VerifyEmailWithPassword;
-use DB;
+use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
@@ -21,17 +26,16 @@ class ApiController extends Controller
 
         $elements = ElementProduct::where('element_category_id', $element_category->id)->orderBy('id', 'desc')->take(16)->get();
 
-        foreach($elements as $key => $element)
-        {
-            $res[$key]['id'] = $element->id;
-            $res[$key]['product_id'] = $element->product_id;
+        foreach ($elements as $key => $element) {
+            $res[$key]['id']                  = $element->id;
+            $res[$key]['product_id']          = $element->product_id;
             $res[$key]['element_category_id'] = $element->element_category_id;
-            $res[$key]['title'] = $element->title;
-            $res[$key]['price_type'] = $element->price_type;
-            $res[$key]['price'] = $element->price;
-            $res[$key]['like'] = $element->like;
-            $res[$key]['thumbnail'] = element_server_url($element->product_id, $element->product_to_elementCategory->slug).$element->thumbnail;
-            
+            $res[$key]['title']               = $element->title;
+            $res[$key]['price_type']          = $element->price_type;
+            $res[$key]['price']               = $element->price;
+            $res[$key]['like']                = $element->like;
+            $res[$key]['thumbnail']           = element_server_url($element->product_id, $element->product_to_elementCategory->slug) . $element->thumbnail;
+
         }
 
         $elements = $res;
@@ -45,25 +49,23 @@ class ApiController extends Controller
 
     public function product_wise_packages($slug = "")
     {
-        $product = Product::where('slug', $slug)->first();
+        $product          = Product::where('slug', $slug)->first();
         $service_packages = ServicePackage::where('product_id', $product->id)->get();
 
-        foreach($service_packages as $key => $service)
-        {
-            $res[$key]['id'] = $service->id;
-            $res[$key]['name'] = $service->name;
-            $active_package['product_id'] = $service->product_id;
+        foreach ($service_packages as $key => $service) {
+            $res[$key]['id']                = $service->id;
+            $res[$key]['name']              = $service->name;
+            $active_package['product_id']   = $service->product_id;
             $active_package['product_slug'] = $service->servicePackage_to_product->slug;
-            $res[$key]['price'] = $service->price;
-            $res[$key]['discounted_price'] = $service->discounted_price != null ? $service->discounted_price : 0;
+            $res[$key]['price']             = $service->price;
+            $res[$key]['discounted_price']  = $service->discounted_price != null ? $service->discounted_price : 0;
 
-            $service_features = json_decode($service->services); 
+            $service_features              = json_decode($service->services);
             $res[$key]['service_features'] = $service_features;
 
-
-            $res[$key]['int_val'] = 'one time';
+            $res[$key]['int_val']              = 'one time';
             $res[$key]['interval_period_text'] = 'You will get the following';
-            
+
         }
 
         $service_packages = $res;
@@ -91,14 +93,14 @@ class ApiController extends Controller
     {
         $company_details = SaasCompany::where('company_slug', $slug)->first();
 
-        $data['id'] = $company_details->id;
-        $data['user_id'] = $company_details->user_id;
-        $data['saas_id'] = $company_details->saas_id;
+        $data['id']           = $company_details->id;
+        $data['user_id']      = $company_details->user_id;
+        $data['saas_id']      = $company_details->saas_id;
         $data['company_name'] = $company_details->company_name;
         $data['company_slug'] = $company_details->company_slug;
-        $data['config'] = $company_details->config;
-        $data['created_at'] = $company_details->created_at;
-        $data['updated_at'] = $company_details->updated_at;
+        $data['config']       = $company_details->config;
+        $data['created_at']   = $company_details->created_at;
+        $data['updated_at']   = $company_details->updated_at;
 
         if (empty($company_details)) {
             return response()->json(['status' => 'failed', 'message' => 'Company not found'], 404);
@@ -110,7 +112,7 @@ class ApiController extends Controller
     public function company_lms_register(Request $request)
     {
         // Check if required fields are present
-        if (!empty($request->company_name) && !empty($request->email) && !empty($request->password)) {
+        if (! empty($request->company_name) && ! empty($request->email) && ! empty($request->password)) {
 
             // Define a stricter regex pattern for email validation
             $emailRegex = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
@@ -123,19 +125,19 @@ class ApiController extends Controller
             if ($validator->fails()) {
                 // Return validation errors in JSON format
                 return response()->json([
-                    'status' => '500',
+                    'status'  => '500',
                     'message' => 'Check your email address',
                 ], 500);
             }
 
             // Check if the company name already exists
-            $company = $request->company_name;
+            $company       = $request->company_name;
             $company_check = SaasCompany::where('company_name', $company)->first();
 
-            if (!empty($company_check)) {
+            if (! empty($company_check)) {
                 // Return company name already in use message
                 return response()->json([
-                    'status' => '500',
+                    'status'  => '500',
                     'message' => 'This company name is already in use. Try a different name',
                 ], 500);
             }
@@ -143,30 +145,30 @@ class ApiController extends Controller
             // Check if the email already exists
             $check_email = User::where('email', $request->email)->first();
 
-            if (!empty($check_email)) {
+            if (! empty($check_email)) {
                 // Return email already exists message
                 return response()->json([
-                    'status' => '500',
+                    'status'  => '500',
                     'message' => 'This email already exists. Please provide a new email address',
                 ], 500);
-            } 
+            }
 
             // Create the user
-            $name = strstr($request->email, '@', true);
+            $name     = strstr($request->email, '@', true);
             $password = $request->password;
 
             $user = User::create([
-                'name' => $name,
-                'email' => $request->email,
-                'role_id' => '6',
-                'password' => Hash::make($password)
+                'name'     => $name,
+                'email'    => $request->email,
+                'role_id'  => '6',
+                'password' => Hash::make($password),
             ]);
 
             // Generate and insert password reset token
             $pin = rand(10000, 99999);
             DB::table('password_resets')->insert([
                 'email' => $request->email,
-                'token' => $pin
+                'token' => $pin,
             ]);
 
             // Send email verification with the generated password
@@ -174,34 +176,34 @@ class ApiController extends Controller
 
             // Now create the company after the user has been created
             $company_data = [
-                'admin_name' => $user->name,
-                'admin_email' => $user->email,
+                'admin_name'     => $user->name,
+                'admin_email'    => $user->email,
                 'admin_password' => $request->password,
-                'company_name' => $company,
-                'user_id' => $user->id,
+                'company_name'   => $company,
+                'user_id'        => $user->id,
             ];
 
             // Convert company data to JSON
             $company_data_json = json_encode($company_data);
 
-             // Instantiate the LmsController to access create_db method
+            // Instantiate the LmsController to access create_db method
             $lmsController = new LmsController();
 
             // Call the create_db method
-            $data = $lmsController->create_db($company_data_json);
+            $data  = $lmsController->create_db($company_data_json);
             $data1 = json_decode($data, true);
 
             // Check the response from create_db API
             if (is_array($data1) && $data1['status'] == 200) {
                 // Return success message
                 return response()->json([
-                    'status' => '200',
+                    'status'  => '200',
                     'message' => 'Company and user created successfully',
                 ], 200);
             } else {
                 // Return failure message if the company creation failed
                 return response()->json([
-                    'status' => '500',
+                    'status'  => '500',
                     'message' => 'Failed to create company',
                 ], 500);
             }
@@ -209,13 +211,13 @@ class ApiController extends Controller
         } else {
             // Return missing fields message
             return response()->json([
-                'status' => '500',
+                'status'  => '500',
                 'message' => 'Required fields are missing',
             ], 500);
         }
     }
 
-    public function list() 
+    public function list()
     {
         $element_htmls = ElementProduct::where('element_category_id', 9)->get();
 
@@ -223,23 +225,23 @@ class ApiController extends Controller
             // Build the JSON response structure
             $response = [
                 'creativeelement' => [
-                    'title' => 'Creative Elements',
+                    'title'       => 'Creative Elements',
                     'description' => 'No description No description No description No description No description No description No description No description No description',
-                    'products' => [],
+                    'products'    => [],
                 ],
             ];
 
             // Populate the 'products' array
             foreach ($element_htmls as $elementHtml) {
                 $response['creativeelement']['products'][$elementHtml->product_id] = [
-                    'framework' => 'laravel',
-                    'demo_url' => $elementHtml->previewUrl,
-                    'title' => $elementHtml->title,
-                    'description' => $elementHtml->summary,
-                    'thumbnail' => element_server_url($elementHtml->product_id, $elementHtml->product_to_elementCategory->slug).$elementHtml->thumbnail,
+                    'framework'     => 'laravel',
+                    'demo_url'      => $elementHtml->previewUrl,
+                    'title'         => $elementHtml->title,
+                    'description'   => $elementHtml->summary,
+                    'thumbnail'     => element_server_url($elementHtml->product_id, $elementHtml->product_to_elementCategory->slug) . $elementHtml->thumbnail,
                     'documentation' => 'https://creativeitem.com/docs/elements/what-is-creative-elements-videos',
-                    'youtube' => 'https://www.youtube.com/playlist?list=PLR1GrQCi5Zqvhh7wgtt-ShMAM1RROYJgE',
-                    'buy_now' => url('elements/product/'.$elementHtml->id),
+                    'youtube'       => 'https://www.youtube.com/playlist?list=PLR1GrQCi5Zqvhh7wgtt-ShMAM1RROYJgE',
+                    'buy_now'       => url('elements/product/' . $elementHtml->id),
                 ];
             }
 

@@ -10,23 +10,19 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Documentation;
 use App\Models\ElementCategory;
-use App\Models\ElementProduct;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\Service;
 use App\Models\ServicePackage;
-use App\Models\Setting;
 use App\Models\Subscription;
 use App\Models\Topic;
 use App\Models\User;use DB;
 use File;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use Inertia\Inertia;
 use Stevebauman\Location\Facades\Location;
 
 class HomeController extends Controller
@@ -34,7 +30,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         // $ip = $request->ip(); // remove the command when it's have in a domain
-        // $ip = '27.147.191.220';
+        // $ip       = '27.147.191.220';
         // $location = Location::get($ip);
 
         // if (! empty($location->countryName)) {

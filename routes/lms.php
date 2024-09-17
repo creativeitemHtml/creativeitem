@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 Route::name('lms.')->prefix('creative-lms')->controller(LmsController::class)->group(function () {
 
     Route::get('/', 'index')->name('home');
@@ -27,5 +27,4 @@ Route::name('lms.')->prefix('creative-lms')->controller(LmsController::class)->g
 
     Route::post('/company-email-verify', 'company_email_verify')->name('company_email_verify');
 
-    
 });

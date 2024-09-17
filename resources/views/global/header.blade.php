@@ -99,6 +99,24 @@
                                                             </p>
                                                         </div>
                                                     </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mega-menu-items">
+                                                    {{-- <a href="{{ route('elements') }}" class="mega-menu-item mega-menu-item-3">
+                                                        <div class="icon">
+                                                            <img src="{{ asset('assets/img/new-icons-images/mega-2.svg') }}" alt="" />
+                                                        </div>
+                                                        <div class="content">
+                                                            <h3 class="title">
+                                                                {{ get_phrase('Elements') }}
+                                                            </h3>
+                                                            <p class="info">
+                                                                {{ get_phrase('Stay updated with the latest pre-built elements') }}
+                                                            </p>
+                                                        </div>
+                                                    </a> --}}
+
                                                     <a href="{{ route('lms.home') }}" class="mega-menu-item mega-menu-item-2">
                                                         <div class="icon">
                                                             <img src="{{ asset('assets/img/new-icons-images/mega-4.svg') }}" alt="" />
@@ -112,27 +130,10 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="mega-menu-items">
-                                                    <a href="{{ route('elements') }}" class="mega-menu-item mega-menu-item-3">
-                                                        <div class="icon">
-                                                            <img src="{{ asset('assets/img/new-icons-images/mega-2.svg') }}" alt="" />
-                                                        </div>
-                                                        <div class="content">
-                                                            <h3 class="title">
-                                                                {{ get_phrase('Elements') }}
-                                                            </h3>
-                                                            <p class="info">
-                                                                {{ get_phrase('Stay updated with the latest pre-built elements') }}
-                                                            </p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
                                         </div>
                                     </ul>
                                 </li>
-                                <li><a href="{{ route('elements') }}" class="menu-parent-a {{ request()->is('elements*') ? 'active' : '' }}">{{ get_phrase('Elements') }}</a></li>
+                                {{-- <li><a href="{{ route('elements') }}" class="menu-parent-a {{ request()->is('elements*') ? 'active' : '' }}">{{ get_phrase('Elements') }}</a></li> --}}
                                 <li><a href="{{ route('services') }}" class="menu-parent-a {{ request()->is('services*') || request()->is('hire-us') ? 'active' : '' }}">{{ get_phrase('Service') }}</a></li>
                                 <li><a href="{{ route('blog') }}" class="menu-parent-a {{ request()->is('blog*') ? 'active' : '' }}">{{ get_phrase('Blog') }}</a></li>
                                 <li><a href="javascript:;" class="menu-parent-a" onclick="support()">{{ get_phrase('Support') }}</a></li>
@@ -174,7 +175,7 @@
                                                     <p class="mega-descrip">{{ get_phrase('8+ web applications with multiple available addons') }}</p>
                                                 </div>
                                             </a>
-                                            <a href="{{ route('elements') }}">
+                                            {{-- <a href="{{ route('elements') }}">
                                                 <div class="mobile-mega-single">
                                                     <div class="mobile-mega-icon">
                                                         <div class="mega-icon-inner">
@@ -184,10 +185,10 @@
                                                     <h4 class="mega-heading">{{ get_phrase('Elements') }}</h4>
                                                     <p class="mega-descrip">{{ get_phrase('Stay updated with the latest pre-built elements') }}</p>
                                                 </div>
-                                            </a>
+                                            </a> --}}
                                         </ul>
                                     </li>
-                                    <li><a href="{{ route('elements') }}">{{ get_phrase('Elements') }}</a></li>
+                                    {{-- <li><a href="{{ route('elements') }}">{{ get_phrase('Elements') }}</a></li> --}}
                                     <li><a href="{{ route('services') }}">{{ get_phrase('Service') }}</a></li>
                                     <li><a href="{{ route('blog') }}">{{ get_phrase('Blog') }}</a></li>
                                     <li><a href="{{ route('elements') }}">{{ get_phrase('Submit Ticket') }}</a></li>
