@@ -6,46 +6,54 @@ use App\Mail\VerifyEmailWithPassword;
 use App\Models\ElementCategory;
 use App\Models\PricingPackage;
 use App\Models\SaasCompany;
+use App\Models\SaasProduct;
 use App\Models\SaasSubscription;
 use App\Models\Setting;
-use App\Models\User;use DB;use GuzzleHttp\Client;use Illuminate\Auth\Events\Registered;
+use App\Models\User;
+use Carbon\Carbon;
+use DB;use GuzzleHttp\Client;use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use Laravel\Sanctum\PersonalAccessToken;
 use mysqli;
 use PDO;
+use Stripe;
 
 class LmsController extends Controller
 {
     public function index()
     {
-
-        $page_data['page_title'] = 'Creative LMS';
-
-        return view('frontend.creative_lms.home', $page_data);
+        return view('frontend.creative_lms.home');
     }
 
     public function features()
     {
-        $element_categories = ElementCategory::where('parent_id', null)->orderBy('order', 'asc')->get();
+        // $element_categories = ElementCategory::where('parent_id', null)->orderBy('order', 'asc')->get();
 
-        return Inertia::render('Frontend/Lms/Features', [
-            'element_categories' => $element_categories,
-        ]);
+        // return Inertia::render('Frontend/Lms/Features', [
+        //     'element_categories' => $element_categories,
+        // ]);
+
+        return view('frontend.creative_lms.features');
     }
 
     public function pricing()
     {
-        $element_categories = ElementCategory::where('parent_id', null)->orderBy('order', 'asc')->get();
+        // old code
+        // $element_categories = ElementCategory::where('parent_id', null)->orderBy('order', 'asc')->get();
+        // return Inertia::render('Frontend/Lms/Pricing', [
+        //     'element_categories' => $element_categories,
+        // ]);
 
-        return Inertia::render('Frontend/Lms/Pricing', [
-            'element_categories' => $element_categories,
-        ]);
+        $lms_id                = SaasProduct::where('slug', 'creative-lms')->value('id');
+        $page_data['packages'] = PricingPackage::where('product_id', $lms_id)->get();
+        return view('frontend.creative_lms.pricing', $page_data);
     }
 
     public function solution_course_selling()
@@ -612,5 +620,166 @@ class LmsController extends Controller
                 ],
             ]);
         }
+    }
+
+    public function subscription(Request $request)
+    {
+        // package info
+        $package = PricingPackage::find($request->package_id);
+
+        $subscription = SaasSubscription::where('user_id', auth()->id())
+            ->where('expiry', '>', now())
+            ->where('status', 1)
+            ->latest('id')
+            ->first();
+
+        // check user plan
+        if ($subscription) {
+            if ($subscription->package->priority == $package->priority) {
+                return redirect()->back()->with('error', 'You are on this plan.');
+            } elseif ($subscription->package->priority > $package->priority) {
+                return redirect()->back()->with('error', 'You have a higher plan.');
+            }
+        }
+
+        // retrieve system currency and stripe settings
+        $currency        = get_settings('system_currency');
+        $stripe_settings = json_decode(get_settings('stripe'));
+
+        // Set Stripe keys based on mode
+        $stripe_key    = $stripe_settings->mode === 'test' ? $stripe_settings->test_key : $stripe_settings->public_live_key;
+        $stripe_secret = $stripe_settings->mode === 'test' ? $stripe_settings->test_secret_key : $stripe_settings->secret_live_key;
+
+        $description = "Subscription for GrowUpLMS.";
+        if ($subscription) {
+            $issue_date    = strtotime($subscription->created_at);
+            $time_diff     = time() - $issue_date;
+            $expiry        = strtotime($subscription->expiry);
+            $period        = $expiry - $issue_date;
+            $deduct_amount = ($subscription->package->price / $period) * $time_diff;
+            $amount_return = ($subscription->package->discount ?? $subscription->package->price) - $deduct_amount;
+            $description   = "Upgrading GrowUpLMS subscription plan.";
+        }
+
+        // prepare subscription data
+        $expiry                          = strtotime("+ {$package->interval_period} {$package->interval}");
+        $purchase_data['has_plan']       = $subscription ? $subscription->id : null;
+        $purchase_data['discount']       = isset($amount_return) ? $amount_return : null;
+        $purchase_data['user_id']        = auth()->user()->id;
+        $purchase_data['package_id']     = $package->id;
+        $purchase_data['price']          = ($package->discount ?? $package->price - $purchase_data['discount']) * 100;
+        $purchase_data['expiry']         = isset($time_diff) ? $expiry - $time_diff : $expiry;
+        $purchase_data['payment_method'] = 'stripe';
+        $purchase_data['success_url']    = 'lms.subscription.success';
+        $purchase_data['cancel_url']     = 'lms.pricing';
+
+        // payable amount
+        $payable_amount = round($purchase_data['price']);
+
+        $purchase_data = implode(' ', array_map(function ($key, $value) {
+            return "$key:$value";
+        }, array_keys($purchase_data), $purchase_data));
+
+        try {
+
+            Stripe\Stripe::setApiKey($stripe_secret);
+            $session = \Stripe\Checkout\Session::create([
+                'line_items'  => [[
+                    'price_data' => [
+                        'currency'     => $currency,
+                        'product_data' => [
+                            'name'        => $package->title,
+                            'description' => $description,
+                        ],
+                        'unit_amount'  => $payable_amount,
+                    ],
+                    'quantity'   => 1,
+                ]],
+                'mode'        => 'payment',
+                'success_url' => route('lms.subscription.success', ['purchase_data' => $purchase_data, 'response' => 'check $service_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url'  => route('lms.pricing', ['purchase_data' => $purchase_data, 'response' => 'check $service_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
+            ]);
+
+            return redirect($session->url);
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function subscription_success(Request $request, $purchase, $response)
+    {
+        $purchase = $this->string_to_array($purchase);
+
+        if ($purchase['payment_method'] == 'stripe') {
+            // retrieve system currency and stripe settings
+            $currency        = get_settings('system_currency');
+            $stripe_settings = json_decode(get_settings('stripe'));
+
+            // set Stripe keys based on mode
+            $stripe_key    = $stripe_settings->mode === 'test' ? $stripe_settings->test_key : $stripe_settings->public_live_key;
+            $stripe_secret = $stripe_settings->mode === 'test' ? $stripe_settings->test_secret_key : $stripe_settings->secret_live_key;
+
+            // stripe response
+            $stripe_api_response_session_id = $request->all();
+            $stripe                         = new \Stripe\StripeClient($stripe_secret);
+            $session_response               = $stripe->checkout->sessions->retrieve($stripe_api_response_session_id['session_id'], []);
+
+            // retrieve session data
+            $stripe_payment_intent = $session_response['payment_intent'];
+            $stripe_session_id     = $stripe_api_response_session_id['session_id'];
+
+            $stripe_transaction_keys           = array();
+            $stripe_response['payment_intent'] = $stripe_payment_intent;
+            $stripe_response['session_id']     = $stripe_session_id;
+            $stripe_transaction_keys           = $stripe_response;
+            $stripe_payment_response           = json_encode($stripe_transaction_keys);
+
+            // prepare subscription data
+            $subscription['user_id']          = $purchase['user_id'];
+            $subscription['package_id']       = $purchase['package_id'];
+            $subscription['price']            = number_format($purchase['price'] / 100, 2);
+            $subscription['payment_method']   = 'stripe';
+            $subscription['transaction_keys'] = $stripe_payment_response;
+            $subscription['expiry']           = date('Y-m-d H:i:s', $purchase['expiry']);
+            $subscription['status']           = 1;
+
+            $purchase['has_plan'] ? $subscription['upgrade_from_package_id'] = $purchase['has_plan'] : null;
+
+            // check if use has any plan
+            if ($purchase['has_plan']) {
+                SaasSubscription::where('id', $purchase['has_plan'])->update(['status' => 0]);
+            }
+            $msg = $purchase['has_plan'] ? 'Your plan has been upgraded!' : 'Subscription completed successfully!';
+            SaasSubscription::insert($subscription);
+
+            // Mail::to(auth()->user()->email)->send(new ServiceInvoice($payment_details, $user));
+            // Mail::to('project@creativeitem.com')->send(new ServiceInvoice($payment_details, $user));
+
+            // return redirect('customer/project_details/' . $payment_details->project_id)->with('success', 'Service Payment successful');
+            return redirect()->route('lms.home')->with('success', $msg);
+        }
+    }
+
+    public function service_purchase_fail_payment(Request $request, $purchase, $response)
+    {
+        $purchase = $this->string_to_array($purchase);
+
+        return redirect()->route('services')->with('warning', 'Service Purchase failed.');
+    }
+
+    public function string_to_array($user_data)
+    {
+        $user_data         = explode(' ', $user_data);
+        $recover_user_data = array();
+        foreach ($user_data as $key => $value) {
+            $length                        = strlen($value);
+            $position                      = strpos($value, ':');
+            $array_key                     = substr($value, 0, $position);
+            $array_value                   = substr($value, $position + 1, $length);
+            $recover_user_data[$array_key] = $array_value;
+        }
+
+        return $recover_user_data;
     }
 }

@@ -21,44 +21,39 @@
     <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
 
     <script>
-
         "use strict";
-        
-        @if(Session::has('message'))
-            toastr.options =
-            {
-                "closeButton" : true,
-                "progressBar" : true
+
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
             }
             toastr.success("{{ session('message') }}");
-		@endif
+        @endif
 
-		@if(Session::has('error'))
-            toastr.options =
-            {
-                "closeButton" : true,
-                "progressBar" : true
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
             }
             toastr.error("{{ session('error') }}");
-		@endif
+        @endif
 
-		@if(Session::has('info'))
-            toastr.options =
-            {
-                "closeButton" : true,
-                "progressBar" : true
+        @if (Session::has('info'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
             }
             toastr.info("{{ session('info') }}");
-		@endif
+        @endif
 
-		@if(Session::has('warning'))
-            toastr.options =
-            {
-                "closeButton" : true,
-                "progressBar" : true
+        @if (Session::has('warning'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
             }
             toastr.warning("{{ session('warning') }}");
-		@endif
+        @endif
     </script>
 
     <script type="text/javascript">
@@ -68,3 +63,4 @@
             });
         }
     </script>
+    @stack('js')

@@ -1,6 +1,7 @@
 <?php
 use App\Models\Article;
 use App\Models\ElementProduct;
+use App\Models\SaasSubscription;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
@@ -568,5 +569,19 @@ if (! function_exists('seo')) {
         }
 
         return (object) $seo; // Cast the array to an object
+    }
+
+    if (! function_exists('get_package_subscription_status')) {
+        function get_package_subscription_status($package_id)
+        {
+            $subscription = SaasSubscription::where('package_id', $package_id)
+                ->where('user_id', auth()->user()->id)
+                ->where('status', 1)
+                ->where('expiry', '>', now())
+                ->latest('id')
+                ->exists();
+
+            return $subscription;
+        }
     }
 }

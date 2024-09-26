@@ -1,311 +1,156 @@
 @extends('global.index')
 @section('content')
+    @include('frontend.creative_lms.lms_header')
 
-@include('frontend.creative_lms.lms_header')
-
-<!-- Start Pricing Area -->
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="pricing-section-title pricing-st-top">
-                    <h1 class="title-58">We’ve got a plan that’s perfect for you</h1>
-                    <div class="pricing-tab-btn">
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <!-- Pricing Area Start -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <div class="mt-60px mb-32px">
+                            <h1 class="man-title-48px text-center mb-3">Growth-Friendly, Affordable Pricing</h1>
+                            <p class="man-subtitle2-20px text-center text-capitalize max-w-736px mx-auto">Choose your desired  Plan That Fuses your Vision with Value.</p>
+                            <p class="man-subtitle2-20px text-center text-lowercase max-w-736px mx-auto">Switch Plans Anytime and Enhance with Add-Ons for Email and Teams!</p>
+                        </div>
+                        <ul class="nav nav-pills lms-pricingtab-nav-pills mb-32px" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-monthly-tab" data-bs-toggle="pill" data-bs-target="#pills-monthly" type="button" role="tab" aria-controls="pills-monthly" aria-selected="true">Monthly billing</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-annual-tab" data-bs-toggle="pill" data-bs-target="#pills-annual" type="button" role="tab" aria-controls="pills-annual" aria-selected="false">Annual billing</button>
+                                <button class="nav-link" id="pills-yearly-tab" data-bs-toggle="pill" data-bs-target="#pills-yearly" type="button" role="tab" aria-controls="pills-yearly" aria-selected="false">Annual billing</button>
                             </li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-content padding-bottom-110" id="pills-tabContent">
-            <!-- Monthly billing -->
-            <div class="tab-pane fade show active" id="pills-monthly" role="tabpanel" aria-labelledby="pills-monthly-tab" tabindex="0">
-                <div class="row mcg-30 justify-content-center">
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Single Pricing Card -->
-                        <div class="single-pricing-card">
-                            <div class="pn-light-package d-flex justify-content-between">
-                                <h4 class="pn-light">Basic Plan</h4>
-                            </div>
-                            <div class="pn-price-month d-flex align-items-center">
-                                <h2 class="title-price">$10</h2>
-                                <div class="pn-month">
-                                    <p>Per User</p>
-                                    <p>Per Month</p>
-                                </div>
-                            </div>
-                            <p class="feature-limit">Basic features for up to 10 users.</p>
-                            <a href="#" class="plan-btn">Sign up for free</a>
-                            <div class="pricing-list-title">
-                                <h4>FEATURES</h4>
-                                <p>Everything in our free plan plus...</p>
-                            </div>
-                            <div class="pricing-card-list">
-                                <ul>
-                                    <li>Access to Basic Features</li>
-                                    <li>Basic reporting & analytics</li>
-                                    <li>Up to 10 Individual users</li>
-                                    <li>20GB Individual data for each user</li>
-                                    <li>Basic Chat & email support</li>
-                                    <li>Access to Basic Features.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Single Pricing Card -->
-                        <div class="single-pricing-card active">
-                            <div class="pn-light-package d-flex justify-content-between">
-                                <h4 class="pn-light">Business Plan</h4>
-                                <p class="pn-popular-batch">Popular</p>
-                            </div>
-                            <div class="pn-price-month d-flex align-items-center">
-                                <h2 class="title-price">$50</h2>
-                                <div class="pn-month">
-                                    <p>Per User</p>
-                                    <p>Per Month</p>
-                                </div>
-                            </div>
-                            <p class="feature-limit">Basic features for up to 10 users.</p>
-                            <a href="#" class="plan-btn">Get Started</a>
-                            <div class="pricing-list-title">
-                                <h4>FEATURES</h4>
-                                <p>Everything in our free plan plus...</p>
-                            </div>
-                            <div class="pricing-card-list">
-                                <ul>
-                                    <li>Access to Basic Features</li>
-                                    <li>Basic reporting & analytics</li>
-                                    <li>Up to 10 Individual users</li>
-                                    <li>20GB Individual data for each user</li>
-                                    <li>Basic Chat & email support</li>
-                                    <li>Access to Basic Features.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Single Pricing Card -->
-                        <div class="single-pricing-card">
-                            <div class="pn-light-package d-flex justify-content-between">
-                                <h4 class="pn-light">Enterprise Plan</h4>
-                            </div>
-                            <div class="pn-price-month d-flex align-items-center">
-                                <h2 class="title-price">$99</h2>
-                                <div class="pn-month">
-                                    <p>Per User</p>
-                                    <p>Per Month</p>
-                                </div>
-                            </div>
-                            <p class="feature-limit">Basic features for up to 10 users.</p>
-                            <a href="#" class="plan-btn">Get Started</a>
-                            <div class="pricing-list-title">
-                                <h4>FEATURES</h4>
-                                <p>Everything in our free plan plus...</p>
-                            </div>
-                            <div class="pricing-card-list">
-                                <ul>
-                                    <li>Access to Basic Features</li>
-                                    <li>Basic reporting & analytics</li>
-                                    <li>Up to 10 Individual users</li>
-                                    <li>20GB Individual data for each user</li>
-                                    <li>Basic Chat & email support</li>
-                                    <li>Access to Basic Features.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Annual billing -->
-            <div class="tab-pane fade" id="pills-annual" role="tabpanel" aria-labelledby="pills-annual-tab" tabindex="0">
-                <div class="row mcg-30 justify-content-center">
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Single Pricing Card -->
-                        <div class="single-pricing-card">
-                            <div class="pn-light-package d-flex justify-content-between">
-                                <h4 class="pn-light">Basic Plan</h4>
-                            </div>
-                            <div class="pn-price-month d-flex align-items-center">
-                                <h2 class="title-price">$10</h2>
-                                <div class="pn-month">
-                                    <p>Per User</p>
-                                    <p>Per Month</p>
-                                </div>
-                            </div>
-                            <p class="feature-limit">Basic features for up to 10 users.</p>
-                            <a href="#" class="plan-btn">Sign up for free</a>
-                            <div class="pricing-list-title">
-                                <h4>FEATURES</h4>
-                                <p>Everything in our free plan plus...</p>
-                            </div>
-                            <div class="pricing-card-list">
-                                <ul>
-                                    <li>Access to Basic Features</li>
-                                    <li>Basic reporting & analytics</li>
-                                    <li>Up to 10 Individual users</li>
-                                    <li>20GB Individual data for each user</li>
-                                    <li>Basic Chat & email support</li>
-                                    <li>Access to Basic Features.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Single Pricing Card -->
-                        <div class="single-pricing-card active">
-                            <div class="pn-light-package d-flex justify-content-between">
-                                <h4 class="pn-light">Business Plan</h4>
-                                <p class="pn-popular-batch">Popular</p>
-                            </div>
-                            <div class="pn-price-month d-flex align-items-center">
-                                <h2 class="title-price">$50</h2>
-                                <div class="pn-month">
-                                    <p>Per User</p>
-                                    <p>Per Month</p>
-                                </div>
-                            </div>
-                            <p class="feature-limit">Basic features for up to 10 users.</p>
-                            <a href="#" class="plan-btn">Get Started</a>
-                            <div class="pricing-list-title">
-                                <h4>FEATURES</h4>
-                                <p>Everything in our free plan plus...</p>
-                            </div>
-                            <div class="pricing-card-list">
-                                <ul>
-                                    <li>Access to Basic Features</li>
-                                    <li>Basic reporting & analytics</li>
-                                    <li>Up to 10 Individual users</li>
-                                    <li>20GB Individual data for each user</li>
-                                    <li>Basic Chat & email support</li>
-                                    <li>Access to Basic Features.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <!-- Single Pricing Card -->
-                        <div class="single-pricing-card">
-                            <div class="pn-light-package d-flex justify-content-between">
-                                <h4 class="pn-light">Enterprise Plan</h4>
-                            </div>
-                            <div class="pn-price-month d-flex align-items-center">
-                                <h2 class="title-price">$99</h2>
-                                <div class="pn-month">
-                                    <p>Per User</p>
-                                    <p>Per Month</p>
-                                </div>
-                            </div>
-                            <p class="feature-limit">Basic features for up to 10 users.</p>
-                            <a href="#" class="plan-btn">Get Started</a>
-                            <div class="pricing-list-title">
-                                <h4>FEATURES</h4>
-                                <p>Everything in our free plan plus...</p>
-                            </div>
-                            <div class="pricing-card-list">
-                                <ul>
-                                    <li>Access to Basic Features</li>
-                                    <li>Basic reporting & analytics</li>
-                                    <li>Up to 10 Individual users</li>
-                                    <li>20GB Individual data for each user</li>
-                                    <li>Basic Chat & email support</li>
-                                    <li>Access to Basic Features.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Pricing Area -->
+                        <!-- pricing -->
+                        <div class="tab-content mb-100px" id="pills-tabContent">
+                            <!-- Monthly billing -->
+                            <div class="tab-pane fade show active" id="pills-monthly" role="tabpanel" aria-labelledby="pills-monthly-tab" tabindex="0">
+                                <div class="row mcg-30 justify-content-center">
+                                    @foreach ($packages as $package)
+                                        <div class="col-lg-4 col-md-6">
+                                            <!-- Single Pricing Card -->
+                                            <div class="lms1-pricing-card h-100 package" id="{{ $package->id }}">
+                                                <p class="lms1-badge-primary mb-12px text-capitalize">{{ $package->type }}</p>
+                                                <div class="d-flex align-items-end flex-wrap mb-3">
+                                                    <h1 class="lms1-pricing-price">{{ $package->is_free ? 'Free' : currency($package->price) }}</h1>
+                                                    <p class="lms1-pricing-duration mb-2px">/{{ $package->interval }}</p>
+                                                </div>
+                                                <ul class="d-flex flex-column gap-2 mb-4">
+                                                    <li class="lms1-greencheck-list">Task Management</li>
+                                                    <li class="lms1-greencheck-list">Project Planning</li>
+                                                    <li class="lms1-greencheck-list">Team Collaboration</li>
+                                                    <li class="lms1-greencheck-list">Notifications and Reminders</li>
+                                                    <li class="lms1-greencheck-list">What you get</li>
+                                                    <li class="lms1-greencheck-list">Team Collaboration</li>
+                                                    <li class="lms1-greencheck-list">Notifications and Reminders</li>
+                                                    <li class="lms1-greencheck-list">What you get</li>
+                                                </ul>
 
-<!-- Start Frequently asked questions Area -->
-<section class="frequently-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="frequently-title">
-                    <h2 class="title-58">Frequently asked questions</h2>
-                </div>
-                <div class="frequently-accordion">
-                    <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    What is membership management software?
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                                                @auth
+                                                    @if (get_package_subscription_status($package->id))
+                                                        <button type="button" class="btn ci-btn-outline-primary w-100">
+                                                            <span>Claimed !</span>
+                                                        </button>
+                                                    @else
+                                                        <button type="button" class="btn ci-btn-outline-primary w-100" id="get-subscription">
+                                                            <span>Get Started Now</span>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M14.4297 5.92993L20.4997 11.9999L14.4297 18.0699" stroke="#0A7EFB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M3.5 12H20.33" stroke="#0A7EFB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
+                                                        </button>
+                                                    @endif
+                                                @else
+                                                    <button type="button" class="btn ci-btn-outline-primary w-100" id="get-subscription">
+                                                        <span>Get Started Now</span>
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M14.4297 5.92993L20.4997 11.9999L14.4297 18.0699" stroke="#0A7EFB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M3.5 12H20.33" stroke="#0A7EFB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                        </svg>
+                                                    </button>
+                                                @endauth
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    What are the benefit of a  membership site?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    What is membership management software?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    What is membership management software?
-                                </button>
-                            </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFive">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    What is membership management software?
-                                </button>
-                            </h2>
-                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingSix">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                    What is membership management software?
-                                </button>
-                            </h2>
-                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                            <!-- yearly billing -->
+                            <div class="tab-pane fade" id="pills-yearly" role="tabpanel" aria-labelledby="pills-yearly-tab" tabindex="0">
+                                <div class="row mcg-30 justify-content-center">
+                                    <div class="col-lg-4 col-md-6">
+                                        <!-- Single Pricing Card -->
+                                        <div class="lms1-pricing-card h-100">
+                                            <p class="lms1-badge-primary mb-12px">Pro</p>
+                                            <div class="d-flex align-items-end flex-wrap mb-3">
+                                                <h1 class="lms1-pricing-price">$120.00</h1>
+                                                <p class="lms1-pricing-duration mb-2px">/month</p>
+                                            </div>
+                                            <ul class="d-flex flex-column gap-2 mb-4">
+                                                <li class="lms1-greencheck-list">Task Management</li>
+                                                <li class="lms1-greencheck-list">Project Planning</li>
+                                                <li class="lms1-greencheck-list">Team Collaboration</li>
+                                                <li class="lms1-greencheck-list">Notifications and Reminders</li>
+                                                <li class="lms1-greencheck-list">What you get</li>
+                                                <li class="lms1-greencheck-list">Team Collaboration</li>
+                                                <li class="lms1-greencheck-list">Notifications and Reminders</li>
+                                                <li class="lms1-greencheck-list">What you get</li>
+                                            </ul>
+                                            <a href="#" class="btn ci-btn-outline-primary w-100">
+                                                <span>Get Started Now</span>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M14.4297 5.92993L20.4997 11.9999L14.4297 18.0699" stroke="#0A7EFB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M3.5 12H20.33" stroke="#0A7EFB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <!-- Single Pricing Card -->
+                                        <div class="lms1-pricing-card h-100">
+                                            <p class="lms1-badge-primary mb-12px">Pro Plus</p>
+                                            <div class="d-flex align-items-end flex-wrap mb-3">
+                                                <h1 class="lms1-pricing-price">$120.00</h1>
+                                                <p class="lms1-pricing-duration mb-2px">/month</p>
+                                            </div>
+                                            <ul class="d-flex flex-column gap-2 mb-4">
+                                                <li class="lms1-greencheck-list">Task Management</li>
+                                                <li class="lms1-greencheck-list">Project Planning</li>
+                                                <li class="lms1-greencheck-list">Team Collaboration</li>
+                                                <li class="lms1-greencheck-list">Notifications and Reminders</li>
+                                                <li class="lms1-greencheck-list">What you get</li>
+                                                <li class="lms1-greencheck-list">Team Collaboration</li>
+                                                <li class="lms1-greencheck-list">Notifications and Reminders</li>
+                                                <li class="lms1-greencheck-list">What you get</li>
+                                            </ul>
+                                            <a href="#" class="btn ci-btn-outline-primary w-100">
+                                                <span>Get Started Now</span>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M14.4297 5.92993L20.4997 11.9999L14.4297 18.0699" stroke="#0A7EFB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M3.5 12H20.33" stroke="#0A7EFB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <!-- Single Pricing Card -->
+                                        <div class="lms1-pricing-card h-100">
+                                            <p class="lms1-badge-primary mb-12px">Custom</p>
+                                            <div class="d-flex align-items-end flex-wrap mb-3">
+                                                <h1 class="lms1-pricing-title">Let’s Talk</h1>
+                                            </div>
+                                            <ul class="d-flex flex-column gap-2 mb-4">
+                                                <li class="lms1-greencheck-list">Task Management</li>
+                                                <li class="lms1-greencheck-list">Project Planning</li>
+                                                <li class="lms1-greencheck-list">Team Collaboration</li>
+                                                <li class="lms1-greencheck-list">Notifications and Reminders</li>
+                                                <li class="lms1-greencheck-list">What you get</li>
+                                                <li class="lms1-greencheck-list">Team Collaboration</li>
+                                                <li class="lms1-greencheck-list">Notifications and Reminders</li>
+                                                <li class="lms1-greencheck-list">What you get</li>
+                                            </ul>
+                                            <a href="#" class="btn ci-btn-outline-primary w-100">Book a Call</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -313,308 +158,289 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- End Frequently asked questions Area -->
+    </section>
+    <!-- Pricing Area End -->
 
-<!-- Start LMS Testimonials Area -->
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="lms-testimonial-title">
-                    <h1 class="title-58">What they’re saying</h1>
-                    <p class="info">We’ve made it easier than ever to create, manage, and grow a profitable coaching business that achieves transformational client results. </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Testimonials -->
-    <div class="swiper lmsSwiper">
-        <div class="lms-testimonials-wrap swiper-wrapper">
-            <div class="single-lms-testimonial swiper-slide">
-                <div class="lms-testimonial-rating d-flex align-items-center">
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                </div>
-                <p class="info">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less which normal distribution of letters look like readable English.</p>
-                <div class="lmst-user-brand d-flex align-items-center justify-content-between">
-                    <div class="lmst-user-wrap d-flex align-items-center">
-                        <div class="lmst-user">
-                            <img src="{{ asset('assets/img/lms/testimonial-user-2.webp') }}" alt="">
-                        </div>
-                        <div class="lmst-user-details">
-                            <h4 class="name">Lana Ross</h4>
-                            <p class="role">CEO, Devzone</p>
-                        </div>
-                    </div>
-                    <div class="lmst-brand-img">
-                        <img src="{{ asset('assets/img/lms/lms-testimonial-brand-2.svg') }}" alt="">
+
+    <!-- Dedicated Success Area Start -->
+    <section>
+        <div class="container">
+            <div class="row mb-100px">
+                <div class="col-12">
+                    <div>
+                        <h1 class="man-title-48px text-center mb-3 fw-extrabold">We’re Dedicated to <span class="skin-color">Your Success.</span></h1>
+                        <p class="text-center man-subtitle2-20px">Discover More with Creative LMS!</p>
                     </div>
                 </div>
             </div>
-            <div class="single-lms-testimonial swiper-slide">
-                <div class="lms-testimonial-rating d-flex align-items-center">
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                </div>
-                <p class="info">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less which normal distribution of letters look like readable English.</p>
-                <div class="lmst-user-brand d-flex align-items-center justify-content-between">
-                    <div class="lmst-user-wrap d-flex align-items-center">
-                        <div class="lmst-user">
-                            <img src="{{ asset('assets/img/lms/testimonial-user-1.webp') }}" alt="">
-                        </div>
-                        <div class="lmst-user-details">
-                            <h4 class="name">Michael Johnson</h4>
-                            <p class="role">Web Developer</p>
-                        </div>
+            <div class="row mcg-30 align-items-center mb-60px">
+                <div class="col-md-6">
+                    <div class="pe-xl-4 pe-lg-3 wow animate__fadeInUp" data-wow-delay=".3s">
+                        <img class="w-100" src="{{ asset('assets/img/lms/dedicated-success-banner1.webp') }}" alt="banner">
                     </div>
-                    <div class="lmst-brand-img">
-                        <img src="{{ asset('assets/img/lms/lms-testimonial-brand-1.svg') }}" alt="">
+                </div>
+                <div class="col-md-6">
+                    <div class="pb-30px">
+                        <h1 class="man-title-48px mb-32px">24/7 Customer support</h1>
+                        <p class="man-subtitle3-16px mb-32px">With Creative LMS, you’re never alone. Our <span class="cin2-text-dark fw-semibold">24/7 support</span> ensures that help is always available, no matter the hour. so you can focus on what matters most—your success.</p>
+                        <a href="#" class="btn cin3-btn-outline-secondary svg-stroke px-32px py-3 d-flex align-items-center gap-2">
+                            <span>Get Support</span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.90625 19.92L15.4263 13.4C16.1963 12.63 16.1963 11.37 15.4263 10.6L8.90625 4.08" stroke="#212534" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="single-lms-testimonial swiper-slide">
-                <div class="lms-testimonial-rating d-flex align-items-center">
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                </div>
-                <p class="info">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less which normal distribution of letters look like readable English.</p>
-                <div class="lmst-user-brand d-flex align-items-center justify-content-between">
-                    <div class="lmst-user-wrap d-flex align-items-center">
-                        <div class="lmst-user">
-                            <img src="{{ asset('assets/img/lms/testimonial-user-2.webp') }}" alt="">
-                        </div>
-                        <div class="lmst-user-details">
-                            <h4 class="name">Lana Ross</h4>
-                            <p class="role">CEO, Devzone</p>
-                        </div>
-                    </div>
-                    <div class="lmst-brand-img">
-                        <img src="{{ asset('assets/img/lms/lms-testimonial-brand-2.svg') }}" alt="">
+            <div class="row mcg-30 align-items-center mb-70px">
+                <div class="col-md-6 order-2 order-md-1">
+                    <div class="pb-30px">
+                        <h1 class="man-title-48px mb-32px">Creative LMS network</h1>
+                        <p class="man-subtitle3-16px mb-32px"><span class="cin2-text-dark fw-semibold">Connect, collaborate, and grow</span> with our lively Creative LMS community on Facebook. Engage with fellow learners, share insights, and fuel your passion with entrepreneurs, experts, and
+                            innovators. Read more.</p>
+                        <a href="#" class="btn cin3-btn-outline-secondary svg-stroke px-32px py-3 d-flex align-items-center gap-2">
+                            <span>Get Started</span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.90625 19.92L15.4263 13.4C16.1963 12.63 16.1963 11.37 15.4263 10.6L8.90625 4.08" stroke="#212534" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div class="single-lms-testimonial swiper-slide">
-                <div class="lms-testimonial-rating d-flex align-items-center">
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_197_259)">
-                            <path d="M19.0002 27.3442L25.571 31.3184C26.7743 32.0467 28.2468 30.97 27.9302 29.6084L26.1885 22.135L31.9993 17.1C33.0602 16.1817 32.4902 14.44 31.0968 14.3292L23.4493 13.68L20.4568 6.61837C19.9185 5.33587 18.0818 5.33587 17.5435 6.61837L14.551 13.6642L6.90351 14.3134C5.51018 14.4242 4.94018 16.1659 6.00101 17.0842L11.8118 22.1192L10.0702 29.5925C9.75351 30.9542 11.226 32.0309 12.4293 31.3025L19.0002 27.3442Z" fill="#FACA21"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_197_259">
-                                <rect width="38" height="38" fill="white"/>
-                            </clipPath>
-                        </defs>
-                    </svg>                    
-                </div>
-                <p class="info">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less which normal distribution of letters look like readable English.</p>
-                <div class="lmst-user-brand d-flex align-items-center justify-content-between">
-                    <div class="lmst-user-wrap d-flex align-items-center">
-                        <div class="lmst-user">
-                            <img src="{{ asset('assets/img/lms/testimonial-user-1.webp') }}" alt="">
-                        </div>
-                        <div class="lmst-user-details">
-                            <h4 class="name">Michael Johnson</h4>
-                            <p class="role">Web Developer</p>
-                        </div>
-                    </div>
-                    <div class="lmst-brand-img">
-                        <img src="{{ asset('assets/img/lms/lms-testimonial-brand-1.svg') }}" alt="">
+                <div class="col-md-6 order-1 order-md-2">
+                    <div class="ps-xl-4 ps-lg-3 wow animate__fadeInUp" data-wow-delay=".3s">
+                        <img class="w-100" src="{{ asset('assets/img/lms/dedicated-success-banner2.webp') }}" alt="banner">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="swiper-next-prev">
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+    </section>
+    <!-- Dedicated Success Area End -->
+
+
+    <!-- Testimonial Area Start -->
+    <section>
+        <div class="container">
+            <div class="row mb-32px">
+                <div class="col-12">
+                    <h1 class="man-title-48px text-center mb-20px">What Our <span class="skin-color">Customers</span> Say</h1>
+                    <p class="man-subtitle3-16px text-center max-w-750px mx-auto">We’ve made it easier than ever to create, manage, and grow a profitable their coaching business that achieves transformational client results.</p>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
-<!-- End LMS Testimonials Area -->
- 
+        <div class="lms-main-testimonial-area mb-100px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="lms-testimonial-space">
+                            <!-- Swiper -->
+                            <div class="swiper lms2-swiper lms2-slider">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="d-flex flex-column flex-sm-row lms2-single-slider">
+                                            <div class="lms2-slider-img">
+                                                <img src="{{ asset('assets/img/lms/lms-main-slider-banner-1.svg') }}" alt="banner">
+                                            </div>
+                                            <div class="lms2-slider-details">
+                                                <img class="lms2-slider-quote" src="{{ asset('assets/img/lms/quote-up-blue-72.svg') }}" alt="">
+                                                <p class="lms2-slider-comment">Great job, I will definitely be ordering again! LookScout is worth much more than I paid. I would like to personally thank you.</p>
+                                                <h5 class="man-subtitle-16px mb-2px fw-bold cin2-text-dark">Robert Johnson</h5>
+                                                <p class="man-subtitle3-16px">CEO at Startup Inc.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="d-flex flex-column flex-sm-row lms2-single-slider">
+                                            <div class="lms2-slider-img">
+                                                <img src="{{ asset('assets/img/lms/lms-main-slider-banner-1.svg') }}" alt="banner">
+                                            </div>
+                                            <div class="lms2-slider-details">
+                                                <img class="lms2-slider-quote" src="{{ asset('assets/img/lms/quote-up-blue-72.svg') }}" alt="">
+                                                <p class="lms2-slider-comment">Great job, I will definitely be ordering again! LookScout is worth much more than I paid. I would like to personally thank you.</p>
+                                                <h5 class="man-subtitle-16px mb-2px fw-bold cin2-text-dark">Robert Johnson</h5>
+                                                <p class="man-subtitle3-16px">CEO at Startup Inc.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="d-flex flex-column flex-sm-row lms2-single-slider">
+                                            <div class="lms2-slider-img">
+                                                <img src="{{ asset('assets/img/lms/lms-main-slider-banner-1.svg') }}" alt="banner">
+                                            </div>
+                                            <div class="lms2-slider-details">
+                                                <img class="lms2-slider-quote" src="{{ asset('assets/img/lms/quote-up-blue-72.svg') }}" alt="">
+                                                <p class="lms2-slider-comment">Great job, I will definitely be ordering again! LookScout is worth much more than I paid. I would like to personally thank you.</p>
+                                                <h5 class="man-subtitle-16px mb-2px fw-bold cin2-text-dark">Robert Johnson</h5>
+                                                <p class="man-subtitle3-16px">CEO at Startup Inc.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="d-flex flex-column flex-sm-row lms2-single-slider">
+                                            <div class="lms2-slider-img">
+                                                <img src="{{ asset('assets/img/lms/lms-main-slider-banner-1.svg') }}" alt="banner">
+                                            </div>
+                                            <div class="lms2-slider-details">
+                                                <img class="lms2-slider-quote" src="{{ asset('assets/img/lms/quote-up-blue-72.svg') }}" alt="">
+                                                <p class="lms2-slider-comment">Great job, I will definitely be ordering again! LookScout is worth much more than I paid. I would like to personally thank you.</p>
+                                                <h5 class="man-subtitle-16px mb-2px fw-bold cin2-text-dark">Robert Johnson</h5>
+                                                <p class="man-subtitle3-16px">CEO at Startup Inc.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="d-flex flex-column flex-sm-row lms2-single-slider">
+                                            <div class="lms2-slider-img">
+                                                <img src="{{ asset('assets/img/lms/lms-main-slider-banner-1.svg') }}" alt="banner">
+                                            </div>
+                                            <div class="lms2-slider-details">
+                                                <img class="lms2-slider-quote" src="{{ asset('assets/img/lms/quote-up-blue-72.svg') }}" alt="">
+                                                <p class="lms2-slider-comment">Great job, I will definitely be ordering again! LookScout is worth much more than I paid. I would like to personally thank you.</p>
+                                                <h5 class="man-subtitle-16px mb-2px fw-bold cin2-text-dark">Robert Johnson</h5>
+                                                <p class="man-subtitle3-16px">CEO at Startup Inc.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial Area End -->
+
+
+    <!-- QNA Area Start -->
+    <section>
+        <div class="container">
+            <div class="row mb-32px">
+                <div class="col-12">
+                    <h1 class="man-title-48px text-center mb-20px">Customers FAQ</h1>
+                </div>
+            </div>
+            <div class="row mb-100px justify-content-center">
+                <div class="col-xl-9 col-lg-10 col-md-11">
+                    <div>
+                        <div class="accordion lms3-accordion" id="lms-qna-accordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseqnaOne" aria-expanded="true" aria-controls="collapseqnaOne">
+                                        Can I use CreativeLMS at no cost?
+                                    </button>
+                                </h2>
+                                <div id="collapseqnaOne" class="accordion-collapse collapse show" data-bs-parent="#lms-qna-accordion">
+                                    <div class="accordion-body">
+                                        <p class="man-subtitle3-16px">Yes! You can start with free plan  of Creative LMS at no cost and begin earning right away.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseqnaTwo" aria-expanded="false" aria-controls="collapseqnaTwo">
+                                        Can I close my account whenever I want?
+                                    </button>
+                                </h2>
+                                <div id="collapseqnaTwo" class="accordion-collapse collapse" data-bs-parent="#lms-qna-accordion">
+                                    <div class="accordion-body">
+                                        <p class="man-subtitle3-16px">We hope you stay, but if you need to, you can cancel your account at any time.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseqnaThree" aria-expanded="false" aria-controls="collapseqnaThree">
+                                        Do I have to provide credit card details to sign up?
+                                    </button>
+                                </h2>
+                                <div id="collapseqnaThree" class="accordion-collapse collapse" data-bs-parent="#lms-qna-accordion">
+                                    <div class="accordion-body">
+                                        <p class="man-subtitle3-16px">You don’t need a credit card to sign up. Begin with our free plan and upgrade to a paid plan whenever you’re ready.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseqnaFour" aria-expanded="false" aria-controls="collapseqnaFour">
+                                        Does Creative LMS take a percentage of my earnings?
+                                    </button>
+                                </h2>
+                                <div id="collapseqnaFour" class="accordion-collapse collapse" data-bs-parent="#lms-qna-accordion">
+                                    <div class="accordion-body">
+                                        <p class="man-subtitle3-16px">Unlike other platforms, Creative LMS doesn’t take a cut of your earnings. We only have standard processing fees, just like other payment processors.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseqnaFive" aria-expanded="false" aria-controls="collapseqnaFive">
+                                        Is support included with my plan?
+                                    </button>
+                                </h2>
+                                <div id="collapseqnaFive" class="accordion-collapse collapse" data-bs-parent="#lms-qna-accordion">
+                                    <div class="accordion-body">
+                                        <p class="man-subtitle3-16px">Every plan includes unlimited support, even the Free plan! Just start a support ticket from your portal’s dashboard.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseqnaSix" aria-expanded="false" aria-controls="collapseqnaSix">
+                                        Will I need a web host?
+                                    </button>
+                                </h2>
+                                <div id="collapseqnaSix" class="accordion-collapse collapse" data-bs-parent="#lms-qna-accordion">
+                                    <div class="accordion-body">
+                                        <p class="man-subtitle3-16px">With Creative LMS, your site is fully hosted, so no extra web hosting is required. Secure hosting and e-commerce features are built-in.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- QNA Area End -->
+
+
+    <!-- Blue Signup Area Start -->
+    <section class="wow animate__fadeInUp" data-wow-delay=".3s">
+        <div class="container">
+            <div class="row mb-100px">
+                <div class="col-12">
+                    <div class="lms-getstarted-area">
+                        <h2 class="man-title-60px text-white mb-20px text-center">Start Making Money!</h2>
+                        <h4 class="man-title-48px fw-semibold text-white text-center mb-32px">Enroll Free Today.</h4>
+                        <div class="text-center">
+                            <a href="#" class="btn cin1-btn-outline-white">Get started for free</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blue Signup Area End -->
+    <form action="{{ route('lms.subscription') }}" id="lms-subscription-form" method="post">@csrf</form>
 @endsection
+
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.package button#get-subscription').on('click', function() {
+                let packageId = $(this).parent().attr('id');
+                let input = `<input type="text" name="package_id" id="package_id" value="${packageId}">`;
+                let form = $('#lms-subscription-form');
+                if (form.find('#package_id')) {
+                    $('#lms-subscription-form #package_id').remove();
+                }
+                form.append(input);
+                form.submit();
+            });
+        });
+    </script>
+@endpush

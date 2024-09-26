@@ -7,14 +7,15 @@
                     <div class="element-menu-wrap d-flex justify-content-between align-items-center">
                         <!-- Logo -->
                         <div class="element-logo">
-                            <a href="{{ route('lms.home') }}"><img src="{{ asset('assets/img/new-icons-images/lms-logo.svg') }}" alt="logo"></a>
+                            <a href="{{ route('lms.home') }}"><img src="{{ asset('assets/img/new-icons-images/grow-up-lms.png') }}" alt="logo" width="145px"></a>
                         </div>
                         <!-- Menu -->
                         <div class="element-menu-area">
                             <nav class="element-desktop-nav">
                                 <ul class="d-flex align-items-center align-items-center">
-                                    <li><a href="#" class="active">Features</a></li>
-                                    <li><a href="#">Pricing</a></li>
+                                    <li><a href="{{ route('lms.home') }}" class="{{ Route::currentRouteName() == 'lms.home' ? 'active' : '' }}">Home</a></li>
+                                    <li><a href="{{ route('lms.features') }}" class="{{ Route::currentRouteName() == 'lms.features' ? 'active' : '' }}">Features</a></li>
+                                    <li><a href="{{ route('lms.pricing') }}" class="{{ Route::currentRouteName() == 'lms.pricing' ? 'active' : '' }}">Pricing</a></li>
                                     <li><a href="#">Solutions</a></li>
                                     <li><a href="#">Demo</a></li>
                                     <li class="el-have-sub">

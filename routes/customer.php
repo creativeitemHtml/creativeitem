@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::controller(CustomerController::class)->middleware('auth', 'customer')->group(function () {
 
@@ -42,7 +42,7 @@ Route::controller(CustomerController::class)->middleware('auth', 'customer')->gr
 
     Route::get('/customer/creative-elements/wishlists', 'wishlists')->name('customer.wishlists');
     Route::get('customer/creative_elements/wishlists/remove/{id}', 'wishlist_remove')->name('customer.wishlist_remove');
-    
+
     Route::any('/customer/creative-elements/downloads', 'downloads')->name('customer.downloads');
 
     Route::get('/customer/profile', 'profile')->name('customer.profile');

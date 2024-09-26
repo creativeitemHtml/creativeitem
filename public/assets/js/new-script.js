@@ -49,6 +49,14 @@ $(document).ready(function () {
     $('.organizer-accordion .accordion-button').click(function(){
           $("#organizer-banner").attr("src", $(this).attr("data-img-src"));
     });
+    // LMS Main Accordion Image Change 
+    $('.lms-secondary-accordion .accordion-button').click(function(){
+          $(".lms-secondary-accordion-img").attr("src", $(this).attr("data-img-src"));
+    });
+    // LMS Feature Accordion Image Change 
+    $('.lms2-accordion .accordion-button').click(function(){
+          $(".lms2-accordion-img").attr("src", $(this).attr("data-img-src"));
+    });
 
 
     // Main Menu
@@ -163,6 +171,17 @@ $(document).ready(function () {
         }
     });
 
+    // Lms main password toggle 
+    $(".toggle-password").click(function() {
+        $(this).toggleClass("lock unlock");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+          input.attr("type", "text");
+        } else {
+          input.attr("type", "password");
+        }
+      });
+
     // Variable
     var $tagifyTags = $('.enTags'),
     $chosenSelect = $('.chzn-select'),
@@ -240,6 +259,7 @@ $(document).ready(function () {
     $('.service-select select').niceSelect();
     $('.product-filter-select').niceSelect();
     $('.enForm-nice-select').niceSelect();
+    $('.cin1-nice-select').niceSelect();
 });
 
 
@@ -525,7 +545,7 @@ $(document).ready(function(){
      } );
 });
 
-// LMS Pricing Testimonial Slider
+// LMS Pricing Testimonial Slider & lms main
 $(document).ready(function(){
     var lmsswiper = new Swiper(".lmsSwiper", {
         slidesPerView: 1,
@@ -550,6 +570,34 @@ $(document).ready(function(){
             },
           },
     });
+
+    var lms2swiper = new Swiper(".lms2-swiper", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        // autoplay: true,
+        autoplay: {
+            delay: 8000,
+            disableOnInteraction: false,
+            },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    var lms3swiper = new Swiper(".swiper-auto", {
+        loop: true,
+        freeMode: true,
+        autoplay: {
+            delay: 0,
+            disableOnInteraction:false,
+        },
+        slidesPerView: "auto",
+        speed: 5000,
+        spaceBetween: 30,
+    });
+
 });
 
 // Checkbox for checkout
@@ -566,7 +614,50 @@ $(document).ready(function () {
     });
     // Select2 multiple js for Component 
     $(".eChoice-multiple-with-remove").select2();
+    // Select2 with search active
+    $(".select2-with-search").select2({
+        dropdownCssClass: "select2-mydrop"
+    });
+
 });
+
+
+
+// Player js 
+$(document).ready(function () {
+    var $player1 = $('#player'),
+    $player2 = $('#player-2'),
+    $player3 = $('#player-3'),
+    $player4 = $('#player-4'),
+    $player5 = $('#player-5'),
+    $player6 = $('#player-6'),
+    $player7 = $('#player-7');
+
+    if ($player1.length > 0){
+        const player = new Plyr('#player');
+    }
+    if ($player2.length > 0){
+        const player2 = new Plyr('#player-2');
+    }
+    if ($player3.length > 0){
+        const player3 = new Plyr('#player-3');
+    }
+    if ($player4.length > 0){
+        const player4 = new Plyr('#player-4');
+    }
+    if ($player5.length > 0){
+        const player5 = new Plyr('#player-5');
+    }
+    if ($player6.length > 0){
+        const player6 = new Plyr('#player-6');
+    }
+    if ($player7.length > 0){
+        const player7 = new Plyr('#player-7');
+    }
+    
+    
+});
+
 
 
 // Country Select for checkout
@@ -622,8 +713,11 @@ $(document).ready(function () {
 })(jQuery);
 
 // Wow JS 
-new WOW().init();
+// new WOW().init();
 
+new WOW({
+    animateClass: 'animate__animated'
+}).init();
 
 
 // Venobox Active 
@@ -636,12 +730,14 @@ new VenoBox({
 });
 
 // Player js 
-const player = new Plyr('#player');
-const player_2 = new Plyr('#player-2');
-const player_3 = new Plyr('#player-3');
-const player_4 = new Plyr('#player-4');
-const player_5 = new Plyr('#player-5');
-const player_6 = new Plyr('#player-6');
+// const player = new Plyr('#player');
+// const player_2 = new Plyr('#player-2');
+// const player_3 = new Plyr('#player-3');
+// const player_4 = new Plyr('#player-4');
+// const player_5 = new Plyr('#player-5');
+// const player_6 = new Plyr('#player-6');
+
+
 
 
 

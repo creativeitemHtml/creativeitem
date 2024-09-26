@@ -1,26 +1,28 @@
 <?php
 
+use App\Http\Middleware\IsCustomer;
+use App\Http\Middleware\IsSuperadmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\IsSuperadmin;
-use App\Http\Middleware\IsCustomer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        commands: __DIR__.'/../routes/console.php',
+        commands: __DIR__ . '/../routes/console.php',
         using: function () {
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
-     
+
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/home.php'));
-            
+
             Route::middleware('web')
                 ->group(base_path('routes/superadmin.php'));
 
@@ -29,7 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
             Route::middleware('web')
                 ->group(base_path('routes/element.php'));
-            
+
             Route::middleware('web')
                 ->group(base_path('routes/lms.php'));
         },
@@ -37,7 +39,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'superadmin' => IsSuperadmin::class,
-            'customer' => IsCustomer::class
+            'customer'   => IsCustomer::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
@@ -47,7 +49,7 @@ return Application::configure(basePath: dirname(__DIR__))
             //         return response()->view("admin.errors.400", [], 400);
             //     }
             // }
-    
+
             if ($exception->getStatusCode() == 400) {
                 return response()->view("errors.400", [], 400);
             }
