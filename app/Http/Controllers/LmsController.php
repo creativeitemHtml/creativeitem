@@ -603,13 +603,13 @@ class LmsController extends Controller
             ->whereHas('package', function ($query) use ($product) {
                 $query->where('product_id', $product);
             })
-            ->with('package', 'user')
             ->first();
 
         if ($subscription) {
             return response()->json([
                 'data' => [
                     'subscription_info' => $subscription,
+                    'package_info'      => $subscription->package,
                 ],
             ]);
         } else {
