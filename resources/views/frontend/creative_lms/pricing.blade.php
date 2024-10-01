@@ -169,7 +169,7 @@
                 <div class="col-12">
                     <div>
                         <h1 class="man-title-48px text-center mb-3 fw-extrabold">We’re Dedicated to <span class="skin-color">Your Success.</span></h1>
-                        <p class="text-center man-subtitle2-20px">Discover More with Creative LMS!</p>
+                        <p class="text-center man-subtitle2-20px">Discover More with GrowUp LMS!</p>
                     </div>
                 </div>
             </div>
@@ -182,7 +182,7 @@
                 <div class="col-md-6">
                     <div class="pb-30px">
                         <h1 class="man-title-48px mb-32px">24/7 Customer support</h1>
-                        <p class="man-subtitle3-16px mb-32px">With Creative LMS, you’re never alone. Our <span class="cin2-text-dark fw-semibold">24/7 support</span> ensures that help is always available, no matter the hour. so you can focus on what matters most—your success.</p>
+                        <p class="man-subtitle3-16px mb-32px">With GrowUp LMS, you’re never alone. Our <span class="cin2-text-dark fw-semibold">24/7 support</span> ensures that help is always available, no matter the hour. so you can focus on what matters most—your success.</p>
                         <a href="#" class="btn cin3-btn-outline-secondary svg-stroke px-32px py-3 d-flex align-items-center gap-2">
                             <span>Get Support</span>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -195,8 +195,8 @@
             <div class="row mcg-30 align-items-center mb-70px">
                 <div class="col-md-6 order-2 order-md-1">
                     <div class="pb-30px">
-                        <h1 class="man-title-48px mb-32px">Creative LMS network</h1>
-                        <p class="man-subtitle3-16px mb-32px"><span class="cin2-text-dark fw-semibold">Connect, collaborate, and grow</span> with our lively Creative LMS community on Facebook. Engage with fellow learners, share insights, and fuel your passion with entrepreneurs, experts, and
+                        <h1 class="man-title-48px mb-32px">GrowUp LMS network</h1>
+                        <p class="man-subtitle3-16px mb-32px"><span class="cin2-text-dark fw-semibold">Connect, collaborate, and grow</span> with our lively GrowUp LMS community on Facebook. Engage with fellow learners, share insights, and fuel your passion with entrepreneurs, experts, and
                             innovators. Read more.</p>
                         <a href="#" class="btn cin3-btn-outline-secondary svg-stroke px-32px py-3 d-flex align-items-center gap-2">
                             <span>Get Started</span>
@@ -334,7 +334,7 @@
                                 </h2>
                                 <div id="collapseqnaOne" class="accordion-collapse collapse show" data-bs-parent="#lms-qna-accordion">
                                     <div class="accordion-body">
-                                        <p class="man-subtitle3-16px">Yes! You can start with free plan  of Creative LMS at no cost and begin earning right away.</p>
+                                        <p class="man-subtitle3-16px">Yes! You can start with free plan  of GrowUp LMS at no cost and begin earning right away.</p>
                                     </div>
                                 </div>
                             </div>
@@ -365,12 +365,12 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseqnaFour" aria-expanded="false" aria-controls="collapseqnaFour">
-                                        Does Creative LMS take a percentage of my earnings?
+                                        Does GrowUp LMS take a percentage of my earnings?
                                     </button>
                                 </h2>
                                 <div id="collapseqnaFour" class="accordion-collapse collapse" data-bs-parent="#lms-qna-accordion">
                                     <div class="accordion-body">
-                                        <p class="man-subtitle3-16px">Unlike other platforms, Creative LMS doesn’t take a cut of your earnings. We only have standard processing fees, just like other payment processors.</p>
+                                        <p class="man-subtitle3-16px">Unlike other platforms, GrowUp LMS doesn’t take a cut of your earnings. We only have standard processing fees, just like other payment processors.</p>
                                     </div>
                                 </div>
                             </div>
@@ -394,7 +394,7 @@
                                 </h2>
                                 <div id="collapseqnaSix" class="accordion-collapse collapse" data-bs-parent="#lms-qna-accordion">
                                     <div class="accordion-body">
-                                        <p class="man-subtitle3-16px">With Creative LMS, your site is fully hosted, so no extra web hosting is required. Secure hosting and e-commerce features are built-in.</p>
+                                        <p class="man-subtitle3-16px">With GrowUp LMS, your site is fully hosted, so no extra web hosting is required. Secure hosting and e-commerce features are built-in.</p>
                                     </div>
                                 </div>
                             </div>

@@ -26,6 +26,10 @@
     padding: 1.25rem 10px 1.25rem;
     transition: .3s;
 }
+
+.element-sm-btn .unlimited-btn{
+    padding: 12px 20px;
+}
 .element-desktop-nav li a.active,
 .element-desktop-nav li a:hover{
     color: #0A7EFB;
@@ -303,12 +307,12 @@
         background: #fff;
         width: 100%;
         display: none;
-        
+
     }
     .element-desktop-nav{
         padding-bottom: 30px;
-        height: calc(100vh - 56px);
-        overflow-y: scroll;
+        height: calc(100vh - 100px);
+        overflow-y: auto;
     }
     .element-desktop-nav > ul {
         flex-direction: column;
@@ -354,7 +358,7 @@
     .el-sub-menu > span{
         display: none;
     }
-    .element-desktop-nav li a.active, 
+    .element-desktop-nav li a.active,
     .element-desktop-nav li a:hover {
         color: #212534;
     }

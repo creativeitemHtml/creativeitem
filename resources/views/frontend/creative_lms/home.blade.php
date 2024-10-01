@@ -4,14 +4,13 @@
 
     @php
         use App\Models\SaasCompany;
-
     @endphp
 
     <!-- Get Started Area Start -->
     <section class="lms-get-started-section">
         <div class="container">
             <div class="row align-items-center justify-content-between">
-                <div class="col-xl-7 col-lg-6 col-md-6">
+                <div class="col-xl-7 col-lg-6 col-md-6 order-2 order-md-1 ">
                     <div class="md-max-w-584px">
                         <h1 class="man-title-60px mb-3">Your skill pays. <span class="skin-color">Start earning</span> today!</h1>
                         <p class="man-subtitle3-16px mb-32px pe-xl-4">An advanced LMS that turns your learning Into earning potentials.Share what you know and earn money on your own terms.<span class="fw-medium cin2-text-dark">Turn your knowledge into business opportunity.</span></p>
@@ -20,13 +19,16 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-xl-5 col-lg-6 col-md-6">
+                <div class="col-xl-5 col-lg-6 col-md-6 order-1 order-md-2">
                     <div>
                         <h3 class="man-title2-20px mb-4">Get started in 30 seconds</h3>
                         <form action="">
                             <div class="mb-3">
-                                <input type="email" class="form-control ci2-form-control" id="" placeholder="Your company name*">
-                                <p class="ci2-input-value-text">www.creativeitem.com/</p>
+                                <p class="ci2-input-value-text mb-2">
+                                    www.creativeitem.com/
+                                    <span class="company-name"></span>
+                                </p>
+                                <input type="email" class="form-control ci2-form-control" id="type-company-name" placeholder="Your company name*">
                             </div>
                             <div class="mb-3">
                                 <input type="text" class="form-control ci2-form-control" id="" placeholder="Your Email Address*">
@@ -78,8 +80,8 @@
                 <div class="col-lg-6">
                     <div class="ps-lg-1 ps-xl-2">
                         <div>
-                            <h1 class="man-title-48px mb-3">What can <span class="skin-color">Creative LMS</span> do for you ?</h1>
-                            <p class="man-subtitle3-16px cin2-text-dark mb-32px">Creative LMS supercharges your learning management With engaging features and seamless delivery. Whatever you need, we’ve got the best tools To help you <span class="fw-bold">grow your business.</span></p>
+                            <h1 class="man-title-48px mb-3">What can <span class="skin-color">GrowUp LMS</span> do for you ?</h1>
+                            <p class="man-subtitle3-16px cin2-text-dark mb-32px">GrowUp LMS supercharges your learning management With engaging features and seamless delivery. Whatever you need, we’ve got the best tools To help you <span class="fw-bold">grow your business.</span></p>
                             <a href="#" class="btn cin3-btn-outline-secondary px-32px">Get Started</a>
                         </div>
                     </div>
@@ -96,7 +98,7 @@
             <div class="row mb-32px">
                 <div class="col-12">
                     <h1 class="man-title-48px text-center mb-3">Dream it, Launch it, <span class="skin-color">Make profit!</span></h1>
-                    <p class="man-subtitle3-16px text-center"><span class="cin2-text-dark">Creative LMS</span> makes it happen fast</p>
+                    <p class="man-subtitle3-16px text-center"><span class="cin2-text-dark">GrowUp LMS</span> makes it happen fast</p>
                 </div>
             </div>
             <div class="row">
@@ -244,7 +246,7 @@
                                     </div>
                                     <div>
                                         <h5 class="lms-iconlist-title mb-12px">Ultimate Authority</h5>
-                                        <p class="lms-iconlist-subtitle">Seize full control over your business through direct payment processing and management on Creative LMS.</p>
+                                        <p class="lms-iconlist-subtitle">Seize full control over your business through direct payment processing and management GrowUp LMS.</p>
                                     </div>
                                 </li>
                                 <li class="d-flex align-items-start gap-3">
@@ -374,7 +376,7 @@
                                 </h2>
                                 <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <p class="man-subtitle3-16px">Creative LMS offers personalized guidance and support through interactive, digital communication tools.</p>
+                                        <p class="man-subtitle3-16px">GrowUp LMS offers personalized guidance and support through interactive, digital communication tools.</p>
                                         <!-- for mobile banner -->
                                         <img class="d-block d-md-none lms-secondary-accordion-img" src="{{ asset('assets/img/lms/lms-profit-tab-banner1.webp') }}" alt="">
                                     </div>
@@ -455,7 +457,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="swiper-slide">
+                                    {{-- <div class="swiper-slide">
                                         <div class="d-flex flex-column flex-sm-row lms2-single-slider">
                                             <div class="lms2-slider-img">
                                                 <img src="{{ asset('assets/img/lms/lms-main-slider-banner-1.svg') }}" alt="banner">
@@ -493,7 +495,7 @@
                                                 <p class="man-subtitle3-16px">CEO at Startup Inc.</p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="swiper-button-next"></div>
                                 <div class="swiper-button-prev"></div>
@@ -515,7 +517,7 @@
                     <div class="lms-joining-area">
                         <h1 class="man-title-60px text-white mb-32px text-center">Trainer? Creator? Smart cookie?</h1>
                         <h4 class="man-title-48px fw-semibold text-white mb-2 text-center">You are on the right platform</h4>
-                        <p class="mb-32px man-subtitle2-20px text-white text-center">Join Creative LMS to be part of the creator community</p>
+                        <p class="mb-32px man-subtitle2-20px text-white text-center">Join GrowUp LMS to be part of the creator community</p>
                         <div class="text-center">
                             <a href="#" class="btn cin1-btn-outline-white">Join us free!</a>
                         </div>
@@ -526,3 +528,11 @@
     </section>
     <!-- Blue Area End -->
 @endsection
+
+@push('js')
+    <script>
+        $('#type-company-name').on('input', function() {
+            $('.company-name').text($(this).val());
+        });
+    </script>
+@endpush

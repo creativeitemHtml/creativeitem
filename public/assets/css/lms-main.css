@@ -187,8 +187,8 @@ a.video-sign-up:hover {
     height: 42px;
     z-index: -1;
 }
-.video-after-1 img, 
-.video-after-2 img, 
+.video-after-1 img,
+.video-after-2 img,
 .video-after-3 img {
     height: 100%;
     width: 100%;
@@ -1255,7 +1255,7 @@ a.white-btn-lms{
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 28px; 
+    line-height: 28px;
 }
 .organizer-accordion .accordion-body img{
     display: none;
@@ -1451,7 +1451,7 @@ a.black-btn-lms{
     font-size: 58px;
     font-style: normal;
     font-weight: 800;
-    line-height: 68px; 
+    line-height: 68px;
 }
 
 /* Title */
@@ -1815,7 +1815,7 @@ a.black-btn-lms{
     background-size: 28px;
     background-position: center;
     filter: drop-shadow(0px 8px 20px rgba(12, 119, 236, 0.12));
-} 
+}
 .swiper-next-prev .swiper-button-prev:after {
     position: absolute;
     content: "";
@@ -2410,7 +2410,7 @@ a.black-btn-lms{
     padding: 100px 0;
 }
 .getting-started-top-title{
-    
+
 }
 .getting-started-top-title .title{
     color: #181A1E;
@@ -2701,14 +2701,30 @@ a.black-btn-lms{
     background: rgba(166, 171, 190, 0.29);
 }
 
+.lms-video-modal-btn::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 40px;
+    background: #141451;
+    transition: .3s ease;
+}
+.lms-video-modal-btn:hover::before{
+    width: 97%;
+    background: var(--skinColor);
+}
 .lms-video-modal-btn{
     color: #141451;
     font-family: 'Manrope';
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px; /* 150% */
-    text-decoration-line: underline;
+    line-height: 24px;
+    position: relative;
+    letter-spacing: 4px;
+    text-transform: uppercase;
 }
 .url-input-group{
     border-radius: 8px;
@@ -2944,6 +2960,7 @@ a.black-btn-lms{
 .lms-get-started-section{
     padding: 60px 0 112px 0;
 }
+
 .md-max-w-584px{
     max-width: 584px;
 }
@@ -2975,8 +2992,8 @@ a.black-btn-lms{
 .lms2-video-wrap .plyr__progress input[type=range]{
     color: #0a7efb;
 }
-.plyr--video .plyr__control:focus-visible, 
-.plyr--video .plyr__control:hover, 
+.plyr--video .plyr__control:focus-visible,
+.plyr--video .plyr__control:hover,
 .plyr--video .plyr__control[aria-expanded="true"] {
 	background: #0a7efb;
 }
@@ -3168,7 +3185,7 @@ a.black-btn-lms{
     background: var(--whiteColor);
     z-index: 2;
 }
-.lms2-slider .swiper-button-next, 
+.lms2-slider .swiper-button-next,
 .lms2-slider .swiper-button-prev{
     height: 64px;
     width: 64px;
@@ -3177,19 +3194,19 @@ a.black-btn-lms{
     transition: .3s;
     background: var(--whiteColor);
 }
-.swiper-button-next::after, 
+.swiper-button-next::after,
 .swiper-button-prev::after {
 	font-size: 16px;
     font-weight: bold;
     color: #212534;
     transition: .3s;
 }
-.lms2-slider .swiper-button-next:hover, 
+.lms2-slider .swiper-button-next:hover,
 .lms2-slider .swiper-button-prev:hover{
     border-color: var(--skinColor);
     background: var(--skinColor);
 }
-.lms2-slider .swiper-button-next:hover::after, 
+.lms2-slider .swiper-button-next:hover::after,
 .lms2-slider .swiper-button-prev:hover::after{
     color: var(--whiteColor);
 }
@@ -3561,7 +3578,7 @@ a.black-btn-lms{
 .lms-signup-area{
     border-radius: 32px;
     background: linear-gradient(180deg, #0A7EFB 0%, #0059FF 100%);
-    display: flex; 
+    display: flex;
     align-items: flex-end;
     justify-content: space-between;
     overflow: hidden;
@@ -3651,7 +3668,7 @@ a.black-btn-lms{
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
-    line-height: 20px; 
+    line-height: 20px;
     transition: .3s;
     text-align: center;
     width: fit-content;
@@ -3830,7 +3847,7 @@ a.black-btn-lms{
     max-width: 736px;
 }
 .lms-pricingtab-nav-pills{
-    justify-content: center; 
+    justify-content: center;
     flex-wrap: wrap;
     padding: 6px;
     border-radius: 43px;
@@ -4605,6 +4622,9 @@ a.black-btn-lms{
     .lms1-pricing-title {
         font-size: 37px;
     }
+    .lms-get-started-section.feature{
+        padding-bottom: 60px;
+    }
     .lms1-pricing-card{
         max-width: 450px;
         margin: 0 auto;
@@ -4617,6 +4637,9 @@ a.black-btn-lms{
 
 @media screen and (max-width: 575px){
     /* LMS Landing page */
+    .lms-btn-purple-gradient.feature{
+        width: 100%;
+    }
     .text-58 {
         font-size: 43px;
     }
@@ -4654,7 +4677,7 @@ a.black-btn-lms{
         width: auto;
         justify-content: flex-start;
     }
-    
+
     .single-success-wrap:nth-of-type(3){
         width: auto;
         justify-content: flex-start;
@@ -4830,7 +4853,7 @@ a.black-btn-lms{
     .profit-white-wrap .man-title-60px {
         font-size: 40px;
     }
-    .lms2-slider .swiper-button-next, 
+    .lms2-slider .swiper-button-next,
     .lms2-slider .swiper-button-prev {
         height: 50px;
         width: 50px;
@@ -4919,5 +4942,5 @@ a.black-btn-lms{
     .lms-getstarted-area {
         padding: 30px 45px;
     }
-    
+
 }

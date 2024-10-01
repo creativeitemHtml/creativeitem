@@ -1,190 +1,132 @@
-@php
-    $today = strtotime('now');
-@endphp
 <div class="subscription-main-wrap l_col_main">
-    <div class="title-btn-menu-wrap d-flex justify-content-between align-items-center flex-wrap g-10 pb-30 mb-20">
+    <div class="title-btn-menu-wrap d-flex justify-content-between align-items-center flex-wrap g-10 mb-4">
         <h4 class="fz-20-sb-black">{{ get_phrase($page_title) }}</h4>
-        <a href="{{ route('elements') }}" class="new-goelement-btn">
-             {{ get_phrase('Go to Elements') }}
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"/></svg>
-        </a>
         <button class="d-lg-none mobile-menu-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
             <img src="{{ asset('assets/img/new-icons-images/menu-icon.svg') }}" alt="menu">
         </button>
     </div>
-    <div class="row rg-40">
-        @if(isset($current_subscription) && ($current_subscription->subscription_to_package->interval == 'lifetime' || $current_subscription->expire_date > $today))
-        <div class="col-md-6">
-            <div class="project-item-2">
-                <div class="project-item-2-title">
-                    <h3 class="title">{{ get_phrase('Subscription Status') }}</h3>
-                </div>
-                <div class="py-20 text-center">
-                    <img src="{{ asset('assets/img/admin-customer/subscription-status-2.png') }}" alt="" />
-                </div>
-                <!-- List -->
-                <div class="el-sp-table sStatus-table mx-20 pb-28">
-                    <table class="table eTable">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="el_table_title">
-                                        <img src="{{ asset('assets/img/icon/pulse.svg') }}" alt="" />
-                                        <p>{{ get_phrase('Current subscription status') }}:</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="el_table_info">
-                                        @if($current_subscription->status == 'approved')
-                                        <p class="status-btn status-up">{{ get_phrase('Active') }}</p>
-                                        @else
-                                        <p class="status-btn status-down">{{ get_phrase('Pending') }}</p>
-                                        @endif
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="el_table_title">
-                                        <img src="{{ asset('assets/img/icon/pulse.svg') }}" alt="" />
-                                        <p>{{get_phrase('Package Name')}}:</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="el_table_info">
-                                        <p>{{ $current_subscription->subscription_to_package->name }}</p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                @if($current_subscription->subscription_to_package->interval != 'lifetime')
-                                <td>
-                                    <div class="el_table_title">
-                                    <img
-                                        src="{{ asset('assets/img/icon/calendar-minus.svg') }}"
-                                        alt=""
-                                    />
-                                    <p>{{ get_phrase('Next payment date') }}:</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="el_table_info">
-                                    <p>{{ date('d M Y', $current_subscription->expire_date) }}</p>
-                                    </div>
-                                </td>
-                                @else
-                                <td>
-                                    <div class="el_table_title">
-                                    <img
-                                        src="{{ asset('assets/img/icon/calendar-minus.svg') }}"
-                                        alt=""
-                                    />
-                                    <p>{{ get_phrase('Package Status') }}:</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="el_table_info">
-                                    <p>{{ get_phrase('Lifetime') }}</p>
-                                    </div>
-                                </td>
-                                @endif
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="el_table_title">
-                                        <img
-                                            :src="{{ asset('assets/img/icon/credit-card-2.svg') }}"
-                                            alt=""
-                                        />
-                                        <p>{{ get_phrase('Payment amount') }}:</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="el_table_info">
-                                        <p>{{ currency($current_subscription->paid_amount) }}</p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                @if($current_subscription->subscription_to_package->interval != 'lifetime')
-                    @if($current_subscription->auto_subscription == 1)
-                        <a class="cancel-subscription m-auto" href="javascript:;" onclick="confirmModal('{{ route('customer.stripe.subscription_cancel') }}', 'undefined')">{{ get_phrase('Cancel Subscription') }}</a>
-                    @else
-                        <div class="sbbtn">
-                            <a href="javascript:;" class="cancel-subscription m-auto">{{ get_phrase('Subscription Cancelled') }}</a>
-                            <a class="cancel-subscription m-auto" href="javascript:;" onclick="confirmModal('{{ route('customer.stripe.subscription_again') }}', 'undefined')">{{ get_phrase('Subscribe Again') }}</a>
+
+
+    @if ($current_subscription)
+        <div class="row">
+            <div class="col-md-4">
+                <div class="e-card h-100">
+                    <div class="e-card-header">
+                        <div class="application">
+                            <div class="logo">
+                                <img src="" alt="">
+                            </div>
+                            <h5 class="heading">GrowUp Lms</h5>
                         </div>
-                    @endif
-                @endif
-            </div>
-        </div>
-        @else
-        <!-- Subscription Status -->
-        <div class="col-md-6">
-            <div class="project-item-2">
-            <!-- Title -->
-                <div class="project-item-2-title">
-                    <h3 class="title">{{ get_phrase('Subscription Status') }}</h3>
-                </div>
-                <!-- Content -->
-                <div class="no-subscription">
-                    <img src="{{ asset('assets/img/admin-customer/subscription-status.png') }}" alt="" />
-                    <h4 class="title">
-                        <img src="{{ asset('assets/img/icon/warning.svg') }}" alt="" />
-                        {{ get_phrase('Expired / No Subscription') }}
-                    </h4>
-                    <a href="{{ route('elements_package_pricing') }}">{{ get_phrase('Subscribe Now') }}</a>
+                    </div>
+
+                    <div class="e-card-body">
+                        <p class="title">
+                            <span class="elabel">Company</span> : {{ App\Models\SaasCompany::where('user_id', auth()->user()->id)->value('company_name') }}
+                        </p>
+                        <p class="title">
+                            <span class="elabel">Issue Date</span> : {{ date('d M Y', strtotime($current_subscription->created_at)) }}
+                        </p>
+                        <p class="title">
+                            <span class="elabel">Expiry Date</span> : {{ date('d M Y', strtotime($current_subscription->expiry)) }}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        @endif
-        @if($subscriptions->count() > 0)
-        <!-- Billing History -->
-        <div class="col-md-6">
-            <div class="project-item-2">
-                <!-- Title -->
-                <div class="project-item-2-title">
-                    <h3 class="title">{{ get_phrase('Billing History') }}</h3>
-                </div>
-                <!-- Table -->
-                <div class="table-responsive">
-                    <table class="table eTable eTable-project">
-                        <thead>
-                            <tr>
-                                <th>{{ get_phrase('Date') }}</th>
-                                <th>{{ get_phrase('Amount') }}</th>
-                                <th>{{ get_phrase('Invoice') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($subscriptions as $subscription)
-                            <tr>
-                                <td>
-                                    <div class="project-date-min">
-                                    <p class="fz-15-sb-black">{{ date('d F, Y', $subscription->date_added) }}</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="min-w">
-                                    <p class="fz-15-sb-black">{{ currency($subscription->paid_amount) }}</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="min-w">
-                                        <a href="#" class="payfile-download">
-                                            <img src="{{ asset('assets/img/icon/download.svg') }}" alt="" />
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+
+
+            <div class="col-md-8">
+                <div class="e-card">
+                    <div class="e-card-header">
+                        <div class="subscription d-flex justify-content-between">
+                            <div class="subscription-title">
+                                <h5 class="heading d-flex align-items-center text-capitalize">
+                                    {{ $current_subscription->package->title }}
+                                    <span class="interval-tag text-capitalize">{{ $current_subscription->package->interval }}</span>
+                                </h5>
+                                <p class="title mt-2">{{ $current_subscription->package->subtitle }}</p>
+                            </div>
+                            <div class="d-flex align-items-end gap-2">
+                                <h2 class="subscription-price">{{ currency($current_subscription->package->price) }}</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    @php
+                        $expiry_date = \Carbon\Carbon::parse($current_subscription->expiry);
+                        $issue_date = \Carbon\Carbon::parse($current_subscription->created_at);
+                        $current_date = \Carbon\Carbon::now();
+                        $days_until_expiry = $current_date->diffInDays($expiry_date);
+                        $total_expiry_days = $issue_date->diffInDays($expiry_date);
+                        $progress = 100 - (100 / $total_expiry_days) * $days_until_expiry;
+                        $alert_period = round(($total_expiry_days / 100) * 80);
+                        $subscription_used_days = round($total_expiry_days - $days_until_expiry);
+                    @endphp
+
+                    <div class="e-card-body">
+                        <div class="days-progress">
+                            <p class="title days-left">
+                                @if (round($days_until_expiry) > 0)
+                                    Days Left : {{ round($days_until_expiry) }}
+                                @elseif(round($days_until_expiry) <= 0)
+                                    Expired {{ -1 * round($days_until_expiry) }} day ago
+                                @endif
+                            </p>
+
+                            <div class="progress">
+                                <div class="progress-bar" id="progress-bar" role="progressbar" data-percentage="{{ $progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+
+                        <div class="subscription-status d-flex align-items-center justify-content-between">
+                            <div class="ebadge @if (round($days_until_expiry) > 0) success @else danger @endif ">
+                                <div class="circle"></div>
+                                <span>
+                                    {{ round($days_until_expiry) > 0 ? 'Active' : 'Expired' }}
+                                </span>
+                            </div>
+
+                            @if ($subscription_used_days >= $alert_period)
+                                <a href="#" class="renew">Renew
+                                    <span>
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.83398 14.1667L14.1673 5.83337M14.1673 5.83337H5.83398M14.1673 5.83337V14.1667" stroke="#0A7EFB" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        @endif
-    </div>
+    @else
+        <div class="no-subscription arrow-right mt-60">
+            <img src="{{ asset('assets/img/admin-customer/subscription-status.png') }}" alt="">
+            <h4 class="title"> Currently You don't have any subscription!</h4>
+            <a href="{{ route('lms.pricing') }}">Click to purchase a plan.</a>
+        </div>
+    @endif
 </div>
+
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.getElementById('progress-bar');
+            const percentage = parseInt(progressBar.getAttribute('data-percentage'));
+
+            setTimeout(function() {
+                progressBar.style.width = percentage + '%';
+                progressBar.setAttribute('aria-valuenow', percentage);
+
+                if (percentage < 60) {
+                    progressBar.style.backgroundColor = '#17B26A';
+                } else if (percentage >= 60 && percentage < 90) {
+                    progressBar.style.backgroundColor = 'orange';
+                } else {
+                    progressBar.style.backgroundColor = '#FF6969';
+                }
+            }, 100);
+        });
+    </script>
+@endpush

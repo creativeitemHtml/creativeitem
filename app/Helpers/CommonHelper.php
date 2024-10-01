@@ -247,6 +247,7 @@ if (! function_exists('reformat_image_path')) {
 if (! function_exists('currency')) {
     function currency($price = "")
     {
+        return "$" . $price;
         location_set();
 
         if (isset(auth()->user()->id)) {

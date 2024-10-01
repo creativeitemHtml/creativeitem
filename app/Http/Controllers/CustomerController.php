@@ -17,6 +17,7 @@ use App\Models\Package;
 use App\Models\PaymentMilestone;
 use App\Models\Project;
 use App\Models\RolesAndPermission;
+use App\Models\SaasSubscription;
 use App\Models\Service;
 use App\Models\ServicePackage;
 use App\Models\Setting;
@@ -63,7 +64,8 @@ class CustomerController extends Controller
         return view('backend.customer.navigation', $page_data);
     }
 
-    public function subscription_details()
+    // this is previous code for elements -> changed by Sham
+    public function old_subscription_details()
     {
 
         $page_data            = array();
@@ -129,20 +131,54 @@ class CustomerController extends Controller
 
         $page_data['subscriptions']        = Subscription::where('user_id', auth()->user()->id)->orderBy('id', 'asc')->get();
         $page_data['current_subscription'] = Subscription::where('user_id', auth()->user()->id)->latest()->first();
-        $page_data['page_title']           = 'Creative Elements - Subscription Report';
+        $page_data['page_title']           = 'Subscription';
         $page_data['subscription']         = 'active';
         $page_data['sub_folder']           = 'elements';
         $page_data['file_name']            = 'subscription_details';
         return view('backend.customer.navigation', $page_data);
     }
 
-    public function purchase_history()
+    public function subscription_details()
+    {
+        $page_data['current_subscription'] = SaasSubscription::with('package')
+            ->where('user_id', auth()->user()->id)
+            ->where('status', 1)
+            ->whereHas('package', function ($query) {
+                $query->where('product_id', 1);
+            })
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $page_data['page_title']   = 'Subscription';
+        $page_data['subscription'] = 'active';
+        $page_data['sub_folder']   = 'elements';
+        $page_data['file_name']    = 'subscription_details';
+        return view('backend.customer.navigation', $page_data);
+    }
+
+    // this is previous code for elements -> changed by Sham
+    public function old_purchase_history()
     {
         $page_data['purchase_histories'] = ElementProductPayment::where('user_id', auth()->user()->id)->orderBy('id', 'asc')->paginate(10);
         $page_data['page_title']         = 'Creative Elements - Purchase History';
         $page_data['purchase_history']   = 'active';
         $page_data['sub_folder']         = 'elements';
         $page_data['file_name']          = 'purchase_history';
+        return view('backend.customer.navigation', $page_data);
+    }
+
+    public function purchase_history()
+    {
+        $page_data['purchase_histories'] = SaasSubscription::where('user_id', auth()->user()->id)->with('package')
+            ->whereHas('package', function ($query) {
+                $query->where('product_id', 1);
+            })
+            ->latest()->paginate(10);
+
+        $page_data['page_title']       = 'Payment Method';
+        $page_data['purchase_history'] = 'active';
+        $page_data['sub_folder']       = 'elements';
+        $page_data['file_name']        = 'purchase_history';
         return view('backend.customer.navigation', $page_data);
     }
 

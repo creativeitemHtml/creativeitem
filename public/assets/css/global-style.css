@@ -958,7 +958,7 @@ img{
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 20px; 
+    line-height: 20px;
 }
 /* Mobile Language */
 .mobile-language-li{
@@ -1057,7 +1057,7 @@ img{
     line-height: normal;
     transition: .3s;
 }
-.main-menu-login .log-in:hover{
+.main-menu-login .log-in.active{
     color: #fff;
 }
 .main-menu-login .sign-up{
@@ -1492,10 +1492,10 @@ img{
 .cin1-form-control:hover{
     border-color: var(--skinColor);
 }
-.cin1-form-control::-webkit-inner-spin-button, 
-.cin1-form-control::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+.cin1-form-control::-webkit-inner-spin-button,
+.cin1-form-control::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* Check box */
@@ -1712,13 +1712,13 @@ a.cin2-text-dark:hover{
 .sm-primary-light-nav-pills .nav-link{
     border: 1px solid transparent;
 }
-.sm-primary-light-nav-pills .nav-link.active, 
+.sm-primary-light-nav-pills .nav-link.active,
 .sm-primary-light-nav-pills .show>.nav-link {
     color: var(--skinColor);
     border-color: var(--skinColor);
     background-color: #EFF7FF;
 }
-.sm-primary-light-nav-link:focus, 
+.sm-primary-light-nav-link:focus,
 .sm-primary-light-nav-link:hover {
     color: var(--skinColor);
 }
@@ -1924,7 +1924,7 @@ a.cin2-text-dark:hover{
     font-family: 'Inter';
     font-weight: 500;
     font-size: 12px;
-    line-height: 20px; 
+    line-height: 20px;
     color: #9f9b9e;
 }
 .cin4-btn-outline-secondary{
@@ -1978,7 +1978,7 @@ a.cin2-text-dark:hover{
     font-family: 'Manrope';
     font-weight: 600;
     font-size: 14px;
-    line-height: 20px; 
+    line-height: 20px;
 }
 .cin2-btn-primary:hover{
     color: var(--whiteColor);
@@ -2155,7 +2155,7 @@ a.cin2-text-dark:hover{
         display: none;
     }
     .mobile-menu-button{
-        display: block flex;    
+        display: block flex;
         padding: 10px 10px 10px 0;
         margin-right: 25px;
     }
@@ -2249,7 +2249,7 @@ a.cin2-text-dark:hover{
         display: block;
         margin-left: 20px;
     }
-    
+
     .menu-mobile-login a{
         display: block flex;
         align-items: center;
@@ -2312,6 +2312,10 @@ a.cin2-text-dark:hover{
     .man-title-26px{
         font-size: 24px;
     }
+
+    .lms-get-started-section{
+        padding-top: 20px !important;
+    }
 }
 
 
@@ -2348,7 +2352,7 @@ a.cin2-text-dark:hover{
     .main-menu-profile .dropdown-toggle{
         padding-right: 0;
     }
-    
+
     /* Footer Css Start */
     .copy_right{
         text-align: center;
@@ -2359,7 +2363,7 @@ a.cin2-text-dark:hover{
         font-size: 40px;
     }
     .man-title-48px {
-        font-size: 30px;
+        font-size: 24px;
     }
     .man-title-26px{
         font-size: 20px;
@@ -2384,7 +2388,7 @@ a.cin2-text-dark:hover{
     font-weight: 600;
     font-size: 12px;
     line-height: 1.33333;
-    color: var(--whiteColor); 
+    color: var(--whiteColor);
 }
 .white-icontext-link1:hover{
     color: var(--whiteColor);
@@ -2403,15 +2407,15 @@ a.cin2-text-dark:hover{
 .wh-main-menu-header .menu-parent-a{
     color: var(--grayColor);
 }
-.wh-main-menu-header .menu-parent-a.active, 
+.wh-main-menu-header .menu-parent-a.active,
 .wh-main-menu-header .menu-parent-a:hover {
     color: var(--darkColor);
 }
-.wh-main-menu-header .menu-parent-a path, 
+.wh-main-menu-header .menu-parent-a path,
 .wh-main-menu-header .menu-parent-a path {
     fill: var(--grayColor);
 }
-.wh-main-menu-header .menu-parent-a.active path, 
+.wh-main-menu-header .menu-parent-a.active path,
 .wh-main-menu-header .menu-parent-a:hover path {
     fill: var(--darkColor);
 }
@@ -2468,6 +2472,3 @@ a.cin2-text-dark:hover{
     }
 }
 /* Update Menu Css End */
-
-
-

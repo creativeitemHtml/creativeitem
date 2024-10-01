@@ -5,18 +5,30 @@
     <!-- Hero Title Area Start -->
     <section>
         <div class="container">
-            <div class="row mt-60px mb-60px">
+            <div class="row lms-get-started-section feature">
                 <div class="col-12">
                     <div>
-                        <p class="lms-notice-badge-warning mx-auto mb-12px text-center">Experience robust features of Creative LMS</p>
+                        <p class="lms-notice-badge-warning mx-auto mb-12px text-center">Experience robust features of GrowUp LMS</p>
                         <h1 class="mb-3 man-title-48px text-center">Design for impact. Learn for life.</h1>
                         <p class="mb-32px man-subtitle3-16px text-center">Combine your expertise with our cutting-edge tools to build impactful learning solutions that students will find irresistable.</p>
-                        <div class="d-flex align-items-center justify-content-center cg-32px rg-20px flex-wrap">
-                            <a href="#" class="btn lms-btn-purple-gradient px-4">
-                                <span>Get Started Free</span>
-                                <img src="{{ asset('assets/img/icon/arrow-right-white-24.svg') }}" alt="icon">
-                            </a>
-                            <a href="#" class="lms-video-modal-btn" data-bs-toggle="modal" data-bs-target="#video-modal">Watch demo</a>
+                        {{-- <div class="row">
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6 d-flex justify-content-center justify-content-sm-start align-items-center">
+
+                            </div>
+                        </div> --}}
+
+                        <div class="d-sm-flex justify-content-center align-items-center gap-3">
+                            <div class="d-flex d-sm-block">
+                                <a href="#" class="btn lms-btn-purple-gradient px-4 feature">
+                                    <span>Get Started Free</span>
+                                    <img src="{{ asset('assets/img/icon/arrow-right-white-24.svg') }}" alt="icon">
+                                </a>
+                            </div>
+                            <div class="mt-3 mt-sm-0 d-flex d-sm-block justify-content-center">
+                                <a href="#" class="lms-video-modal-btn" data-bs-toggle="modal" data-bs-target="#video-modal">Watch demo</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,7 +124,7 @@
                                 </div>
                                 <div>
                                     <h5 class="lms-iconlist-title mb-12px">Spark success</h5>
-                                    <p class="lms-iconlist-subtitle">Transform your knowledge into engaging learning experiences with Creative LMS</p>
+                                    <p class="lms-iconlist-subtitle">Transform your knowledge into engaging learning experiences with GrowUp LMS</p>
                                 </div>
                             </li>
                             <li class="d-flex align-items-start gap-3">
@@ -313,12 +325,12 @@
     <section>
         <div class="container">
             <div class="row mb-100px align-items-center">
-                <div class="col-md-6">
+                <div class="col-md-6 order-2 order-md-1">
                     <div class="wow animate__fadeInLeft" data-wow-delay=".3s">
                         <img class="w-100" src="{{ asset('assets/img/lms/feature-revenue-banner.webp') }}" alt="banner">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 order-1 order-md-2">
                     <div>
                         <h1 class="man-title-48px mb-32px">Boost <span class="skin-color">revenue</span> by selling</h1>
                         <p class="man-subtitle3-16px mb-32px">You provide the expertise, and we deliver the tools. With our seamless marketing and e-commerce features, <span class="fw-semibold cin2-text-dark">promoting and selling your learning products</span> is a breeze—no annoying sales tactics
@@ -492,8 +504,8 @@
         <div class="container">
             <div class="row mb-32px">
                 <div class="col-12">
-                    <h1 class="man-title-48px text-center mb-20px">Creative LMS FAQ</h1>
-                    <p class="man-subtitle3-16px text-center">Your quick guide to all things regarding Creative LMS—features, pricing, and more!</p>
+                    <h1 class="man-title-48px text-center mb-20px">GrowUp LMS FAQ</h1>
+                    <p class="man-subtitle3-16px text-center">Your quick guide to all things regarding GrowUp LMS—features, pricing, and more!</p>
                 </div>
             </div>
             <div class="row mb-100px justify-content-center">
@@ -503,12 +515,12 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseqnaOne" aria-expanded="true" aria-controls="collapseqnaOne">
-                                        What is Creative LMS?
+                                        What is GrowUp LMS?
                                     </button>
                                 </h2>
                                 <div id="collapseqnaOne" class="accordion-collapse collapse show" data-bs-parent="#lms-qna-accordion">
                                     <div class="accordion-body">
-                                        <p class="man-subtitle3-16px">Creative LMS is a Learning Management System designed to streamline and enhance the process of creating, managing, and delivering educational content.</p>
+                                        <p class="man-subtitle3-16px">GrowUp LMS is a Learning Management System designed to streamline and enhance the process of creating, managing, and delivering educational content.</p>
                                     </div>
                                 </div>
                             </div>
@@ -557,19 +569,19 @@
                                 </h2>
                                 <div id="collapseqnaFive" class="accordion-collapse collapse" data-bs-parent="#lms-qna-accordion">
                                     <div class="accordion-body">
-                                        <p class="man-subtitle3-16px">Yes, Creative LMS offers robust communication tools. You can make global announcements visible to all users, send direct messages to individuals or groups, and automate emails for events like recertification or course completion.</p>
+                                        <p class="man-subtitle3-16px">Yes, GrowUp LMS offers robust communication tools. You can make global announcements visible to all users, send direct messages to individuals or groups, and automate emails for events like recertification or course completion.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseqnaSix" aria-expanded="false" aria-controls="collapseqnaSix">
-                                        Is Creative LMS suitable for my company?
+                                        Is GrowUp LMS suitable for my company?
                                     </button>
                                 </h2>
                                 <div id="collapseqnaSix" class="accordion-collapse collapse" data-bs-parent="#lms-qna-accordion">
                                     <div class="accordion-body">
-                                        <p class="man-subtitle3-16px">No matter your size, Creative LMS offers affordable plans for everyone—from solo entrepreneurs to SMBs and growing enterprises. That’s why over 28000  teams rely on Creative LMS for their training needs.</p>
+                                        <p class="man-subtitle3-16px">No matter your size, GrowUp LMS offers affordable plans for everyone—from solo entrepreneurs to SMBs and growing enterprises. That’s why over 28000  teams rely on GrowUp LMS for their training needs.</p>
                                     </div>
                                 </div>
                             </div>

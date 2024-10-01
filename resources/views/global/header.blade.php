@@ -120,20 +120,20 @@
                                                     <p class="mega-descrip">{{ get_phrase('8+ web applications with multiple available addons') }}</p>
                                                 </div>
                                             </a>
-                                            {{-- <a href="{{ route('elements') }}">
-                                                <div class="mobile-mega-single">
-                                                    <div class="mobile-mega-icon">
-                                                        <div class="mega-icon-inner">
-                                                            <img src="{{ asset('assets/img/new-icons-images/mega-5.svg') }}" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <h4 class="mega-heading">{{ get_phrase('Elements') }}</h4>
-                                                    <p class="mega-descrip">{{ get_phrase('Stay updated with the latest pre-built elements') }}</p>
+
+                                            <a href="{{ route('lms.home') }}" class="mega-menu-item mega-menu-item-2">
+                                                <div class="icon">
+                                                    <img src="{{ asset('assets/img/new-icons-images/mega-4.svg') }}" alt="" />
                                                 </div>
-                                            </a> --}}
+                                                <div class="content">
+                                                    <h3 class="title">{{ get_phrase('Creative LMS') }}</h3>
+                                                    <p class="info">
+                                                        {{ get_phrase('SAAS Online Learning Management System') }}
+                                                    </p>
+                                                </div>
+                                            </a>
                                         </ul>
                                     </li>
-                                    {{-- <li><a href="{{ route('elements') }}">{{ get_phrase('Elements') }}</a></li> --}}
                                     <li><a href="{{ route('services') }}">{{ get_phrase('Service') }}</a></li>
                                     <li><a href="{{ route('blog') }}">{{ get_phrase('Blog') }}</a></li>
                                     <li><a href="{{ route('elements') }}">{{ get_phrase('Submit Ticket') }}</a></li>
@@ -149,7 +149,7 @@
                                     @else
                                         <li><a href="{{ route('login') }}">{{ get_phrase('Login') }}</a></li>
                                     @endif
-                                    <li class="mobile-language-li d-flex justify-content-between align-items-center">
+                                    {{-- <li class="mobile-language-li d-flex justify-content-between align-items-center">
                                         <p>{{ get_phrase('Language') }}</p>
                                         <form action="" class="language-selector">
                                             <div class="dropdown-c dropdown-hover">
@@ -231,7 +231,7 @@
                                             <!-- Selected value input -->
                                             <input type="hidden" id="selected-language-mobile" class="selected-language-mobile" name="" value="ENG">
                                         </form>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </nav>
                         </div>
@@ -323,7 +323,7 @@
                             <!-- Login Logout Button -->
                             <div class="main-menu-login d-flex align-items-center">
                                 <a href="{{ route('login') }}" class="log-in">{{ get_phrase('Log in') }}</a>
-                                <a href="{{ route('register') }}" class="sign-up">{{ get_phrase('Sign Up') }}</a>
+                                <a href="{{ route('register') }}" class="log-in active">{{ get_phrase('Sign Up') }}</a>
                             </div>
                             <!-- Mobile Login Button -->
                             <div class="menu-mobile-login">
