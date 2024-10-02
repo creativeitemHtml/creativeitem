@@ -3163,7 +3163,7 @@ a.black-btn-lms{
     height: 100%;
 }
 .lms2-slider{
-    padding: 0 76px;
+    padding: 0 76px !important;
 }
 .lms2-slider::after{
     content: "";
@@ -3196,7 +3196,7 @@ a.black-btn-lms{
 }
 .swiper-button-next::after,
 .swiper-button-prev::after {
-	font-size: 16px;
+	font-size: 16px !important;
     font-weight: bold;
     color: #212534;
     transition: .3s;
@@ -4349,7 +4349,7 @@ a.black-btn-lms{
         width: 55px;
     }
     .lms2-slider{
-        padding: 0 60px;
+        padding: 0 60px !important;
     }
     .lms2-slider::after{
         width: 60px;
@@ -4859,7 +4859,7 @@ a.black-btn-lms{
         width: 50px;
     }
     .lms2-slider{
-        padding: 0 30px;
+        padding: 0 30px !important;
     }
     .lms2-slider::after{
         width: 30px;
