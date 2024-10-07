@@ -159,7 +159,7 @@
                                         </li>
 
 
-                                        <li class="nav-links-li-2 {{ request()->routeIs(['customer.subscription_details', 'customer.purchase_history', 'customer.wishlists', 'customer.downloads', 'customer.purchase_invoice']) ? 'active-submenu' : '' }}">
+                                        <li class="nav-links-li-2 {{ request()->routeIs(['customer.growup.lms.subscription', 'customer.growup.lms.purchase.history', 'customer.wishlists', 'customer.downloads', 'customer.purchase_invoice']) ? 'active-submenu' : '' }}">
                                             <a href="javascript:void(0);" class="nav-item nav-item-have-sub d-flex align-items-center">
                                                 <div class="sidebar_icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="20" height="20">
@@ -171,9 +171,9 @@
                                                 <span class="link-name">{{ get_phrase('GrowUp Lms') }}</span>
                                             </a>
                                             <ul class="sideBar-sub"
-                                                style="display: {{ request()->routeIs('customer.subscription_details') || request()->routeIs(['customer.purchase_history', 'customer.purchase_invoice']) || request()->routeIs('customer.wishlists') || request()->routeIs('customer.downloads') ? 'block' : 'none' }}">
-                                                <li><a href="{{ route('customer.subscription_details') }}" class="{{ request()->routeIs('customer.subscription_details') ? 'active' : '' }}">{{ get_phrase('Subscription Details') }}</a></li>
-                                                <li><a href="{{ route('customer.purchase_history') }}" class="{{ request()->routeIs(['customer.purchase_history', 'customer.purchase_invoice']) ? 'active' : '' }}">{{ get_phrase('Purchase History') }}</a></li>
+                                                style="display: {{ request()->routeIs('customer.growup.lms.subscription') || request()->routeIs(['customer.growup.lms.purchase.history', 'customer.purchase_invoice']) || request()->routeIs('customer.wishlists') || request()->routeIs('customer.downloads') ? 'block' : 'none' }}">
+                                                <li><a href="{{ route('customer.growup.lms.subscription') }}" class="{{ request()->routeIs('customer.growup.lms.subscription') ? 'active' : '' }}">{{ get_phrase('Subscription Details') }}</a></li>
+                                                <li><a href="{{ route('customer.growup.lms.purchase.history') }}" class="{{ request()->routeIs(['customer.growup.lms.purchase.history', 'customer.purchase_invoice']) ? 'active' : '' }}">{{ get_phrase('Purchase History') }}</a></li>
                                             </ul>
                                         </li>
 

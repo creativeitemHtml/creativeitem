@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::name('lms.')->prefix('creative-lms')->group(function () {
+Route::name('lms.')->prefix('growup-lms')->group(function () {
 
     Route::controller(LmsController::class)->group(function () {
         Route::get('/', 'index')->name('home');

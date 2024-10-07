@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
@@ -667,21 +668,36 @@ class LmsController extends Controller
         $purchase_data['discount']       = isset($amount_return) ? $amount_return : null;
         $purchase_data['user_id']        = auth()->user()->id;
         $purchase_data['package_id']     = $package->id;
-        $purchase_data['price']          = ($package->discount ?? $package->price - $purchase_data['discount']) * 100;
+        $purchase_data['price']          = $package->is_free ? null : (($package->discount ?? $package->price - $purchase_data['discount']) * 100);
         $purchase_data['expiry']         = isset($time_diff) ? $expiry - $time_diff : $expiry;
         $purchase_data['payment_method'] = 'stripe';
         $purchase_data['success_url']    = 'lms.subscription.success';
         $purchase_data['cancel_url']     = 'lms.pricing';
 
+        // subscription to free package
+        if ($package->is_free) {
+            $subscription                   = array_splice($purchase_data, 2, 5);
+            $subscription['expiry']         = date('Y-m-d H:i:s', $subscription['expiry']);
+            $subscription['status']         = 1;
+            $subscription['payment_method'] = 'free';
+
+            $subscription_id = SaasSubscription::insertGetId($subscription);
+            $this->updateGrowUpSubscription($subscription_id);
+
+            // return to subscription details page
+            return redirect()->route('customer.growup.lms.subscription')->with('success', 'Subscription completed successfully.');
+        }
+
         // payable amount
         $payable_amount = round($purchase_data['price']);
 
+        // process stripe data
         $purchase_data = implode(' ', array_map(function ($key, $value) {
             return "$key:$value";
         }, array_keys($purchase_data), $purchase_data));
 
+        // stipe api payment
         try {
-
             Stripe\Stripe::setApiKey($stripe_secret);
             $session = \Stripe\Checkout\Session::create([
                 'line_items'  => [[
@@ -699,9 +715,7 @@ class LmsController extends Controller
                 'success_url' => route('lms.subscription.success', ['purchase_data' => $purchase_data, 'response' => 'check $service_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url'  => route('lms.pricing', ['purchase_data' => $purchase_data, 'response' => 'check $service_id to get the response ']) . '?session_id={CHECKOUT_SESSION_ID}',
             ]);
-
             return redirect($session->url);
-
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -750,21 +764,44 @@ class LmsController extends Controller
             if ($purchase['has_plan']) {
                 SaasSubscription::where('id', $purchase['has_plan'])->update(['status' => 0]);
             }
-            $msg = $purchase['has_plan'] ? 'Your plan has been upgraded!' : 'Subscription completed successfully!';
-            SaasSubscription::insert($subscription);
+
+            $subscription_id = SaasSubscription::insertGetId($subscription);
+
+            $this->updateGrowUpSubscription($subscription_id);
 
             // Mail::to(auth()->user()->email)->send(new ServiceInvoice($payment_details, $user));
             // Mail::to('project@creativeitem.com')->send(new ServiceInvoice($payment_details, $user));
 
             // return redirect('customer/project_details/' . $payment_details->project_id)->with('success', 'Service Payment successful');
-            return redirect()->route('lms.home')->with('success', $msg);
+            $msg = $purchase['has_plan'] ? 'Your plan has been upgraded!' : 'Subscription completed successfully!';
+            return redirect()->route('customer.growup.lms.subscription')->with('success', $msg);
+        }
+    }
+
+    public function updateGrowUpSubscription($subscription_id)
+    {
+        $subscription = SaasSubscription::with('package')->findOrFail($subscription_id);
+
+        $api_response = Http::post('http://localhost/saas/academy/infinity/update/user-subscription', [
+            'payload' => $subscription,
+        ]);
+
+        if ($api_response->successful()) {
+            return response()->json([
+                'message' => 'Subscription request sent successfully.',
+                'data'    => $api_response->json(),
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Failed to send subscription request.',
+                'error'   => $api_response->body(),
+            ], $api_response->status());
         }
     }
 
     public function service_purchase_fail_payment(Request $request, $purchase, $response)
     {
         $purchase = $this->string_to_array($purchase);
-
         return redirect()->route('services')->with('warning', 'Service Purchase failed.');
     }
 

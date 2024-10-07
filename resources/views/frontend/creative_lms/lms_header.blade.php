@@ -12,17 +12,20 @@
                         <!-- Menu -->
                         <div class="element-menu-area">
                             <nav class="element-desktop-nav">
-                                <ul class="d-flex align-items-center align-items-center">
+                                <ul class="d-flex align-items-center justify-content-between">
                                     <li><a href="{{ route('lms.home') }}" class="{{ Route::currentRouteName() == 'lms.home' ? 'active' : '' }}">Home</a></li>
                                     <li><a href="{{ route('lms.features') }}" class="{{ Route::currentRouteName() == 'lms.features' ? 'active' : '' }}">Features</a></li>
                                     <li><a href="{{ route('lms.pricing') }}" class="{{ Route::currentRouteName() == 'lms.pricing' ? 'active' : '' }}">Pricing</a></li>
-                                    <li>
-                                        <div class="element-sm-btn mt-3 mt-lg-0">
+                                    <li class="list-button">
+                                        <div class="element-sm-btn-2 mt-3 mt-lg-0">
                                             <a href="#" class="unlimited-btn w-100 justify-content-center">Start For Free</a>
                                         </div>
                                     </li>
                                 </ul>
                             </nav>
+                        </div>
+                        <div class="element-sm-btn mt-3 mt-lg-0">
+                            <a href="#" class="unlimited-btn w-100 justify-content-center">Start For Free</a>
                         </div>
                         <div class="element-menu-button">
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">

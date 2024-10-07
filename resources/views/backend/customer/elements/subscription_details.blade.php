@@ -47,7 +47,7 @@
                                 <p class="title mt-2">{{ $current_subscription->package->subtitle }}</p>
                             </div>
                             <div class="d-flex align-items-end gap-2">
-                                <h2 class="subscription-price">{{ currency($current_subscription->package->price) }}</h2>
+                                <h2 class="subscription-price">{{ $current_subscription->package->price ? currency($current_subscription->package->price) : 'Free' }}</h2>
                             </div>
                         </div>
                     </div>

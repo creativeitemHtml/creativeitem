@@ -74,4 +74,7 @@ Route::controller(CustomerController::class)->middleware('auth', 'customer')->gr
     Route::get('/customer/creative-elements/download-link/{product_id}', 'download_link_generate')->name('customer.download_link_generate');
     Route::get('/elements/download-file/{unique_identifier}', 'download_product')->name('customer.download_product');
 
+    // grow up lms
+    Route::get('/customer/growup-lms/subscription', 'growup_lms_subscription')->name('customer.growup.lms.subscription');
+    Route::get('/customer/growup-lms/purchase-history', 'growup_lms_purchase_history')->name('customer.growup.lms.purchase.history');
 });

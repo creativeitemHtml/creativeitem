@@ -138,11 +138,11 @@ class CustomerController extends Controller
         return view('backend.customer.navigation', $page_data);
     }
 
-    public function subscription_details()
+    public function growup_lms_subscription()
     {
         $page_data['current_subscription'] = SaasSubscription::with('package')
             ->where('user_id', auth()->user()->id)
-            ->where('status', 1)
+            ->where('status', '!=', 0)
             ->whereHas('package', function ($query) {
                 $query->where('product_id', 1);
             })
@@ -167,7 +167,7 @@ class CustomerController extends Controller
         return view('backend.customer.navigation', $page_data);
     }
 
-    public function purchase_history()
+    public function growup_lms_purchase_history()
     {
         $page_data['purchase_histories'] = SaasSubscription::where('user_id', auth()->user()->id)->with('package')
             ->whereHas('package', function ($query) {

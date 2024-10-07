@@ -125,6 +125,7 @@
 .element-menu-button{
     display: none;
 }
+
 /* Element Menu Css */
 
 
@@ -273,13 +274,14 @@
 }
 /* Element Menu Search */
 
-
+.list-button{
+    display: none;
+}
 
 
 /* Responsive Css Start */
 @media all and (max-width: 1199px){
     .element-desktop-nav ul{
-        /* column-gap: 20px; */
         column-gap: 0px;
     }
 }
@@ -322,6 +324,12 @@
     .element-menu-button{
         display: block;
         padding: 10px;
+    }
+    .element-sm-btn{
+        display: none;
+    }
+    .list-button{
+        display: block;
     }
     .element-logo img {
         height: 30px;
