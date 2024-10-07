@@ -781,8 +781,8 @@ class LmsController extends Controller
     public function updateGrowUpSubscription($subscription_id)
     {
         $subscription = SaasSubscription::with('package')->findOrFail($subscription_id);
-
-        $api_response = Http::post('http://localhost/saas/academy/infinity/update/user-subscription', [
+        $company      = SaasCompany::where('user_id', auth()->user()->id)->where('saas_id', 1)->value('company_slug');
+        $api_response = Http::post("https://lms.creativeitem.com/{$company}/update/user-subscription", [
             'payload' => $subscription,
         ]);
 
