@@ -247,8 +247,7 @@ if (! function_exists('reformat_image_path')) {
 if (! function_exists('currency')) {
     function currency($price = "")
     {
-        return "$" . $price;
-        location_set();
+        // location_set();
 
         if (isset(auth()->user()->id)) {
             $code = User::where('id', auth()->user()->id)->value('currency_code');

@@ -151,7 +151,7 @@ class CustomerController extends Controller
 
         $page_data['page_title']   = 'Subscription';
         $page_data['subscription'] = 'active';
-        $page_data['sub_folder']   = 'elements';
+        $page_data['sub_folder']   = 'grow-up-lms';
         $page_data['file_name']    = 'subscription_details';
         return view('backend.customer.navigation', $page_data);
     }
@@ -177,7 +177,7 @@ class CustomerController extends Controller
 
         $page_data['page_title']       = 'Payment Method';
         $page_data['purchase_history'] = 'active';
-        $page_data['sub_folder']       = 'elements';
+        $page_data['sub_folder']       = 'grow-up-lms';
         $page_data['file_name']        = 'purchase_history';
         return view('backend.customer.navigation', $page_data);
     }

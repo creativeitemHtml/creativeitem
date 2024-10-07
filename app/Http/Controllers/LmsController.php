@@ -756,13 +756,13 @@ class LmsController extends Controller
             $subscription['payment_method']   = 'stripe';
             $subscription['transaction_keys'] = $stripe_payment_response;
             $subscription['expiry']           = date('Y-m-d H:i:s', $purchase['expiry']);
-            $subscription['status']           = 2;
+            $subscription['status']           = 1;
 
             $purchase['has_plan'] ? $subscription['upgrade_from_package_id'] = $purchase['has_plan'] : null;
 
             // check if use has any plan
             if ($purchase['has_plan']) {
-                SaasSubscription::where('id', $purchase['has_plan'])->update(['status' => 0]);
+                SaasSubscription::where('id', $purchase['has_plan'])->update(['status' => 2]);
             }
 
             $subscription_id = SaasSubscription::insertGetId($subscription);

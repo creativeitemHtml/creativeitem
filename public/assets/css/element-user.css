@@ -311,6 +311,17 @@
     border-radius: 6px;
 }
 
+.upgrade-badge {
+    background: #EBF4FF;
+    color: #212534;
+    border: 1px solid #B1D6FF;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+
 .e-table thead th{
     font-size: 12px;
     font-weight: 600;

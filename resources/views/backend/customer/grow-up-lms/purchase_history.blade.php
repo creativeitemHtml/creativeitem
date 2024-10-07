@@ -26,9 +26,13 @@
                                 <tr>
                                     <td>{{ $history->package->title }}</td>
                                     <td>{{ date('d M Y', strtotime($history->created_at)) }}</td>
-                                    <td>{{ currency($history->price) }}</td>
+                                    <td>{{ $history->price ? currency($history->price) : 'Free' }}</td>
                                     <td>
-                                        <span class="{{ $history->status ? 'paid' : 'processing' }}-badge">{{ $history->status ? 'Paid' : 'Processing' }}</span>
+                                        @if (!$history->status)
+                                            <span class="processing-badge">Processing</span>
+                                        @else
+                                            <span class="{{ $history->status == 1 ? 'paid' : 'upgrade' }}-badge">{{ $history->status == 1 ? 'Paid' : 'Upgrade' }}</span>
+                                        @endif
                                     </td>
                                     <td>
                                         <a href="#">
