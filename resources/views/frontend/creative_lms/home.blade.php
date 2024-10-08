@@ -22,16 +22,16 @@
                 <div class="col-xl-5 col-lg-6 col-md-6 order-1 order-md-2">
                     <div>
                         <h3 class="man-title2-20px mb-4">Get started in 30 seconds</h3>
-                        <form action="">
+                        <form action="{{ route('lms.company_lms_register') }}" method="post" enctype="multipart/form-data">@csrf
                             <div class="mb-3">
                                 <p class="ci2-input-value-text mb-2">
                                     www.creativeitem.com/
                                     <span class="company-name"></span>
                                 </p>
-                                <input type="email" class="form-control ci2-form-control" id="type-company-name" placeholder="Your company name*">
+                                <input type="text" class="form-control ci2-form-control" id="type-company-name" name="company_name" placeholder="Your company name*">
                             </div>
                             <div class="mb-3">
-                                <input type="text" class="form-control ci2-form-control" id="" placeholder="Your Email Address*">
+                                <input type="text" class="form-control ci2-form-control" id="" name="email" @auth value="{{ auth()->user()->id }}" @endauth placeholder="Your Email Address*">
                             </div>
                             <div class="mb-3">
                                 <div class="input-password-wrap">
@@ -39,7 +39,7 @@
                                         <img class="eye-unlock" src="{{ asset('assets/img/icon/eye-gray-18.svg') }}" alt="">
                                         <img class="eye-lock" src="{{ asset('assets/img/icon/eye-slash-gray-18.svg') }}" alt="">
                                     </div>
-                                    <input type="password" id="password1" class="form-control ci2-form-control password-field1" placeholder="Password*">
+                                    <input type="password" id="password1" name="password" class="form-control ci2-form-control password-field1" placeholder="Password*">
                                 </div>
                             </div>
                             <div class="mb-20px">

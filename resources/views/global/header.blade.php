@@ -268,7 +268,7 @@
                                         </li>
                                     @else
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('customer.subscription_details') }}">
+                                            <a class="dropdown-item" href="{{ route('customer.growup.lms.subscription') }}">
                                                 <span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16.663" height="16.663" viewBox="0 0 16.663 16.663">
                                                         <path id="send"

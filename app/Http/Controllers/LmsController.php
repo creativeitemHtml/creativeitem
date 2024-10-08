@@ -324,6 +324,21 @@ class LmsController extends Controller
 
                     $check_verification = auth()->user()->email_verified_at;
 
+                    // subscription to a free package
+                    $package = PricingPackage::where('is_free', 1)->first();
+                    $expiry  = strtotime("+ {$package->interval_period} {$package->interval}");
+
+                    $subscription['user_id']        = auth()->user()->id;
+                    $subscription['package_id']     = $package->id;
+                    $subscription['price']          = $package->is_free ? null : (($package->discount ?? $package->price) * 100);
+                    $subscription['expiry']         = isset($time_diff) ? $expiry - $time_diff : $expiry;
+                    $subscription['expiry']         = date('Y-m-d H:i:s', $subscription['expiry']);
+                    $subscription['payment_method'] = 'free';
+                    $subscription['status']         = 1;
+
+                    $subscription_id = SaasSubscription::insertGetId($subscription);
+                    $this->updateGrowUpSubscription($subscription_id);
+
                     if (is_null($check_verification)) {
                         return view('frontend.creative_lms.company_email_verify');
                     } else {
@@ -668,7 +683,7 @@ class LmsController extends Controller
         $purchase_data['discount']       = isset($amount_return) ? $amount_return : null;
         $purchase_data['user_id']        = auth()->user()->id;
         $purchase_data['package_id']     = $package->id;
-        $purchase_data['price']          = $package->is_free ? null : (($package->discount ?? $package->price - $purchase_data['discount']) * 100);
+        $purchase_data['price']          = $package->is_free ? null : (($package->discount ?? $package->price) * 100);
         $purchase_data['expiry']         = isset($time_diff) ? $expiry - $time_diff : $expiry;
         $purchase_data['payment_method'] = 'stripe';
         $purchase_data['success_url']    = 'lms.subscription.success';
@@ -782,7 +797,14 @@ class LmsController extends Controller
     {
         $subscription = SaasSubscription::with('package')->findOrFail($subscription_id);
         $company      = SaasCompany::where('user_id', auth()->user()->id)->where('saas_id', 1)->value('company_slug');
-        $api_response = Http::post("https://lms.creativeitem.com/{$company}/update/user-subscription", [
+
+        // live server testing
+        // $api_response = Http::post("https://lms.creativeitem.com/{$company}/update/user-subscription", [
+        //     'payload' => $subscription,
+        // ]);
+
+        // localhost testing
+        $api_response = Http::post("http://localhost/saas/academy/{$company}/update/user-subscription", [
             'payload' => $subscription,
         ]);
 
