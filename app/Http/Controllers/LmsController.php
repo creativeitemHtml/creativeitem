@@ -421,7 +421,7 @@ class LmsController extends Controller
         // Root Database credentials
         $servername = "localhost";
         $username   = "root";
-        $password   = "";
+        $password   = "VEz1Pi%#@cKL";
 
         // New DB name
         $dbname = 'ctmacademy_saas_' . random(9);
