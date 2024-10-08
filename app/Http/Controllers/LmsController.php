@@ -799,14 +799,14 @@ class LmsController extends Controller
         $company      = SaasCompany::where('user_id', auth()->user()->id)->where('saas_id', 1)->value('company_slug');
 
         // live server testing
-        // $api_response = Http::post("https://lms.creativeitem.com/{$company}/update/user-subscription", [
-        //     'payload' => $subscription,
-        // ]);
-
-        // localhost testing
-        $api_response = Http::post("http://localhost/saas/academy/{$company}/update/user-subscription", [
+        $api_response = Http::post("https://lms.creativeitem.com/{$company}/update/user-subscription", [
             'payload' => $subscription,
         ]);
+
+        // localhost testing
+        // $api_response = Http::post("http://localhost/saas/academy/{$company}/update/user-subscription", [
+        //     'payload' => $subscription,
+        // ]);
 
         if ($api_response->successful()) {
             return response()->json([
