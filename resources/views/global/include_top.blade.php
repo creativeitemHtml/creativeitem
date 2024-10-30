@@ -73,6 +73,7 @@
             Route::currentRouteName() == 'element_product_details_modal' ||
             Route::currentRouteName() == 'customer.element_checkout_success' ||
             Route::currentRouteName() == 'customer.project_create' ||
+            Route::currentRouteName() == 'superadmin.products.updater' ||
             Route::currentRouteName() == 'customer.milestone_invoice' ||
             Route::currentRouteName() == 'customer.subscription_details' ||
             Route::currentRouteName() == 'customer.purchase_history' ||
@@ -111,6 +112,7 @@
             Route::currentRouteName() == 'customer.profile' ||
             Route::currentRouteName() == 'superadmin.dashboard' ||
             Route::currentRouteName() == 'superadmin.products' ||
+            Route::currentRouteName() == 'superadmin.products.updater' ||
             Route::currentRouteName() == 'superadmin.product_type' ||
             Route::currentRouteName() == 'superadmin.tags' ||
             Route::currentRouteName() == 'superadmin.documentation' ||

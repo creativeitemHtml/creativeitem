@@ -9,6 +9,10 @@ Route::name('superadmin.')->prefix('superadmin')->middleware('auth', 'superadmin
         Route::get('dashboard', 'dashboard')->name('dashboard');
         Route::get('products', 'products')->name('products');
         Route::get('product-type', 'product_type')->name('product_type');
+
+        Route::get('products/updater', 'products_updater')->name('products.updater');
+        Route::post('products/updater', 'update_user_product')->name('products.updater');
+
         Route::get('tags', 'tags')->name('tags');
         Route::post('add-tag', 'tag_create')->name('tag_create');
         Route::post('tag-update/{id}', 'tag_update')->name('tag_update');

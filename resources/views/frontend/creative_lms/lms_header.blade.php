@@ -7,7 +7,7 @@
                     <div class="element-menu-wrap d-flex justify-content-between align-items-center">
                         <!-- Logo -->
                         <div class="element-logo">
-                            <a href="{{ route('lms.home') }}"><img src="{{ asset('assets/img/new-icons-images/grow-up-lms.png') }}" alt="logo" width="145px"></a>
+                            <a href="{{ route('lms.home') }}"><img src="{{ asset('assets/img/new-icons-images/grow-up-lms-dark-beta.svg') }}" alt="logo" width="145px"></a>
                         </div>
                         <!-- Menu -->
                         <div class="element-menu-area">
