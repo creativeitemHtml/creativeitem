@@ -2408,16 +2408,14 @@ class SuperadminController extends Controller
             $company = DB::table('saas_companies')->find($id);
 
             if ($company) {
-                if ($this->databaseExists($company->db_name)) {
-                    config([
-                        'database.connections.company_db.username' => 'root',
-                        'database.connections.company_db.database' => $company->db_name,
-                        'database.connections.company_db.password' => "VEz1Pi%#@cKL",
-                    ]);
+                config([
+                    'database.connections.company_db.username' => 'root',
+                    'database.connections.company_db.database' => $company->db_name,
+                    'database.connections.company_db.password' => "VEz1Pi%#@cKL",
+                ]);
 
-                    DB::purge('company_db');
-                    DB::connection('company_db')->statement($request->custom_query);
-                }
+                DB::purge('company_db');
+                DB::connection('company_db')->statement($request->custom_query);
             }
         }
 
