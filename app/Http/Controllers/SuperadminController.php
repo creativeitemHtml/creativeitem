@@ -2410,6 +2410,7 @@ class SuperadminController extends Controller
             if ($company) {
                 if ($this->databaseExists($company->db_name)) {
                     config([
+                        'database.connections.company_db.username' => 'root',
                         'database.connections.company_db.database' => $company->db_name,
                         'database.connections.company_db.password' => "VEz1Pi%#@cKL",
                     ]);
